@@ -5,6 +5,10 @@ require("dotenv").config();
 
 //import router
 const testRouter = require("./router/test");
+const connectDB = require("./config/conn");
+
+//connect DB
+connectDB();
 
 app.use(express.json());
 app.use(
