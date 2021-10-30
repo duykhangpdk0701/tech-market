@@ -10,16 +10,15 @@ const InputField = (props) => {
   console.log(bsSize);
 
   return (
-    <FormGroup>
-      {label && <Label for={name}>{label}</Label>}
+    <FormGroup floating>
       <Input
         id={name}
         {...field}
         type={type}
         disabled={disabled}
         placeholder={placeholder}
-        bsSize={bsSize}
       />
+      {label && <Label for={name}>{label}</Label>}
     </FormGroup>
   );
 };

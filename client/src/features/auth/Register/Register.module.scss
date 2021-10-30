@@ -1,0 +1,23 @@
+.section {
+  min-height: 100vh;
+  background-color: #f6f7fc;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+  min-height: 40rem;
+}
+
+.form_container {
+  flex-basis: 100%;
+  padding: 4rem;
+
+  display: flex;
+  align-items: center;
+}

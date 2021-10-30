@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "./Form";
+import FormLogin from "./FormLogin";
 //import style
 import style from "./Login.module.scss";
 
@@ -13,7 +13,7 @@ const Login = () => {
           <img className={style.img} src={loginBanner} alt="" />
         </div>
         <div className={style.form_container}>
-          <Form />
+          <FormLogin />
         </div>
       </div>
     </section>

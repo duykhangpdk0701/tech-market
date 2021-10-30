@@ -1,10 +1,18 @@
 import React from "react";
+import FormRegister from "./FormRegister";
+
+//import style
+import style from "./Register.module.scss";
 
 const Register = () => {
   return (
-    <div>
-      <h1>this is register page</h1>
-    </div>
+    <section className={style.section}>
+      <div className={style.container}>
+        <div className={style.form_container}>
+          <FormRegister />
+        </div>
+      </div>
+    </section>
   );
 };
 
