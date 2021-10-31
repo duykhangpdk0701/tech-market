@@ -16,15 +16,14 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 });
 
 export const register = createAsyncThunk("auth/register", async (data) => {
-  const { firstName, lastName, username, email, password, confirmPassword } =
-    data;
+  const { firstname, lastname, username, email, password } = data;
+  console.log(data);
   const res = await authApi.register(
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     username,
     email,
     password,
-    confirmPassword,
   );
   return res;
 });

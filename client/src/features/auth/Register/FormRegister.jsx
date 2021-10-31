@@ -1,23 +1,36 @@
 import { Formik, Form, FastField } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Col, FormGroup, Row } from "reactstrap";
+import { Button, Col, FormGroup, Row, Spinner } from "reactstrap";
 import InputField from "../../../custom-fields/InputFields";
+import * as Yup from "yup";
 //import style
 import style from "./FormRegister.module.scss";
 
-const FormRegister = () => {
+const FormRegister = (props) => {
   const initialValue = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
 
+  const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required("FirstName is Required"),
+    lastname: Yup.string().required("FirstName is Required"),
+    username: Yup.string().required("Username is Required"),
+    email: Yup.string().email().required("Email is Required"),
+    password: Yup.string().required("Password is Required").min(8),
+    confirmPassword: Yup.string().required("confirmPassword is Required"),
+  });
+
   return (
-    <Formik initialValues={initialValue}>
+    <Formik
+      initialValues={initialValue}
+      validationSchema={validationSchema}
+      onSubmit={props.onSubmit}>
       {(formikProps) => {
         const { values, errors, touched } = formikProps;
         console.log({ values, errors, touched });
@@ -29,7 +42,7 @@ const FormRegister = () => {
             <Row>
               <Col>
                 <FastField
-                  name="firstName"
+                  name="firstname"
                   component={InputField}
                   label="First Name:"
                   placeholder="Enter your First Name"
@@ -38,7 +51,7 @@ const FormRegister = () => {
               </Col>
               <Col>
                 <FastField
-                  name="lastName"
+                  name="lastname"
                   component={InputField}
                   label="Last Name:"
                   placeholder="Enter your First Name"
@@ -86,13 +99,26 @@ const FormRegister = () => {
                   Already have an account <Link to="/auth/login">Login</Link>
                 </div>
 
-                <Button
-                  color="primary"
-                  className={style.submit_btn}
-                  size="lg"
-                  block>
-                  Login
-                </Button>
+                {props.isLoading ? (
+                  <Button
+                    color="primary"
+                    className={style.submit_btn}
+                    size="lg"
+                    block
+                    type="submit"
+                    disabled>
+                    <Spinner>Loading...</Spinner>
+                  </Button>
+                ) : (
+                  <Button
+                    color="primary"
+                    className={style.submit_btn}
+                    size="lg"
+                    block
+                    type="submit">
+                    Login
+                  </Button>
+                )}
               </FormGroup>
             </div>
           </Form>

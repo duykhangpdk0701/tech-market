@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormGroup, Input, Label } from "reactstrap";
+import { FormGroup, Input, Label, FormFeedback } from "reactstrap";
+import { ErrorMessage } from "formik";
 
 const InputField = (props) => {
-  const { field, type, label, placeholder, disabled, bsSize } = props;
+  const { field, form, type, label, placeholder, disabled, bsSize } = props;
   // eslint-disable-next-line
   const { name, values, onChange, onBlur } = field;
-
-  console.log(bsSize);
-
+  const { errors, touched } = form;
+  const showError = errors[name] && touched;
   return (
     <FormGroup floating>
       <Input
@@ -17,8 +17,11 @@ const InputField = (props) => {
         type={type}
         disabled={disabled}
         placeholder={placeholder}
+        invalid={showError}
       />
       {label && <Label for={name}>{label}</Label>}
+
+      <ErrorMessage name={name} component={FormFeedback} />
     </FormGroup>
   );
 };

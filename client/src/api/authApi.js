@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const authApi = {
   login(username, password) {
-    const url = "/auth/login";
+    const url = "/user/login";
     try {
       const res = axiosClient.post(url, { username, password });
       return res;
@@ -10,15 +10,15 @@ const authApi = {
       return error;
     }
   },
-  register(firstName, lastName, username, email, password, confirmPassword) {
-    const url = "/auth/register";
+
+  register(firstname, lastname, username, email, password) {
+    const url = "/user/register";
     return axiosClient.post(url, {
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       username,
       email,
       password,
-      confirmPassword,
     });
   },
 };

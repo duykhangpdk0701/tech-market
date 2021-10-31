@@ -9,6 +9,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import Auth from "./features/auth";
+import Store from "./features/Store";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Redirect to={`/auth`} />
           </Route>
           <Route path="/auth" component={Auth} />
+          <Route path="/store" component={Store} />
         </Switch>
       </Router>
     </div>

@@ -1,18 +1,27 @@
 import { Formik, Form, FastField } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
-import { FormGroup, Button } from "reactstrap";
+import { FormGroup, Button, Spinner } from "reactstrap";
 import InputField from "../../../custom-fields/InputFields";
 import style from "./FormLogin.module.scss";
+import * as Yup from "yup";
 
-const FormLogin = () => {
+const FormLogin = (props) => {
   const initialValue = {
     username: "",
     password: "",
   };
 
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is Required"),
+    password: Yup.string().required("Password is required"),
+  });
+
   return (
-    <Formik initialValues={initialValue}>
+    <Formik
+      initialValues={initialValue}
+      validationSchema={validationSchema}
+      onSubmit={props.onSubmit}>
       {(formikProps) => {
         const { values, errors, touched } = formikProps;
         console.log({ values, errors, touched });
@@ -49,13 +58,26 @@ const FormLogin = () => {
                   <Link to="/auth/register">Register</Link>
                 </div>
 
-                <Button
-                  color="primary"
-                  className={style.submit_btn}
-                  size="lg"
-                  block>
-                  Login
-                </Button>
+                {props.isLoading ? (
+                  <Button
+                    color="primary"
+                    className={style.submit_btn}
+                    size="lg"
+                    block
+                    type="submit"
+                    disabled>
+                    <Spinner>Loading...</Spinner>
+                  </Button>
+                ) : (
+                  <Button
+                    color="primary"
+                    className={style.submit_btn}
+                    size="lg"
+                    block
+                    type="submit">
+                    Login
+                  </Button>
+                )}
               </FormGroup>
             </div>
           </Form>
