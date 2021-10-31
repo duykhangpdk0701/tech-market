@@ -23,8 +23,6 @@ const FormLogin = (props) => {
       validationSchema={validationSchema}
       onSubmit={props.onSubmit}>
       {(formikProps) => {
-        const { values, errors, touched } = formikProps;
-        console.log({ values, errors, touched });
         return (
           <Form className={style.form}>
             <div className={style.title_container}>

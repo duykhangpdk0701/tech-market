@@ -18,12 +18,16 @@ const FormRegister = (props) => {
   };
 
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string().required("FirstName is Required"),
-    lastname: Yup.string().required("FirstName is Required"),
+    firstname: Yup.string().required("First Name is Required"),
+    lastname: Yup.string().required("Last Name is Required"),
     username: Yup.string().required("Username is Required"),
     email: Yup.string().email().required("Email is Required"),
     password: Yup.string().required("Password is Required").min(8),
-    confirmPassword: Yup.string().required("confirmPassword is Required"),
+    confirmPassword: Yup.string().test(
+      "password-match",
+      "Password must match",
+      (value) => validationSchema.password === value,
+    ),
   });
 
   return (
@@ -32,8 +36,6 @@ const FormRegister = (props) => {
       validationSchema={validationSchema}
       onSubmit={props.onSubmit}>
       {(formikProps) => {
-        const { values, errors, touched } = formikProps;
-        console.log({ values, errors, touched });
         return (
           <Form className={style.form}>
             <div className={style.title_container}>
@@ -107,7 +109,9 @@ const FormRegister = (props) => {
                     block
                     type="submit"
                     disabled>
-                    <Spinner>Loading...</Spinner>
+                    <Spinner className={style.submit_spinner}>
+                      Loading...
+                    </Spinner>
                   </Button>
                 ) : (
                   <Button
@@ -116,7 +120,7 @@ const FormRegister = (props) => {
                     size="lg"
                     block
                     type="submit">
-                    Login
+                    Submit
                   </Button>
                 )}
               </FormGroup>
