@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const Route = require("./router/index")
 require("dotenv").config();
 
 //import router
-const testRouter = require("./router/test");
 const connectDB = require("./config/conn");
 
 //connect DB
@@ -17,13 +17,13 @@ app.use(
   }),
 );
 
+Route(app)
+
 // middleware router
 app.get("/", (req, res) => {
   res.status(200).send("hello this is home api");
 });
-app.use("/test", testRouter);
 
 app.listen(process.env.PORT || 4000, () => {
   console.log(`server is running on ${process.env.PORT} ...`);
 });
-console.log('ccccccccccccccccccccccccccccccccc')
