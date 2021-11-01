@@ -22,10 +22,14 @@ axiosClient.interceptors.request.use(
 
 axiosClient.interceptors.response.use(
   (res) => {
-    return res.data;
+    if (res.data && res) {
+      return res.data;
+    }
+    return res;
   },
   (error) => {
-    return Promise.reject(error.response.data);
+    console.log(error.response.data);
+    return Promise.reject(error.response ? error.response.data.messages : {});
   },
 );
 

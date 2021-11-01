@@ -1,7 +1,7 @@
 import { Formik, Form, FastField } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Col, FormGroup, Row, Spinner } from "reactstrap";
+import { Alert, Button, Col, FormGroup, Row, Spinner } from "reactstrap";
 import InputField from "../../../custom-fields/InputFields";
 import * as Yup from "yup";
 //import style
@@ -21,12 +21,18 @@ const FormRegister = (props) => {
     firstname: Yup.string().required("First Name is Required"),
     lastname: Yup.string().required("Last Name is Required"),
     username: Yup.string().required("Username is Required"),
-    email: Yup.string().email().required("Email is Required"),
-    password: Yup.string().required("Password is Required").min(8),
+    email: Yup.string()
+      .email("Email không phù hợp")
+      .required("Email is Required"),
+    password: Yup.string()
+      .required("Password is Required")
+      .min(8, "Mật khẩu phải ít nhất 8 ký tự m bị mù à"),
     confirmPassword: Yup.string().test(
       "password-match",
-      "Password must match",
-      (value) => validationSchema.password === value,
+      "Password đéo khớp",
+      function (value) {
+        return this.parent.password === value;
+      },
     ),
   });
 
@@ -36,11 +42,19 @@ const FormRegister = (props) => {
       validationSchema={validationSchema}
       onSubmit={props.onSubmit}>
       {(formikProps) => {
+        // console.log(formikProps.values);
         return (
           <Form className={style.form}>
             <div className={style.title_container}>
               <h1 className={style.title}>Register</h1>
             </div>
+
+            {props.errors && (
+              <FormGroup>
+                <Alert color="danger">{props.errors}</Alert>
+              </FormGroup>
+            )}
+
             <Row>
               <Col>
                 <FastField

@@ -17,7 +17,6 @@ export const login = createAsyncThunk("auth/login", async (data) => {
 
 export const register = createAsyncThunk("auth/register", async (data) => {
   const { firstname, lastname, username, email, password } = data;
-  console.log(data);
   const res = await authApi.register(
     firstname,
     lastname,
@@ -58,7 +57,6 @@ export const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-        state.currentUser = action.payload;
       });
   },
 });

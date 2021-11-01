@@ -1,5 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { register } from "../../../app/authSlice";
@@ -12,6 +12,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const loading = useSelector((state) => state.auth.loading);
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = async (values) => {
     try {
@@ -28,7 +29,7 @@ const Register = () => {
       unwrapResult(actionResult);
       history.push("/auth/login");
     } catch (error) {
-      console.log(error);
+      setErrors(error.message);
     }
   };
 
@@ -36,7 +37,11 @@ const Register = () => {
     <section className={style.section}>
       <div className={style.container}>
         <div className={style.form_container}>
-          <FormRegister onSubmit={handleSubmit} isLoading={loading} />
+          <FormRegister
+            onSubmit={handleSubmit}
+            isLoading={loading}
+            errors={errors}
+          />
         </div>
       </div>
     </section>

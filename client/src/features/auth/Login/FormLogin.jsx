@@ -1,7 +1,7 @@
 import { Formik, Form, FastField } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
-import { FormGroup, Button, Spinner } from "reactstrap";
+import { FormGroup, Button, Spinner, Alert } from "reactstrap";
 import InputField from "../../../custom-fields/InputFields";
 import style from "./FormLogin.module.scss";
 import * as Yup from "yup";
@@ -28,6 +28,12 @@ const FormLogin = (props) => {
             <div className={style.title_container}>
               <h1 className={style.title}>Login</h1>
             </div>
+            {props.errors && (
+              <FormGroup>
+                <Alert color="danger">{props.errors}</Alert>
+              </FormGroup>
+            )}
+
             <FastField
               name="username"
               component={InputField}
