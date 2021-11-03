@@ -16,10 +16,10 @@ const Products = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div>
+    <section>
       {products.map((product) => {
         return (
           <div>
@@ -29,7 +29,7 @@ const Products = () => {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 };
 
