@@ -1,6 +1,14 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  Card,
+  CardBody,
+  CardImg,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+} from "reactstrap";
 import { fetchLaptops } from "../../../app/laptopsSlice";
 //import style
 import style from "./Laptop.module.scss";
@@ -27,11 +35,16 @@ const Laptop = () => {
         </div>
         <div className={style.content}>
           {laptops.map((laptop) => (
-            <div className={style.item_wrapper}>
-              <h3>{laptop.name}</h3>
-              <h3>{laptop.category.name}</h3>
-              <h3>{laptop.brand.name}</h3>
-            </div>
+            <Card className={style.item_wrapper}>
+              <CardImg src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png" />
+              <CardBody>
+                <CardTitle tag="h5">{laptop.name}</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  {laptop.brand.name}
+                </CardSubtitle>
+                <CardText>{laptop.description}</CardText>
+              </CardBody>
+            </Card>
           ))}
         </div>
       </div>
