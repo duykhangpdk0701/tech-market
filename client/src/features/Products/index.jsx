@@ -1,16 +1,16 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../../app/productsSlice";
+import { fetchProducts } from "../../app/productsSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.products.loading);
-  const products = useSelector((state) => state.products.current);
+  const products = useSelector((state) => state.products.current) || [];
 
   useEffect(() => {
     const fetchData = async () => {
-      const action = await fetchProduct();
+      const action = await fetchProducts();
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
     };

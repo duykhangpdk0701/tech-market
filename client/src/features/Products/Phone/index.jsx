@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchLaptops } from "../../../app/laptopsSlice";
 import Template from "../Template";
 
-const Laptop = () => {
+const Phone = () => {
   const dispatch = useDispatch();
   const laptops = useSelector((state) => state.laptops.current);
 
@@ -18,7 +18,7 @@ const Laptop = () => {
     fetchData();
   }, [dispatch]);
 
-  return <Template items={laptops} componentName="Laptop" />;
+  return <Template items={laptops} componentName="Điện thoại" />;
 };
 
-export default Laptop;
+export default Phone;

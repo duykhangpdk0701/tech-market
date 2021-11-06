@@ -1,8 +1,14 @@
 import axiosClient from "./axiosClient";
 
 const productsApi = {
-  fetchProduct: async () => {
+  fetchProducts: async () => {
     const url = "/product";
+    const res = axiosClient.get(url);
+    return res;
+  },
+
+  fetchProduct: async (id) => {
+    const url = "/product/" + id;
     const res = axiosClient.get(url);
     return res;
   },
