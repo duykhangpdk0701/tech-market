@@ -42,12 +42,9 @@ const Template = (props) => {
           <div className={style.category_wrapper}>
             <div className={style.category}>
               <ListGroup>
-                <ListGroupItem>Lenovo</ListGroupItem>
-                <ListGroupItem>Lenovo</ListGroupItem>
-                <ListGroupItem>Lenovo</ListGroupItem>
-                <ListGroupItem>Lenovo</ListGroupItem>
-                <ListGroupItem>Lenovo</ListGroupItem>
-                <ListGroupItem>Lenovo</ListGroupItem>
+                {props.brands.map((item) => (
+                  <ListGroupItem>{item.name}</ListGroupItem>
+                ))}
               </ListGroup>
             </div>
           </div>
@@ -59,11 +56,13 @@ const Template = (props) => {
 
 Template.prototype = {
   items: PropTypes.array.isRequired,
+  brands: PropTypes.array.isRequired,
   componentName: PropTypes.string,
 };
 
 Template.defaultProps = {
   items: [],
+  brands: [],
   componentName: "",
 };
 

@@ -4,6 +4,8 @@ import authReducer from "./authSlice";
 import productsReducer from "./productsSlice";
 import productReducer from "./productSlice";
 import laptopsReducer from "./laptopsSlice";
+import brandsReducer from "./brandsSlice";
+import phonesReducer from "./phonesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +14,7 @@ export const store = configureStore({
     products: productsReducer,
     product: productReducer,
     laptops: laptopsReducer,
+    brands: brandsReducer,
+    phones: phonesReducer,
   },
 });

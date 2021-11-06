@@ -2,23 +2,34 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchLaptops } from "../../../app/laptopsSlice";
+import { fetchBrands } from "../../../app/brandsSlice";
+import { fetchPhones } from "../../../app/phonesSlice";
+import { PHONE } from "../../../constants/category";
 import Template from "../Template";
 
 const Phone = () => {
   const dispatch = useDispatch();
-  const laptops = useSelector((state) => state.laptops.current);
+  const phones = useSelector((state) => state.phones.current);
+  const brands = useSelector((state) => state.brands.current);
 
   useEffect(() => {
     const fetchData = async () => {
-      const action = await fetchLaptops();
+      const action = await fetchPhones();
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
     };
+
+    const fetchDataCategories = async () => {
+      const action = await fetchBrands(PHONE);
+      const actionResult = await dispatch(action);
+      unwrapResult(actionResult);
+    };
+
     fetchData();
+    fetchDataCategories();
   }, [dispatch]);
 
-  return <Template items={laptops} componentName="Điện thoại" />;
+  return <Template items={phones} brands={brands} componentName="Điện thoại" />;
 };
 
 export default Phone;

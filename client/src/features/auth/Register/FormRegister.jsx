@@ -26,10 +26,10 @@ const FormRegister = (props) => {
       .required("Email is Required"),
     password: Yup.string()
       .required("Password is Required")
-      .min(8, "Mật khẩu phải ít nhất 8 ký tự m bị mù à"),
+      .min(8, "Mật khẩu phải ít nhất 8 ký tự "),
     confirmPassword: Yup.string().test(
       "password-match",
-      "Password đéo khớp",
+      "Password không khớp",
       function (value) {
         return this.parent.password === value;
       },

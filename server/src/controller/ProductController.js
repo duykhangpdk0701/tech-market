@@ -1,5 +1,6 @@
 const Product = require("../model/Product");
 const mongoose = require("mongoose");
+const { LAPTOP_ID, PHONE_ID } = require("../constant/categoryName");
 
 class ProductController {
   async showAll(req, res) {
@@ -125,4 +126,70 @@ class ProductController {
   }
 }
 
-module.exports = new ProductController();
+class LaptopController {
+  async showAll(req, res) {
+    try {
+      const findLaptop = await Product.aggregate([
+        {
+          $lookup: {
+            from: "categories",
+            localField: "category",
+            foreignField: "_id",
+            as: "category",
+          },
+        },
+        { $unwind: "$category" },
+        {
+          $lookup: {
+            from: "brands",
+            localField: "brand",
+            foreignField: "_id",
+            as: "brand",
+          },
+        },
+        { $unwind: "$brand" },
+        { $match: { "category._id": mongoose.Types.ObjectId(LAPTOP_ID) } },
+      ]);
+      res.json({ success: true, laptops: findLaptop });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error });
+    }
+  }
+}
+
+class PhoneController {
+  async showAll(req, res) {
+    try {
+      const findLaptop = await Product.aggregate([
+        {
+          $lookup: {
+            from: "categories",
+            localField: "category",
+            foreignField: "_id",
+            as: "category",
+          },
+        },
+        { $unwind: "$category" },
+        {
+          $lookup: {
+            from: "brands",
+            localField: "brand",
+            foreignField: "_id",
+            as: "brand",
+          },
+        },
+        { $unwind: "$brand" },
+        { $match: { "category._id": mongoose.Types.ObjectId(PHONE_ID) } },
+      ]);
+      res.json({ success: true, laptops: findLaptop });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error });
+    }
+  }
+}
+
+module.exports = {
+  ProductController: new ProductController(),
+  LaptopController: new LaptopController(),
+  PhoneController: new PhoneController(),
+};
