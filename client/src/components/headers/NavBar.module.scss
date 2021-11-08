@@ -3,6 +3,7 @@
   height: 7rem;
   background-color: #262e39;
   color: white;
+  z-index: 100;
 }
 
 .nav_wrapper {
@@ -39,7 +40,22 @@
 }
 
 .search_container {
+  position: relative;
   flex-basis: calc(100% - 10rem - 15rem);
+}
+
+.search_result_container {
+  position: absolute;
+  width: 100%;
+  color: black;
+  background-color: white;
+}
+
+.spinner_container {
+  padding: 2rem;
+
+  display: flex;
+  justify-content: center;
 }
 
 .user_profile {

@@ -7,8 +7,10 @@ import {
   CardSubtitle,
   CardText,
   CardTitle,
-  ListGroup,
-  ListGroupItem,
+  UncontrolledAccordion,
+  AccordionItem,
+  AccordionBody,
+  AccordionHeader,
 } from "reactstrap";
 import style from "./Template.module.scss";
 import { Link } from "react-router-dom";
@@ -39,15 +41,20 @@ const Template = (props) => {
               </Card>
             ))}
           </div>
-          <div className={style.category_wrapper}>
+          <aside className={style.category_wrapper}>
             <div className={style.category}>
-              <ListGroup>
-                {props.brands.map((item) => (
-                  <ListGroupItem>{item.name}</ListGroupItem>
-                ))}
-              </ListGroup>
+              <UncontrolledAccordion defaultOpen={["1"]} stayOpen>
+                <AccordionItem>
+                  <AccordionHeader targetId="1">Thương hiệu</AccordionHeader>
+                  <AccordionBody accordionId="1">
+                    {props.brands.map((item) => (
+                      <p>{item.name}</p>
+                    ))}
+                  </AccordionBody>
+                </AccordionItem>
+              </UncontrolledAccordion>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>

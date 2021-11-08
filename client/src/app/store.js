@@ -6,6 +6,7 @@ import productReducer from "./productSlice";
 import laptopsReducer from "./laptopsSlice";
 import brandsReducer from "./brandsSlice";
 import phonesReducer from "./phonesSlice";
+import searchReducer from "./searchSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     laptops: laptopsReducer,
     brands: brandsReducer,
     phones: phonesReducer,
+    search: searchReducer,
   },
 });

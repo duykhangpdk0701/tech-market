@@ -82,6 +82,7 @@ const FormLogin = (props) => {
                     Login
                   </Button>
                 )}
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
               </FormGroup>
             </div>
           </Form>
