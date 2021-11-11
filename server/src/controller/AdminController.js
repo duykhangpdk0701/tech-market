@@ -1,7 +1,8 @@
-const User = require("../model/User");
+const Admin = require("../model/Admin");
 const argon2 = require("argon2");
+const User = require("../model/User");
 
-class UserController {
+class AdminController {
   async login(req, res) {
     const { username, password } = req.body;
     if (!username || !password)
@@ -9,7 +10,7 @@ class UserController {
         .status(400)
         .json({ success: false, messages: "Missing username or password" });
     try {
-      const user = await User.findOne({ username });
+      const user = await Admin.findOne({ username });
       if (!user) {
         return res
           .status(400)
@@ -19,7 +20,7 @@ class UserController {
       if (!passowrdvalid) {
         return res
           .status(500)
-          .json({ success: false, messages: "Invalid password" });
+          .json({ success: false, messages: "Wrong password" });
       }
       res.json({ success: true, messages: "Login successfully", user });
     } catch (error) {
@@ -36,21 +37,21 @@ class UserController {
         .json({ success: false, messages: "Missing username or password" });
     try {
       //checking if user exist
-      const user = await User.findOne({ username });
+      const user = await Admin.findOne({ username });
       if (user) {
         return res
           .status(400)
           .json({ success: false, messages: "Username already taken" });
       }
       //checking if email exist
-      const findEmail = await User.findOne({ email });
+      const findEmail = await Admin.findOne({ email });
       if (findEmail) {
         return res
           .status(400)
           .json({ success: false, messages: "Email already taken" });
       }
       const hashpassword = await argon2.hash(password);
-      const newUser = new User({ ...req.body, password: hashpassword });
+      const newUser = new Admin({ ...req.body, password: hashpassword });
       await newUser.save();
       res.json({
         success: true,
@@ -62,6 +63,25 @@ class UserController {
       res.status(500).json({ success: false, message: error.message });
     }
   }
+
+  async getAllUser(req, res) {
+    try {
+      const findUsers = await User.find();
+      return res.status(200).json({ success: true, users: findUsers });
+    } catch (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  }
+
+  async getUser(req, res) {
+    try {
+      const { id } = req.params;
+      const findUser = await User.findById(id);
+      return res.status(200).json({ success: true, users: findUser });
+    } catch (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  }
 }
 
-module.exports = new UserController();
+module.exports = new AdminController();

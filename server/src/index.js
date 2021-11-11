@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const Route = require("./router/index")
+const Route = require("./router/index");
 require("dotenv").config();
 
 //import router
@@ -16,8 +16,13 @@ app.use(
     origin: process.env.CLIENT_URL,
   }),
 );
+app.use(
+  cors({
+    origin: process.env.ADMIN_URL,
+  }),
+);
 
-Route(app)
+Route(app);
 
 // middleware router
 app.get("/", (req, res) => {

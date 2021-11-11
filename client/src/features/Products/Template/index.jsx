@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionBody,
   AccordionHeader,
+  Button,
 } from "reactstrap";
 import style from "./Template.module.scss";
 import { Link } from "react-router-dom";
@@ -26,13 +27,17 @@ const Template = (props) => {
           <div className={style.content}>
             {props.items.map((item) => (
               <Card key={item._id} className={style.item_wrapper}>
-                <CardImg src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png" />
+                <CardImg
+                  className={style.img_container}
+                  src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
+                />
                 <CardBody>
                   <CardTitle tag="h5">{item.name}</CardTitle>
                   <CardSubtitle className="mb-2 text-muted" tag="h6">
                     {item.brand.name}
                   </CardSubtitle>
                   <CardText>{item.description}</CardText>
+                  <Button>Add to cart</Button>
                 </CardBody>
                 <Link
                   className={style.item_link}

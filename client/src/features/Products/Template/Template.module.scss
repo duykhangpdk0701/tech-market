@@ -20,15 +20,19 @@
 }
 
 .item_wrapper {
-  width: calc(20% - 0.56rem);
+  width: calc(25% - 0.56rem);
   background-color: #fff;
   margin-left: 0.7rem;
   margin-bottom: 0.7rem;
 }
 
-.item_wrapper:nth-child(5n + 1) {
+.item_wrapper:nth-child(4n + 1) {
   background-color: #fff;
   margin-left: 0;
+}
+
+.img_container {
+  height: 50%;
 }
 
 .item_link {
