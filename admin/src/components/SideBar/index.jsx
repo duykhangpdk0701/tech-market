@@ -15,7 +15,7 @@ import {
   Report,
 } from "@mui/icons-material";
 
-import { Link, NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 const SideBar = () => {
   const match = useRouteMatch();

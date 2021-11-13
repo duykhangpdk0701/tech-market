@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Admin from "./features/Admin";
+import Auth from "./features/Auth";
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/admin" />
+            <Redirect to="/auth" />
           </Route>
-          <Route path="/auth" />
+          <Route path="/auth" component={Auth} />
           <Route path="/admin" component={Admin} />
         </Switch>
       </Router>

@@ -10,19 +10,19 @@ class AdminController {
         .status(400)
         .json({ success: false, messages: "Missing username or password" });
     try {
-      const user = await Admin.findOne({ username });
-      if (!user) {
+      const admin = await Admin.findOne({ username });
+      if (!admin) {
         return res
           .status(400)
           .json({ success: false, messages: "Incorrect username or password" });
       }
-      const passowrdvalid = await argon2.verify(user.password, password);
+      const passowrdvalid = await argon2.verify(admin.password, password);
       if (!passowrdvalid) {
         return res
           .status(500)
           .json({ success: false, messages: "Wrong password" });
       }
-      res.json({ success: true, messages: "Login successfully", user });
+      res.json({ success: true, messages: "Login successfully", admin });
     } catch (error) {
       console.log(error);
       res.status(500).json({ success: false, message: error.message });

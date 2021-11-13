@@ -11,16 +11,20 @@ const connectDB = require("./config/conn");
 connectDB();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-  }),
-);
-app.use(
-  cors({
-    origin: process.env.ADMIN_URL,
-  }),
-);
+//cors
+const whitelist = [process.env.CLIENT_URL, process.env.ADMIN_URL];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 Route(app);
 

@@ -31,12 +31,10 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProductsAsync.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.current = action.payload.products;
         state.current.forEach((o, i) => {
           o.id = i + 1;
         });
-        console.log(state.current);
       });
   },
 });
