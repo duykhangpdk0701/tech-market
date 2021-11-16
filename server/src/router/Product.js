@@ -17,4 +17,5 @@ router.get("/products/phone", PhoneController.showAll);
 router.delete("/:id", ProductController.delete);
 router.put("/:id", ProductController.update);
 router.post("/store", ProductController.store);
+
 module.exports = router;

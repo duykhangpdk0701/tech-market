@@ -9,6 +9,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.current) || {};
   const { id } = useParams();
+  const loading = useSelector((state) => state.product.loading);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,13 +18,25 @@ const Product = () => {
       unwrapResult(actionResult);
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <h1>{product._id}</h1>
-    </div>
+    <>
+      {loading ? (
+        <h1>Loading</h1>
+      ) : (
+        <div>
+          <h1>{product.name}</h1>
+          <h1>{product._id}</h1>
+        </div>
+      )}
+      <button
+        onClick={(e) => {
+          console.log(loading);
+        }}>
+        click me
+      </button>
+    </>
   );
 };
 

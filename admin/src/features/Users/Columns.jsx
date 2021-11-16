@@ -13,7 +13,7 @@ const Columns = [
     width: 200,
     renderCell: (params) => (
       <>
-        <Link to={`/user/${params.row._id}`}>
+        <Link to={`/admin/user/${params.row._id}`}>
           <Button variant="outlined">View</Button>
         </Link>
         <Button variant="contained">Lock</Button>

@@ -1,5 +1,5 @@
-exports.LAPTOP_ID = "617e4abebc6d6ba008bf90e1";
-exports.PHONE_ID = "617e4d44426688a1b17033bb";
-exports.HEADPHONE = "617e4d4b426688a1b17033be";
-exports.KEYBOARD = "617e4d57426688a1b17033c1";
-exports.MOUSE = "617e4d64426688a1b17033c4";
+exports.LAPTOP_ID = "6193c6ea2712c40ba379dc75";
+exports.PHONE_ID = "6193c6f32712c40ba379dc78";
+exports.HEADPHONE = "6193c6ff2712c40ba379dc7b";
+exports.KEYBOARD = "6193c70d2712c40ba379dc7e";
+exports.MOUSE = "6193c6b23e306b36104c2f8b";

@@ -20,10 +20,10 @@
 }
 
 .item_wrapper {
-  width: calc(25% - 0.56rem);
+  width: calc(25% - 0.75rem);
   background-color: #fff;
-  margin-left: 0.7rem;
-  margin-bottom: 0.7rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 
 .item_wrapper:nth-child(4n + 1) {
@@ -48,4 +48,14 @@
 
 .category {
   width: 100%;
+}
+
+.card_btn {
+  z-index: 2;
+}
+
+.btn_container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }

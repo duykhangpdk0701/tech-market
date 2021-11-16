@@ -1,0 +1,19 @@
+.section {
+  min-height: 100vh;
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img {
+  width: 50%;
+}
+
+.link {
+  color: white;
+}

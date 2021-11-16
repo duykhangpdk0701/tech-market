@@ -6,7 +6,6 @@ import {
   Redirect,
 } from "react-router-dom";
 //import css
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import Auth from "./features/auth";
 import Store from "./features/Store";

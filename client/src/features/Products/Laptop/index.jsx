@@ -11,6 +11,7 @@ const Laptop = () => {
   const dispatch = useDispatch();
   const laptops = useSelector((state) => state.laptops.current);
   const brands = useSelector((state) => state.brands.current);
+  const loadingLaptop = useSelector((state) => state.laptops.loading);
 
   useEffect(() => {
     const fetchDataLaptop = async () => {
@@ -29,7 +30,14 @@ const Laptop = () => {
     fetchDataCategories();
   }, [dispatch]);
 
-  return <Template items={laptops} brands={brands} componentName="Laptop" />;
+  return (
+    <Template
+      items={laptops}
+      brands={brands}
+      componentName="Laptop"
+      isLoading={loadingLaptop}
+    />
+  );
 };
 
 export default Laptop;

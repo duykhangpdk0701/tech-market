@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Admin from "./features/Admin";
 import Auth from "./features/Auth";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           </Route>
           <Route path="/auth" component={Auth} />
           <Route path="/admin" component={Admin} />
+          <Route component={PageNotFound} />
         </Switch>
       </Router>
     </div>

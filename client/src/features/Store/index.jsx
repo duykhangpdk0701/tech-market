@@ -15,7 +15,7 @@ const Store = () => {
         <Route path={`${match.url}`} exact component={Products} />
         <Route path={`${match.url}/laptop`} component={Laptop} />
         <Route path={`${match.url}/phone`} component={Phone} />
-        <Route path={`${match.url}/product/:id`} component={Product} />
+        <Route path={`${match.url}/product/:id`} component={Product} exact />
       </Switch>
     </>
   );
