@@ -51,8 +51,10 @@ const Template = (props) => {
                     <div className={style.btn_container}>
                       <Tooltip title="Thêm vào giỏ hàng">
                         <LoadingButton
+                          loading={false}
                           className={style.card_btn}
-                          variant="contained">
+                          variant="contained"
+                          onClick={props.handleAddToCart}>
                           <AddShoppingCartIcon />
                         </LoadingButton>
                       </Tooltip>

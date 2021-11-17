@@ -7,6 +7,7 @@ import laptopsReducer from "./laptopsSlice";
 import brandsReducer from "./brandsSlice";
 import phonesReducer from "./phonesSlice";
 import searchReducer from "./searchSlice";
+import cartsReducer from "./cartsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     brands: brandsReducer,
     phones: phonesReducer,
     search: searchReducer,
+    carts: cartsReducer,
   },
 });
