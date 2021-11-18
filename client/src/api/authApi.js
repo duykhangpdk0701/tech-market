@@ -1,6 +1,10 @@
 import axiosClient from "./axiosClient";
 
 const authApi = {
+  load: () => {
+    return axiosClient.get('user/load')
+  },
+
   login(username, password) {
     const url = "/user/login";
     const res = axiosClient.post(url, { username, password });

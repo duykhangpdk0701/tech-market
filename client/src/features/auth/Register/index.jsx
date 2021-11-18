@@ -2,7 +2,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { register } from "../../../app/authSlice";
+import { register, load } from "../../../app/authSlice";
 import FormRegister from "./FormRegister";
 
 //import style
@@ -27,7 +27,7 @@ const Register = () => {
       });
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
-      history.push("/auth/login");
+      await dispatch(load());
     } catch (error) {
       setErrors(error.message);
     }
