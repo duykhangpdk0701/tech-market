@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormLogin from "./FormLogin";
 //import redux
-import { login } from "../../../app/authSlice";
+import { login, load } from "../../../app/authSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useHistory } from "react-router-dom";
@@ -22,7 +22,7 @@ const Login = () => {
       const action = await login({ username, password });
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
-      history.push("/store");
+      await dispatch(load());
     } catch (error) {
       setErrors(error.message);
     }

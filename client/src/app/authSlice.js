@@ -2,12 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authApi from "../api/authApi";
 
 const initialState = {
-  current: {
-    username: "",
-  },
+  current: null,
   loading: false,
   error: "",
 };
+
+export const load = createAsyncThunk("auth/load", async () => {
+  const res = await authApi.load();
+  return res;
+});
 
 export const login = createAsyncThunk("auth/login", async (data) => {
   const { username, password } = data;
@@ -43,8 +46,7 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.current = action.payload.user;
-        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("token", action.payload.accessToken);
       })
 
       //register
@@ -57,7 +59,24 @@ export const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-      });
+        localStorage.setItem("token", action.payload.accessToken);
+      })
+
+      .addCase(load.pending, (state, action) => {
+        state.authLoading = true;
+      })
+      .addCase(load.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(load.fulfilled, (state, action) => {
+        state.authLoading = false;
+        if (action.payload.success) {
+          state.current = action.payload.user
+        } else {
+          state.current.username = null
+        }
+      })
   },
 });
 
