@@ -22,11 +22,16 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4000/category/store
+POST http://localhost:4000/product/store
 Content-Type: application/json
 
 {
-    "name": "test"
+    "name": "test",
+    "category": "6193c6ea2712c40ba379dc75",
+    "brand": "617e4d9b47aaae26553fc8fa",
+    "description": "testing",
+    "quantity": 1,
+    "price": 69
 }
 
 ###

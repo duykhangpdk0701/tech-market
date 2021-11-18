@@ -14,7 +14,7 @@ class OrderController {
                         as: "user",
                     }
                 },
-                { $unwind: "$user"} ,
+                { $unwind: "$user" },
                 {
                     $lookup: {
                         from: "orderdetails",
@@ -50,7 +50,7 @@ class OrderController {
                         as: "user",
                     }
                 },
-                { $unwind: "$user"} ,
+                { $unwind: "$user" },
                 {
                     $lookup: {
                         from: "orderdetails",
@@ -67,8 +67,8 @@ class OrderController {
     }
 
     async store(req, res) {
-        if(!req.body.products){
-            return res.status(401).json({ success: false, messages: 'Order have no item'})
+        if (!req.body.products) {
+            return res.status(401).json({ success: false, messages: 'Order have no item' })
         }
         let orderDetailId = []
         let totalPrice = 0
@@ -79,14 +79,14 @@ class OrderController {
                 orderDetailId.push(orderDetail._id)
                 totalPrice += orderDetail.quantity * orderDetail.price
             }
-            const newOrder = new Order({...req.body, orderDetail:orderDetailId, totalPrice});
+            const newOrder = new Order({ ...req.body, orderDetail: orderDetailId, totalPrice });
             await newOrder.save();
             res.json({
                 success: true,
                 messages: "Add successfully",
             });
         } catch (error) {
-            res.status(500).json({ success: false, messages: "Interval server error" + error.message});
+            res.status(500).json({ success: false, messages: "Interval server error" + error.message });
         }
     }
 

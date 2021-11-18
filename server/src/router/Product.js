@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {
-  ProductController,
-  LaptopController,
-  PhoneController,
-} = require("../controller/ProductController");
+const { ProductController, LaptopController, PhoneController } = require("../controller/ProductController");
+const upload = require('../Middleware/UploadImg')
 
 router.get("/", ProductController.showAll);
 router.get("/:id", ProductController.show);
@@ -14,8 +11,8 @@ router.get("/products/laptop", LaptopController.showAll);
 router.get("/products/phone", PhoneController.showAll);
 
 //admin
-router.delete("/:id", ProductController.delete);
+router.post("/store", upload.array('images', 10), ProductController.store);
 router.put("/:id", ProductController.update);
-router.post("/store", ProductController.store);
+router.delete("/:id", ProductController.delete);
 
 module.exports = router;
