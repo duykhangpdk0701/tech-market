@@ -1,25 +1,32 @@
 ###
-GET http://localhost:4000/user
+GET http://localhost:4000/order
 
 ###
-POST http://localhost:4000/user/login
+POST http://localhost:4000/order/store
 Content-Type: application/json
 
 {
-    "username": "vanhien2001",
-    "password": "vanhien735"
+    "user": "617e5457c25dacc8f3c03289",
+    "products": [
+        {
+            "product": "617e4f443c77a5c8c1e431cf",
+            "quantity": 1,
+            "price": 100
+        },
+        {
+            "product": "61835a7a689bf8d77e077f93",
+            "quantity": 1,
+            "price": 200
+        }
+    ]
 }
 
 ###
-POST http://localhost:4000/user/register
+POST http://localhost:4000/category/store
 Content-Type: application/json
 
 {
-    "firstname": "Duy Khang",
-    "lastname": "Phùng",
-    "username": "duykhangpdk",
-    "email": "duykhangpdk0701@gmail.com",
-    "password": "123"
+    "name": "test"
 }
 
 ###
@@ -32,4 +39,4 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:4000/category/617e4b1a01199071e2b17d75
+DELETE  http://localhost:4000/order/6195d31bdff9f05a6cf2820a

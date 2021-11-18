@@ -5,6 +5,7 @@ const ProductRouter = require("./Product");
 const AdminRouter = require("./Admin");
 const TestRouter = require("./Test");
 const CartRouter = require("./Cart");
+const OrderRouter = require("./Order");
 
 const Route = (app) => {
   app.use("/user", UserRouter);
@@ -14,6 +15,7 @@ const Route = (app) => {
   app.use("/admin", AdminRouter);
   app.use("/test", TestRouter);
   app.use("/cart", CartRouter);
+  app.use("/order", OrderRouter);
 };
 
 module.exports = Route;
