@@ -8,8 +8,14 @@ const initialState = {
 };
 
 export const fetchCartsAsync = createAsyncThunk("carts/fetch", async (data) => {
-  const user = { data };
+  const { user } = data;
   const res = await cartsApi.fetchCartApi(user);
+  return res;
+});
+
+export const addToCartAsync = createAsyncThunk("carts/add", async (data) => {
+  const { userId, productId, quantity } = data;
+  const res = await cartsApi.addWishlist(userId, productId, quantity);
   return res;
 });
 
@@ -19,7 +25,7 @@ export const CartsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      //fetch categories
+      //fetch cart
       .addCase(fetchCartsAsync.pending, (state) => {
         state.loading = true;
       })
@@ -29,7 +35,20 @@ export const CartsSlice = createSlice({
       })
       .addCase(fetchCartsAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.current = action.payload.brands;
+        state.current = action.payload.carts;
+      })
+
+      // add cart
+      .addCase(addToCartAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addToCartAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addToCartAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.current = action.payload.carts;
       });
   },
 });

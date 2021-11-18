@@ -19,7 +19,6 @@ import { NavLink, useRouteMatch } from "react-router-dom";
 
 const SideBar = () => {
   const match = useRouteMatch();
-
   return (
     <div className={style.sidebar}>
       <div className={style.sidebarWrapper}>

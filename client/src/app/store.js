@@ -8,6 +8,7 @@ import brandsReducer from "./brandsSlice";
 import phonesReducer from "./phonesSlice";
 import searchReducer from "./searchSlice";
 import cartsReducer from "./cartsSlice";
+import snackbarReducer from "./snackbarSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     phones: phonesReducer,
     search: searchReducer,
     carts: cartsReducer,
+    snackbar: snackbarReducer,
   },
 });

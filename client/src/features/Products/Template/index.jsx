@@ -1,12 +1,6 @@
 import React from "react";
 import {
-  Card,
-  CardMedia,
-  CardActionArea,
-  CardActions,
-  CardContent,
   Typography,
-  Tooltip,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -15,11 +9,9 @@ import {
   Checkbox,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
 import style from "./Template.module.scss";
-import { Link } from "react-router-dom";
 import prototype from "prop-types";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ItemProduct from "./ItemProduct";
 
 const Template = (props) => {
   return (
@@ -30,43 +22,15 @@ const Template = (props) => {
         </div>
         <div className={style.content_wrapper}>
           <div className={style.content}>
-            {props.items.map((item) => (
-              <Card key={item._id} className={style.item_wrapper}>
-                <CardActionArea>
-                  <CardMedia
-                    className={style.img_container}
-                    component="img"
-                    image="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.name}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {item.category.name}
-                    </Typography>
-                    <Typography variant="body2">{item.description}</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <div className={style.btn_container}>
-                      <Tooltip title="Thêm vào giỏ hàng">
-                        <LoadingButton
-                          loading={false}
-                          className={style.card_btn}
-                          variant="contained"
-                          onClick={props.handleAddToCart}>
-                          <AddShoppingCartIcon />
-                        </LoadingButton>
-                      </Tooltip>
-                    </div>
-                  </CardActions>
-                  <Link
-                    className={style.item_link}
-                    to={`/store/product/${item._id}`}
-                  />
-                </CardActionArea>
-              </Card>
-            ))}
+            {props.items.map((item) => {
+              return (
+                <ItemProduct
+                  item={item}
+                  userId={props.userId}
+                  productId={item._id}
+                />
+              );
+            })}
           </div>
           <aside className={style.category_wrapper}>
             <div className={style.category}>

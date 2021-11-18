@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
 const cors = require("cors");
 const Route = require("./router/index");
 require("dotenv").config();
@@ -10,7 +10,7 @@ const connectDB = require("./config/conn");
 
 //connect DB
 connectDB();
-app.use(express.static(path.join(__dirname, './public')))
+app.use(express.static(path.join(__dirname, "./public")));
 
 app.use(express.json());
 //cors
