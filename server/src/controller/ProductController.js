@@ -5,7 +5,9 @@ const { LAPTOP_ID, PHONE_ID } = require("../constant/categoryName");
 class ProductController {
     async showAll(req, res) {
         try {
-            const products = await Product.aggregate([
+            const filter = req.query || null
+            let aggregate = []
+            const deFault = [
                 {
                     $lookup: {
                         from: "categories",
@@ -23,13 +25,48 @@ class ProductController {
                         as: "brand",
                     },
                 },
-                { $unwind: "$brand" },
-            ]);
+                { $unwind: "$brand" }
+            ]
+
+            if (filter) {
+                if (filter.category) {
+                    aggregate.push(
+                        {
+                            $match: {
+                                category: mongoose.Types.ObjectId(filter.category)
+                            }
+                        }
+                    )
+                }
+                if (filter.brand) {
+                    aggregate.push(
+                        {
+                            $match: {
+                                brand: mongoose.Types.ObjectId(filter.brand)
+                            }
+                        }
+                    )
+                }
+                if (filter.price) {
+                    aggregate.push(
+                        {
+                            $match: {
+                                $and: [
+                                    { price: { $gte: JSON.parse(filter.price)[0] } },
+                                    { price: { $lte: JSON.parse(filter.price)[1] } }
+                                ]
+                            }
+                        }
+                    )
+                }
+            }
+            aggregate = aggregate.concat(deFault)
+            const products = await Product.aggregate(aggregate);
             res.json({ success: true, products });
         } catch (error) {
             res
                 .status(500)
-                .json({ success: false, messages: "Interval server error" });
+                .json({ success: false, messages: "Interval server error" + error.message });
         }
     }
 
