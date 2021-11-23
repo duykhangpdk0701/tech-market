@@ -1,0 +1,42 @@
+.section {
+}
+
+.container {
+  width: 75%;
+  margin: auto;
+}
+
+.content {
+  display: flex;
+  position: relative;
+}
+
+.main {
+  width: calc(100% - 335px);
+}
+
+.aside {
+  width: 335px;
+  top: 0px;
+  position: sticky;
+}
+
+.sumary_contianer {
+  width: 100%;
+}
+
+.promotion_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.apply_btn {
+  align-self: flex-end;
+}
+
+.temp_sum_cotainer,
+.sum_contianer {
+  display: flex;
+  justify-content: space-between;
+}
+

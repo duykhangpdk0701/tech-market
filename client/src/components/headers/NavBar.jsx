@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import style from "./NavBar.module.scss";
@@ -9,10 +9,9 @@ import { Autocomplete, TextField, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const NavBar = () => {
-  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const loadingSearching = useSelector((state) => state.search.loading);
   const searchResult = useSelector((state) => state.search.current) || [];
+  const cart = useSelector((state) => state.carts.current) || [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +21,7 @@ const NavBar = () => {
     };
 
     fetchData();
-  }, [search, dispatch]);
+  }, [dispatch]);
 
   const handleInputOnchangeInputSearch = (e) => {};
 
@@ -35,7 +34,6 @@ const NavBar = () => {
           </div>
           <div className={style.search_container}>
             <Autocomplete
-              value={search}
               freeSolo
               options={searchResult}
               renderOption={(props, option) => (
@@ -60,7 +58,8 @@ const NavBar = () => {
           <div className={style.user_profile}>
             <div className={style.user_profile}>Loli</div>
             <div className={style.cart}>
-              <Badge badgeContent={4} color="primary">
+              <Link className={style.link_cart} to="/store/cart"></Link>
+              <Badge badgeContent={cart.length} color="primary">
                 <ShoppingCartIcon
                   fontSize="large"
                   className={style.cart_logo}

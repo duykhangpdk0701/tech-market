@@ -1,0 +1,41 @@
+.container {
+  height: 10rem;
+  display: flex;
+}
+
+.img_contianer {
+  width: 130px;
+  display: flex;
+  align-items: center;
+}
+
+.name_container {
+  width: calc(100% - 410px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.price_container {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.amount_container {
+  position: relative;
+  width: 140px;
+  display: flex;
+  align-items: center;
+}
+.progress_loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: -11px;
+  margin-left: -11px;
+}

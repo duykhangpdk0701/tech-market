@@ -61,7 +61,7 @@ export const authSlice = createSlice({
         state.loading = false;
         localStorage.setItem("token", action.payload.accessToken);
       })
-
+      //load
       .addCase(load.pending, (state, action) => {
         state.authLoading = true;
       })
@@ -72,11 +72,11 @@ export const authSlice = createSlice({
       .addCase(load.fulfilled, (state, action) => {
         state.authLoading = false;
         if (action.payload.success) {
-          state.current = action.payload.user
+          state.current = action.payload.user;
         } else {
-          state.current.username = null
+          state.current = {};
         }
-      })
+      });
   },
 });
 

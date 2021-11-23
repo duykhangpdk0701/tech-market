@@ -16,6 +16,16 @@ const cartsApi = {
     });
     return res;
   },
+
+  removeCart: async (cartId) => {
+    const url = "/cart";
+    const res = axiosClient.delete(url, {
+      data: {
+        cartId,
+      },
+    });
+    return res;
+  },
 };
 
 export default cartsApi;

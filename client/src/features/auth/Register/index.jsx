@@ -27,7 +27,7 @@ const Register = () => {
       });
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
-      await dispatch(load());
+      history.push("/auht/login");
     } catch (error) {
       setErrors(error.message);
     }
