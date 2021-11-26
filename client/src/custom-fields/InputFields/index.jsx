@@ -4,7 +4,7 @@ import style from "./InputFields.module.scss";
 import { TextField } from "@mui/material";
 
 const InputField = (props) => {
-  const { field, form, type, label, placeholder, disabled } = props;
+  const { field, form, type, label, placeholder, disabled, size } = props;
   // eslint-disable-next-line
   const { name, values, onChange, onBlur } = field;
   const { errors, touched } = form;
@@ -24,6 +24,7 @@ const InputField = (props) => {
         error={showError}
         helperText={errors[name]}
         margin="normal"
+        size={size}
       />
     </div>
   );

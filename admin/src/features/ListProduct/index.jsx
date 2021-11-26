@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
@@ -24,6 +25,7 @@ const Product = () => {
 
   return (
     <div className={style.list_product}>
+      <Button>Add Product</Button>
       <DataGrid
         columns={Columns}
         rows={products}

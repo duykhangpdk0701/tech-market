@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Snackbar, Alert } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { setSnackbar } from "../../app/snackbarSlice";
+import { setSnackbar } from "../../app/snackBarSlice";
 
-const ActionSnackbar = () => {
+const CustomizedSnackbar = () => {
   const dispatch = useDispatch();
   const snackbarOpen = useSelector((state) => state.snackbar.snackbarOpen);
   const snackbarType = useSelector((state) => state.snackbar.snackbarType);
@@ -42,4 +42,4 @@ const ActionSnackbar = () => {
   );
 };
 
-export default ActionSnackbar;
+export default CustomizedSnackbar;

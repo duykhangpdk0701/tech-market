@@ -8,9 +8,18 @@ const initialState = {
 };
 
 export const fetchProductsAsync = createAsyncThunk(
-  "admin/fetchProductsAsync",
+  "product/fetchProductsAsync",
   async () => {
     const res = await productsApi.fetchProducts();
+    return res;
+  },
+);
+
+export const toggleActive = createAsyncThunk(
+  "product/disactiveAsync",
+  async (data) => {
+    const { id, isActive } = data;
+    const res = await productsApi.disactiveProduct(id, isActive);
     return res;
   },
 );
@@ -34,6 +43,23 @@ export const productsSlice = createSlice({
         state.current = action.payload.products;
         state.current.forEach((o, i) => {
           o.id = i + 1;
+        });
+      })
+      // toggle active
+      .addCase(toggleActive.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(toggleActive.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(toggleActive.fulfilled, (state, action) => {
+        state.loading = false;
+
+        state.current.forEach((item) => {
+          if (item._id === action.payload.product._id) {
+            item.isActive = !item.isActive;
+          }
         });
       });
   },

@@ -29,6 +29,8 @@ export const authSlice = createSlice({
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.current = action.payload.admin;
+        localStorage.setItem("adminId", action.payload.admin._id);
+        localStorage.setItem("adminName", action.payload.admin.username);
       });
   },
 });

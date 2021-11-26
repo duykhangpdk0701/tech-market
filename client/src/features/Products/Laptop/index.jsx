@@ -11,7 +11,7 @@ const Laptop = () => {
   const laptops = useSelector((state) => state.laptops.current);
   const brands = useSelector((state) => state.brands.current);
   const loadingLaptop = useSelector((state) => state.laptops.loading);
-  const userId = useSelector((state) => state.auth.current)._id || "";
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchDataLaptop = async () => {

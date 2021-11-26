@@ -73,6 +73,8 @@ export const authSlice = createSlice({
         state.authLoading = false;
         if (action.payload.success) {
           state.current = action.payload.user;
+          localStorage.setItem("userId", action.payload.user.userId);
+          localStorage.setItem("username", action.payload.user.username);
         } else {
           state.current = {};
         }

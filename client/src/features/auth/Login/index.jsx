@@ -4,14 +4,12 @@ import FormLogin from "./FormLogin";
 import { login, load } from "../../../app/authSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { createTheme } from "@mui/material/styles";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const loading = useSelector((state) => state.auth.loading);
   const [errors, setErrors] = useState("");
   const theme = createTheme();

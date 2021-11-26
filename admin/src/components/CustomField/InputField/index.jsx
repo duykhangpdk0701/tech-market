@@ -3,7 +3,7 @@ import React from "react";
 import prototype from "prop-types";
 
 const InputField = (props) => {
-  const { field, form, type, label, placeholder, disabled } = props;
+  const { field, form, type, label, placeholder, disabled, multiline } = props;
 
   const { name, values, onChange, onBlur } = field;
   const { errors, touched } = form;
@@ -19,6 +19,7 @@ const InputField = (props) => {
       label={label}
       type={type}
       disabled={disabled}
+      multiline={multiline}
       placeholder={placeholder}
       autoComplete={name}
       error={showError}

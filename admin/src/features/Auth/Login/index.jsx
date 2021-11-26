@@ -29,9 +29,8 @@ const Login = () => {
     try {
       const { username, password } = values;
       const action = await loginAsync({ username, password });
-      const actionResult = dispatch(action);
-      unwrapResult(actionResult);
-      console.log(admin);
+      const actionResult = await dispatch(action);
+      await unwrapResult(actionResult);
       history.push("/admin");
     } catch (error) {
       console.log(error);

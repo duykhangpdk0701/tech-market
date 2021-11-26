@@ -2,18 +2,21 @@ import { TextField, Typography, Button, Box } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { fetchCartsAsync } from "../../app/cartsSlice";
+import { addOder } from "../../app/ordersSlice";
 
 import style from "./Cart.module.scss";
 import ItemCart from "./ItemCart";
 
 const Cart = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.carts.current) || [
     { quantity: 0, product: { price: 0 } },
   ];
   const user = useSelector((state) => state.auth.current) || "";
-  const userId = user._id;
+  const userId = localStorage.getItem("userId");
   let sum = 0;
 
   for (const item of carts) {
@@ -28,6 +31,12 @@ const Cart = () => {
     };
     fetchData();
   }, [dispatch]);
+
+  const handleOrder = async (e) => {
+    const action = await addOder({ carts });
+    await dispatch(action);
+    history.push("/store/order");
+  };
 
   return (
     <section className={style.section}>
@@ -92,7 +101,8 @@ const Cart = () => {
               fullWidth
               variant="contained"
               className={style.to_order_contianer}
-              size="large">
+              size="large"
+              onClick={handleOrder}>
               Tiến hành thanh toán
             </Button>
           </aside>
