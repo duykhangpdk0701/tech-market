@@ -15,8 +15,16 @@ export const fetchCategoriesAsync = createAsyncThunk(
   },
 );
 
+export const addCategoryAsync = createAsyncThunk(
+  "category/addCategoryAsync",
+  async (data) => {
+    const res = await categoriesApi.addCategory(data);
+    return res;
+  },
+);
+
 export const categoriessSlice = createSlice({
-  name: "products",
+  name: "categories",
   initialState,
   reducers: {},
 
@@ -32,6 +40,21 @@ export const categoriessSlice = createSlice({
       .addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.current = action.payload.categories;
+        state.current.forEach((o, i) => {
+          o.id = i + 1;
+        });
+      })
+      //add product
+      .addCase(addCategoryAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addCategoryAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addCategoryAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.current = [...state.current, action.payload.category];
       });
   },
 });

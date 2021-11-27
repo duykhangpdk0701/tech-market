@@ -81,7 +81,7 @@ export const productsSlice = createSlice({
       })
       .addCase(addProductAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.current = [...state.current, ...action.payload.product];
+        state.current = [...state.current, action.payload.product];
       });
   },
 });

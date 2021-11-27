@@ -1,11 +1,4 @@
-import {
-  Paper,
-  Box,
-  Typography,
-  Button,
-  Autocomplete,
-  TextField,
-} from "@mui/material";
+import { Paper, Box, Typography, Button } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { FastField, Form, Formik } from "formik";
 import React, { useEffect } from "react";
@@ -85,11 +78,10 @@ const AddProduct = () => {
         setSnackbar({
           snackbarOpen: true,
           snackbarType: "success",
-          snackbarMessage: "Không thành công",
+          snackbarMessage: "",
         }),
       );
     } catch (error) {
-      console.log(error);
       store.dispatch(
         setSnackbar({
           snackbarOpen: true,

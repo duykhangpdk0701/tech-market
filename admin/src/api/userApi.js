@@ -10,6 +10,11 @@ const userApi = {
     const res = axiosAdmin.get(`/admin/getUsers/${id}`);
     return res;
   },
+
+  toggleActvieUser: async (id, isActive) => {
+    const res = axiosAdmin.put(`admin/toggle-active`, { id, isActive });
+    return res;
+  },
 };
 
 export default userApi;

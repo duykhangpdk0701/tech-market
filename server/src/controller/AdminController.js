@@ -82,6 +82,23 @@ class AdminController {
       return res.status(400).json({ success: false, message: error.message });
     }
   }
+
+  async toggleActiveUser(req, res) {
+    try {
+      const { id, isActive } = req.body;
+      const updateUser = await User.findByIdAndUpdate(id, {
+        isActive: !isActive,
+      });
+
+      res.json({
+        success: true,
+        user: updateUser,
+        messages: "toggle successfully",
+      });
+    } catch (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  }
 }
 
 module.exports = new AdminController();

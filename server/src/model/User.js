@@ -24,6 +24,10 @@ const UserSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamp: true },
 );

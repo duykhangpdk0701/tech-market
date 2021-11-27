@@ -13,6 +13,8 @@ import {
   ChatBubbleOutline,
   WorkOutline,
   Report,
+  FormatListBulleted,
+  GridView,
 } from "@mui/icons-material";
 
 import { NavLink, useRouteMatch } from "react-router-dom";
@@ -56,6 +58,21 @@ const SideBar = () => {
                 Products
               </li>
             </NavLink>
+
+            <NavLink to={`${match.url}/category`} className={style.link}>
+              <li className={style.sidebarListItem}>
+                <FormatListBulleted className={style.sidebarIcon} />
+                Category
+              </li>
+            </NavLink>
+
+            <NavLink to={`${match.url}/brand`} className={style.link}>
+              <li className={style.sidebarListItem}>
+                <GridView className={style.sidebarIcon} />
+                Brand
+              </li>
+            </NavLink>
+
             <li className={style.sidebarListItem}>
               <AttachMoney className={style.sidebarIcon} />
               Transactions

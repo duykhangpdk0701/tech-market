@@ -12,6 +12,10 @@ import ListProduct from "../ListProduct";
 //import scss
 import style from "./Admin.module.scss";
 import AddProduct from "../ListProduct/AddProduct";
+import AddCategory from "../ListCategory/AddCategory";
+import ListCategory from "../ListCategory";
+import ListBrand from "../ListBrand";
+import AddBrand from "../ListBrand/AddBrand";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -31,6 +35,13 @@ const Admin = () => {
           <Route path={`${match.url}/product`} component={ListProduct} />
           <Route path={`${match.url}/user/:id`} component={User} />
           <Route path={`${match.url}/user`} component={Users} />
+          <Route
+            path={`${match.url}/category/add-category`}
+            component={AddCategory}
+          />
+          <Route path={`${match.url}/category`} component={ListCategory} />
+          <Route path={`${match.url}/brand/add-brand`} component={AddBrand} />
+          <Route path={`${match.url}/brand`} component={ListBrand} />
         </Switch>
       </div>
     </>
