@@ -16,7 +16,7 @@ router.get("/products/laptop", LaptopController.showAll);
 router.get("/products/phone", PhoneController.showAll);
 
 //admin
-router.post("/store", upload.array("images", 10), ProductController.store);
+router.post("/store", upload.array("files", 10), ProductController.store);
 router.put("/permit", ProductController.disactive);
 router.put("/:id", ProductController.update);
 router.delete("/:id", ProductController.delete);

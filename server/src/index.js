@@ -13,6 +13,7 @@ connectDB();
 app.use(express.static(path.join(__dirname, "./public")));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // cors
 const whitelist = [process.env.CLIENT_URL, process.env.ADMIN_URL];
 

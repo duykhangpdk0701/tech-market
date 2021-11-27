@@ -13,14 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { fetchBrandsAsync } from "../../app/brandsSlice";
 import { fetchCategoriesAsync } from "../../app/categorySlice";
+import { addProductAsync } from "../../app/productsSlice";
+import { setSnackbar } from "../../app/snackBarSlice";
+import { store } from "../../app/store";
+import AutoField from "../../components/CustomField/AutoField";
 import InputField from "../../components/CustomField/InputField";
 import DropZone from "../../components/DropZone";
 import style from "./AddProduct.module.scss";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.current) || [];
-  const brands = useSelector((state) => state.brands.current) || [];
+  const categories = useSelector((state) => state.categories.current);
+  const brands = useSelector((state) => state.brands.current);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -47,22 +51,53 @@ const AddProduct = () => {
     description: "",
     quantity: "",
     price: "",
-    isActive: "",
+    isActive: true,
   };
 
   const validationSchema = Yup.object().shape({
+    files: Yup.array().required(),
     name: Yup.string().required(),
-    category: Yup.string().required(),
-    brand: Yup.string().required(),
     description: Yup.string().required(),
-    quantity: Yup.string().required(),
+    quantity: Yup.number().required(),
     price: Yup.number().required(),
+    // category: Yup.string().required()
     isActive: Yup.boolean().default(true),
   });
 
   const handleOnSubmit = async (values) => {
-    console.log(values);
-    console.log("hello my name is Khang");
+    try {
+      const formData = new FormData();
+      for (const file in values.files) {
+        formData.append("files", values.files[file]);
+      }
+      formData.append("name", values.name);
+      formData.append("category", values.category);
+      formData.append("brand", values.brand);
+      formData.append("description", values.description);
+      formData.append("quantity", values.quantity);
+      formData.append("price", values.price);
+      formData.append("isActive", values.isActive);
+
+      const action = await addProductAsync({ formData });
+      const actionResult = await dispatch(action);
+      unwrapResult(actionResult);
+      store.dispatch(
+        setSnackbar({
+          snackbarOpen: true,
+          snackbarType: "success",
+          snackbarMessage: "Không thành công",
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+      store.dispatch(
+        setSnackbar({
+          snackbarOpen: true,
+          snackbarType: "error",
+          snackbarMessage: "Không thành công",
+        }),
+      );
+    }
   };
 
   return (
@@ -73,10 +108,10 @@ const AddProduct = () => {
         onSubmit={handleOnSubmit}>
         {(formikProps) => {
           return (
-            <Form onSubmit={handleOnSubmit} noValidate>
+            <Form enctype="multipart/form-data">
               <Box className={style.outter_box}>
                 <Paper elevation={0} className={style.paper}>
-                  <Typography> Image </Typography>
+                  <Typography> Image</Typography>
                   <DropZone
                     values={formikProps.values}
                     setFieldValue={formikProps.setFieldValue}
@@ -93,34 +128,20 @@ const AddProduct = () => {
                     />
                   </Box>
                   <Box>
-                    <Autocomplete
-                      id="category"
+                    <FastField
+                      name="category"
+                      component={AutoField}
+                      label="Category:"
+                      placeholder="What's your photo category?"
                       options={categories}
-                      autoHighlight
-                      getOptionLabel={(options) => options.name}
-                      isOptionEqualToValue={(option, value) =>
-                        option.name === value.name
-                      }
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Categories"
-                          inputProps={{ ...params.inputProps }}
-                        />
-                      )}
                     />
 
-                    <Autocomplete
-                      id="brand"
+                    <FastField
+                      name="brand"
+                      component={AutoField}
+                      label="Brand:"
+                      placeholder="What's your photo category?"
                       options={brands}
-                      autoHighlight
-                      getOptionLabel={(options) => options.name}
-                      isOptionEqualToValue={(option, value) =>
-                        option.name === value.name
-                      }
-                      renderInput={(params) => (
-                        <TextField {...params} label="Brands" />
-                      )}
                     />
                   </Box>
 

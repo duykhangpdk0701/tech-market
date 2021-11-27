@@ -1,6 +1,7 @@
 const Product = require("../model/Product");
 const mongoose = require("mongoose");
 const { LAPTOP_ID, PHONE_ID } = require("../constant/categoryName");
+const formiable = require("formidable");
 
 class ProductController {
   async showAll(req, res) {
@@ -116,11 +117,13 @@ class ProductController {
           : "defaultImg ??",
       });
       await newProduct.save();
-      res.json({ success: true, messages: "Add successfully" });
+      res.json({
+        success: true,
+        product: newProduct,
+        messages: "Add successfully",
+      });
     } catch (error) {
-      res
-        .status(500)
-        .json({ success: false, messages: "Interval server error" });
+      res.status(400).json({ success: false, messages: error });
     }
   }
 

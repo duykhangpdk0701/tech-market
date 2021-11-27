@@ -64,7 +64,7 @@ const FormLogin = (props) => {
                     <Grid container>
                       <Grid item>
                         <span className={style.to_register}>
-                          Don't have an account{" "}
+                          Don't have an account
                           <Link to="/auth/register">Register</Link>
                         </span>
                       </Grid>

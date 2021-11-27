@@ -3,28 +3,28 @@ import React from "react";
 import prototype from "prop-types";
 
 const InputField = (props) => {
-  const { field, form, type, label, placeholder, disabled, multiline } = props;
+  const { field, form, type, label, placeholder, disabled, size, multiline } =
+    props;
 
-  const { name, values, onChange, onBlur } = field;
+  const { name, value, onChange, onBlur } = field;
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
-
   return (
     <TextField
       id={name}
-      value={values}
+      value={value}
       onChange={onChange}
       onBlur={onBlur}
-      fullWidth
-      label={label}
       type={type}
       disabled={disabled}
-      multiline={multiline}
       placeholder={placeholder}
-      autoComplete={name}
+      fullWidth
+      label={label}
       error={showError}
-      helperText={errors[name]}
+      helperText={showError && errors[name]}
       margin="normal"
+      size={size}
+      multiline={multiline}
     />
   );
 };
@@ -44,6 +44,8 @@ InputField.defaultProps = {
   label: "",
   placeholder: "",
   disable: false,
+  multiline: false,
+  size: "normal",
 };
 
 export default InputField;

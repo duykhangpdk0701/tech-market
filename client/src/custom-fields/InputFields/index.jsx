@@ -22,7 +22,7 @@ const InputField = (props) => {
         fullWidth
         label={label}
         error={showError}
-        helperText={errors[name]}
+        helperText={showError && errors[name]}
         margin="normal"
         size={size}
       />

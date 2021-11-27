@@ -1,7 +1,8 @@
 import { Formik, Form, FastField } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Alert, Button, Col, FormGroup, Row, Spinner } from "reactstrap";
+import { Alert, Col, FormGroup, Row, Spinner } from "reactstrap";
+import { Button } from "@mui/material";
 import InputField from "../../../custom-fields/InputFields";
 import * as Yup from "yup";
 //import style
@@ -129,10 +130,10 @@ const FormRegister = (props) => {
                   </Button>
                 ) : (
                   <Button
+                    fullWidth
+                    variant="contained"
                     color="primary"
                     className={style.submit_btn}
-                    size="lg"
-                    block
                     type="submit">
                     Submit
                   </Button>

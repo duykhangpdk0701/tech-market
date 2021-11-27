@@ -24,6 +24,15 @@ export const toggleActive = createAsyncThunk(
   },
 );
 
+export const addProductAsync = createAsyncThunk(
+  "product/addProductAsync",
+  async (data) => {
+    const { formData } = data;
+    const res = await productsApi.addProdutc(formData);
+    return res;
+  },
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -61,6 +70,18 @@ export const productsSlice = createSlice({
             item.isActive = !item.isActive;
           }
         });
+      })
+
+      .addCase(addProductAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addProductAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addProductAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.current = [...state.current, ...action.payload.product];
       });
   },
 });

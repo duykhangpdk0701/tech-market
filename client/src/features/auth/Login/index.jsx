@@ -20,6 +20,7 @@ const Login = () => {
       const action = await login({ username, password });
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
+      console.log("hello my");
       await dispatch(load());
     } catch (error) {
       setErrors(error.message);
