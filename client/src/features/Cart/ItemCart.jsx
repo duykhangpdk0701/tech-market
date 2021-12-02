@@ -7,8 +7,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
-import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   changeQuantityOfCart,
@@ -16,25 +15,15 @@ import {
   increaseQuantityOfCart,
   removeCart,
 } from "../../app/cartsSlice";
-import { fetchProduct } from "../../app/productSlice";
 import { setSnackbar } from "../../app/snackbarSlice";
 import style from "./ItemCart.module.scss";
+
+import PropsType from "prop-types";
 
 const ItemCart = (props) => {
   const { cart } = props;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [productInfo, setproductInfo] = useState({ name: "", price: 0 });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const action = await fetchProduct({ id: cart.productId });
-      const acionResult = await dispatch(action);
-      const result = await unwrapResult(acionResult).product;
-      setproductInfo(result);
-    };
-    fetchData();
-  }, [dispatch, cart.productId]);
 
   const handleIncreaseAmount = async (e) => {
     try {
@@ -121,6 +110,17 @@ const ItemCart = (props) => {
 
   const handleOnChangeCart = async (e) => {
     try {
+      if (e.target.value < 1) {
+        e.target.value = 1;
+        dispatch(
+          setSnackbar({
+            snackbarOpen: true,
+            snackbarType: "warning",
+            snackbarMessage: "Số lượng không nhỏ hơn 1!",
+          }),
+        );
+      }
+
       setLoading(true);
       dispatch(
         changeQuantityOfCart({
@@ -153,7 +153,7 @@ const ItemCart = (props) => {
     <Box mx={{ p: 3 }} className={style.container}>
       <Box className={style.img_contianer}></Box>
       <Box className={style.name_container}>
-        <Typography>{productInfo.name}</Typography>
+        <Typography>{cart.product && cart.product.name}</Typography>
         <LoadingButton
           loading={loading}
           size="small"
@@ -167,7 +167,7 @@ const ItemCart = (props) => {
           {new Intl.NumberFormat("vi-VN", {
             style: "currency",
             currency: "VND",
-          }).format(productInfo.price * cart.quantity)}
+          }).format((cart.product && cart.product.price) * cart.quantity)}
         </Typography>
       </Box>
       <Box className={style.amount_container}>
@@ -195,4 +195,17 @@ const ItemCart = (props) => {
   );
 };
 
+ItemCart.prototype = {
+  props: PropsType.object.isRequired,
+};
+
+ItemCart.defaultProps = {
+  cart: {
+    product: {
+      name: "",
+      price: 0,
+    },
+    quantity: 1,
+  },
+};
 export default ItemCart;

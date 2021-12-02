@@ -1,6 +1,6 @@
 import { TextField, Typography, Button, Box } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCartsAsync } from "../../app/cartsSlice";
@@ -13,8 +13,15 @@ const Cart = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.carts.current);
-  const userId = localStorage.getItem("userId");
-  const [sum, setSum] = useState(0);
+
+  let sum = carts.reduce((a, b) => {
+    let price = 1;
+    if (b.product) {
+      price = b.product.price;
+    }
+
+    return a + b.quantity * price;
+  }, 0);
 
   const handleOrder = async (e) => {
     const action = await addOder({ carts });
@@ -29,7 +36,8 @@ const Cart = () => {
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, []);
+    // eslint-disable-next-line
+  }, [dispatch]);
 
   return (
     <section className={style.section}>
@@ -46,9 +54,7 @@ const Cart = () => {
             }}
             className={style.main}>
             {carts.map((item) => {
-              return (
-                <ItemCart setSum={setSum} cart={item} key={item.productId} />
-              );
+              return <ItemCart cart={item} key={item.productId} />;
             })}
           </Box>
           <aside className={style.aside}>

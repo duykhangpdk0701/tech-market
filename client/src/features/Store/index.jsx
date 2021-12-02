@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { load } from "../../app/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Orders from "../Orders";
+import PrivateRoute from "../../private/PrivateRoute";
 
 const Store = () => {
   const match = useRouteMatch();
@@ -34,7 +35,7 @@ const Store = () => {
         <Route path={`${match.url}/phone`} component={Phone} />
         <Route path={`${match.url}/cart`} component={Cart} />
         <Route path={`${match.url}/product/:id`} component={Product} exact />
-        <Route path={`${match.url}/order`} component={Orders} />
+        <PrivateRoute path={`${match.url}/order`} component={Orders} />
       </Switch>
     </>
   );

@@ -9,25 +9,20 @@ import Register from "./Register";
 const Auth = () => {
   const match = useRouteMatch();
   const dispatch = useDispatch();
-  const { current } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(load());
   }, [dispatch]);
 
-  if (current) {
-    return <Redirect to="/store" />;
-  } else {
-    return (
-      <Switch>
-        <Route path={`${match.url}`} exact>
-          <Redirect to={`${match.url}/login`} />
-        </Route>
-        <Route path={`${match.url}/login`} component={Login} />
-        <Route path={`${match.url}/register`} component={Register} />
-      </Switch>
-    );
-  }
+  return (
+    <Switch>
+      <Route path={`${match.url}`} exact>
+        <Redirect to={`${match.url}/login`} />
+      </Route>
+      <Route path={`${match.url}/login`} component={Login} />
+      <Route path={`${match.url}/register`} component={Register} />
+    </Switch>
+  );
 };
 
 export default Auth;

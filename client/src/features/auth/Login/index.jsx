@@ -7,9 +7,12 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { createTheme } from "@mui/material/styles";
+import { useHistory } from "react-router-dom";
+import queryString from "query-string";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const loading = useSelector((state) => state.auth.loading);
   const [errors, setErrors] = useState("");
   const theme = createTheme();
@@ -19,9 +22,12 @@ const Login = () => {
       const { username, password } = values;
       const action = await login({ username, password });
       const actionResult = await dispatch(action);
-      unwrapResult(actionResult);
-      console.log("hello my");
+      await unwrapResult(actionResult);
       await dispatch(load());
+      if (queryString.parse(history.location.search).authTo === "true") {
+        history.goBack();
+      }
+      history.push("/store");
     } catch (error) {
       setErrors(error.message);
     }

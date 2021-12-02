@@ -25,6 +25,7 @@ const Template = (props) => {
             {props.items.map((item) => {
               return (
                 <ItemProduct
+                  key={item._id}
                   item={item}
                   userId={props.userId}
                   productId={item._id}

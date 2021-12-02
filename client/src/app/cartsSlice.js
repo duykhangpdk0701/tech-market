@@ -71,8 +71,12 @@ export const CartsSlice = createSlice({
           element.quantity++;
         }
       });
+      state.current.forEach((element) => {
+        if (element.productId === action.payload) {
+          element.quantity++;
+        }
+      });
       localStorage.setItem("cart", JSON.stringify(arrayCart));
-      state.current = arrayCart;
     },
 
     decreaseQuantityOfCart: (state, action) => {
@@ -82,8 +86,13 @@ export const CartsSlice = createSlice({
           element.quantity--;
         }
       });
+      state.current.forEach((element) => {
+        if (element.productId === action.payload) {
+          element.quantity--;
+        }
+      });
+
       localStorage.setItem("cart", JSON.stringify(arrayCart));
-      state.current = arrayCart;
     },
 
     changeQuantityOfCart: (state, action) => {
@@ -93,8 +102,12 @@ export const CartsSlice = createSlice({
           element.quantity = action.payload.quantity;
         }
       });
+      state.current.forEach((element) => {
+        if (element.productId === action.payload) {
+          element.quantity--;
+        }
+      });
       localStorage.setItem("cart", JSON.stringify(arrayCart));
-      state.current = arrayCart;
     },
   },
   extraReducers: (builder) => {
@@ -110,12 +123,10 @@ export const CartsSlice = createSlice({
       .addCase(fetchCartsAsync.fulfilled, (state, action) => {
         state.loading = false;
         for (const key in state.current) {
-          if (state.current[key].productId === action.payload.carts[key]._id) {
-            state.current[key] = {
-              ...state.current[key],
-              product: action.payload.carts[key],
-            };
-          }
+          state.current[key] = {
+            ...state.current[key],
+            product: action.payload.carts[key],
+          };
         }
       });
   },

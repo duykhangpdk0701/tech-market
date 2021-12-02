@@ -37,7 +37,7 @@ const ItemProduct = (props) => {
 
   const { item } = props;
   return (
-    <Card key={item._id} className={style.item_wrapper}>
+    <Card className={style.item_wrapper}>
       <CardActionArea>
         <CardMedia
           className={style.img_container}

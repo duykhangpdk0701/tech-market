@@ -6,6 +6,7 @@ const AdminRouter = require("./Admin");
 const TestRouter = require("./Test");
 const CartRouter = require("./Cart");
 const OrderRouter = require("./Order");
+const AddressRouter = require("./Address");
 
 const Route = (app) => {
   app.use("/user", UserRouter);
@@ -16,6 +17,7 @@ const Route = (app) => {
   app.use("/test", TestRouter);
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
+  app.use("/address", AddressRouter);
 };
 
 module.exports = Route;

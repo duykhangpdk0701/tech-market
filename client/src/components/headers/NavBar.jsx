@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import style from "./NavBar.module.scss";
@@ -11,6 +11,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const NavBar = () => {
   const dispatch = useDispatch();
   const searchResult = useSelector((state) => state.search.current) || [];
+  const countCart = useSelector((state) => state.carts.current).length || 0;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +59,7 @@ const NavBar = () => {
             <div className={style.user_profile}>Loli</div>
             <div className={style.cart}>
               <Link className={style.link_cart} to="/store/cart"></Link>
-              <Badge badgeContent={0} color="primary">
+              <Badge badgeContent={countCart} color="primary">
                 <ShoppingCartIcon
                   fontSize="large"
                   className={style.cart_logo}
