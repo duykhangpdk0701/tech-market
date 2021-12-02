@@ -1,6 +1,6 @@
 import { TextField, Typography, Button, Box } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCartsAsync } from "../../app/cartsSlice";
@@ -12,31 +12,24 @@ import ItemCart from "./ItemCart";
 const Cart = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.carts.current) || [
-    { quantity: 0, product: { price: 0 } },
-  ];
-  const user = useSelector((state) => state.auth.current) || "";
+  const carts = useSelector((state) => state.carts.current);
   const userId = localStorage.getItem("userId");
-  let sum = 0;
-
-  for (const item of carts) {
-    sum += item.product.price * item.quantity;
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const action = await fetchCartsAsync({ userId });
-      const actionResult = dispatch(action);
-      unwrapResult(actionResult);
-    };
-    fetchData();
-  }, [dispatch]);
+  const [sum, setSum] = useState(0);
 
   const handleOrder = async (e) => {
     const action = await addOder({ carts });
     await dispatch(action);
     history.push("/store/order");
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const action = await fetchCartsAsync({ carts });
+      const actionResult = await dispatch(action);
+      await unwrapResult(actionResult);
+    };
+    fetchData();
+  }, []);
 
   return (
     <section className={style.section}>
@@ -53,7 +46,9 @@ const Cart = () => {
             }}
             className={style.main}>
             {carts.map((item) => {
-              return <ItemCart cart={item} key={item._id} />;
+              return (
+                <ItemCart setSum={setSum} cart={item} key={item.productId} />
+              );
             })}
           </Box>
           <aside className={style.aside}>

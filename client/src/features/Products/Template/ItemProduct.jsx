@@ -12,44 +12,27 @@ import { LoadingButton } from "@mui/lab";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
 import style from "./Template.module.scss";
-import { addToCartAsync } from "../../../app/cartsSlice";
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { setSnackbar } from "../../../app/snackbarSlice";
+import { addToCart } from "../../../app/cartsSlice";
 
 const ItemProduct = (props) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const handleAddToWishlist = async (e) => {
-    try {
-      setLoading(true);
-      const action = await addToCartAsync({
-        userId: props.userId,
-        productId: props.productId,
-        quantity: 1,
-      });
-      const actionResult = await dispatch(action);
-      unwrapResult(actionResult);
-      setLoading(false);
-      dispatch(
-        setSnackbar({
-          snackbarOpen: true,
-          snackbarType: "success",
-          snackbarMessage: "Thêm vào giỏ hàng thành công!",
-        }),
-      );
-    } catch (error) {
-      setLoading(false);
-      dispatch(
-        setSnackbar({
-          snackbarOpen: true,
-          snackbarType: "error",
-          snackbarMessage:
-            "Đã có sự cố trong việc thêm vào giỏ hàng, xin vui lòng thử lại sau!",
-        }),
-      );
-    }
+    const productId = props.item._id;
+    setLoading(true);
+    dispatch(addToCart(productId));
+
+    setLoading(false);
+    dispatch(
+      setSnackbar({
+        snackbarOpen: true,
+        snackbarType: "success",
+        snackbarMessage: "Thêm vào giỏ hàng thành công!",
+      }),
+    );
   };
 
   const { item } = props;

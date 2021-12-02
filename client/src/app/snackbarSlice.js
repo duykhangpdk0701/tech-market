@@ -11,7 +11,6 @@ export const snackbarSlice = createSlice({
   initialState,
   reducers: {
     setSnackbar: (state, action) => {
-      console.log(action);
       const { snackbarOpen, snackbarMessage, snackbarType } = action.payload;
 
       return {
