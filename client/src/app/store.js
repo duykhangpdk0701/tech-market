@@ -10,6 +10,7 @@ import searchReducer from "./searchSlice";
 import cartsReducer from "./cartsSlice";
 import snackbarReducer from "./snackbarSlice";
 import orderReducer from "./ordersSlice";
+import addressReducer from "./addressSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     carts: cartsReducer,
     snackbar: snackbarReducer,
     order: orderReducer,
+    address: addressReducer,
   },
 });
