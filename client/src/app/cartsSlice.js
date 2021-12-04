@@ -109,7 +109,12 @@ export const CartsSlice = createSlice({
       });
       localStorage.setItem("cart", JSON.stringify(arrayCart));
     },
+
+    clearCart: (state) => {
+      state.current = [];
+    },
   },
+
   extraReducers: (builder) => {
     builder
       //fetch cart
@@ -139,6 +144,7 @@ export const {
   increaseQuantityOfCart,
   decreaseQuantityOfCart,
   changeQuantityOfCart,
+  clearCart,
 } = CartsSlice.actions;
 
 export default CartsSlice.reducer;

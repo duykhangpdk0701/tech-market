@@ -29,9 +29,6 @@ const OrderAddress = (props) => {
   const addressState = useSelector((state) => state.address.current) || [];
 
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const initialValues = {
     address: "",

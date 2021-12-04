@@ -6,7 +6,11 @@ import CompleteOrder from "./CompleteOrder";
 import MethodPayment from "./MethodPayment";
 import ConfirmOrder from "./ConfirmOrder";
 
-const steps = ["Chọn địa chỉ", "Chọ phương thức thanh toán", "Xác nhận"];
+const steps = [
+  "Chọn địa chỉ giao hàng",
+  "Chọn phương thức thanh toán",
+  "Xác nhận đơn hàng",
+];
 
 const Orders = () => {
   const [activeStep, setActiveStep] = useState(0);

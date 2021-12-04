@@ -1,10 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import orderApi from "../api/orderApi";
 
 const initialState = {
   current: {},
   loading: false,
   error: "",
 };
+
+export const addOrderAsync = createAsyncThunk(
+  "order/addAsync",
+  async (data) => {
+    const res = orderApi.addOrder(data);
+    return res;
+  },
+);
 
 export const ordersSlice = createSlice({
   name: "order",
@@ -32,9 +41,21 @@ export const ordersSlice = createSlice({
       };
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(addOrderAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addOrderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addOrderAsync.fulfilled, (state, action) => {
+        state.loading = false;
+      });
+  },
 });
 
-export const { addOder, addAddress } = ordersSlice.actions;
+export const { addOder, addAddress, addPaymentMethod } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
