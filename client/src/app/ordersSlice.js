@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   current: {},
@@ -24,10 +24,17 @@ export const ordersSlice = createSlice({
         address: action.payload,
       };
     },
+
+    addPaymentMethod: (state, action) => {
+      state.current = {
+        ...state.current,
+        paymentMethod: action.payload,
+      };
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { addOder, address } = ordersSlice.actions;
+export const { addOder, addAddress } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

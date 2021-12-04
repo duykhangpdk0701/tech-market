@@ -16,6 +16,11 @@ export const fetchAdressAsync = createAsyncThunk(
   },
 );
 
+export const addAddressAsync = createAsyncThunk("address/add", async (data) => {
+  const res = await addressApi.add(data);
+  return res;
+});
+
 export const AdressSlice = createSlice({
   name: "address",
   initialState,
@@ -33,6 +38,18 @@ export const AdressSlice = createSlice({
       .addCase(fetchAdressAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.current = action.payload.address;
+      })
+
+      .addCase(addAddressAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addAddressAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addAddressAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.current.push(action.payload.address);
       });
   },
 });

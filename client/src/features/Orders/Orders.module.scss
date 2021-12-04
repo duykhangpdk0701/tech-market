@@ -1,18 +1,7 @@
 .section {
-  width: 75%;
+  width: 60%;
   margin: auto;
   background-color: white;
   display: flex;
-}
-
-.address_contnent {
-  flex-basis: 55%;
-}
-
-.title {
-  text-transform: uppercase;
-}
-
-.cart_content {
-  flex-basis: 45%;
+  flex-direction: column;
 }

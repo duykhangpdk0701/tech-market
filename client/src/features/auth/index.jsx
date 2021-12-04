@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Switch, useRouteMatch, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { load } from "../../app/authSlice";
 //import feature
 import Login from "./Login";
