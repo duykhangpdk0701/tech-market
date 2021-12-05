@@ -13,13 +13,14 @@ const Order = new Schema(
     },
     address: {
       type: Object,
-      require: true,
+      required: true,
     },
     paymentMethod: {
       type: String,
-      require: true,
+      required: true,
     },
-    totalPrice: { type: Number },
+    totalPrice: { type: Number, required: true },
+    status: { type: Number, default: 1 },
   },
   {
     timestamps: true,

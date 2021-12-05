@@ -16,6 +16,7 @@ import AddCategory from "../ListCategory/AddCategory";
 import ListCategory from "../ListCategory";
 import ListBrand from "../ListBrand";
 import AddBrand from "../ListBrand/AddBrand";
+import Analytics from "../Analytics";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -42,6 +43,8 @@ const Admin = () => {
           <Route path={`${match.url}/category`} component={ListCategory} />
           <Route path={`${match.url}/brand/add-brand`} component={AddBrand} />
           <Route path={`${match.url}/brand`} component={ListBrand} />
+
+          <Route path={`${match.url}/analytics`} component={Analytics} />
         </Switch>
       </div>
     </>

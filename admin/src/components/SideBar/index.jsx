@@ -27,16 +27,18 @@ const SideBar = () => {
         <div className={style.sidebarMenu}>
           <h3 className={style.sidebarTitle}>Dashboard</h3>
           <ul className={style.sidebarList}>
-            <NavLink to="/" className={style.link}>
+            <NavLink to="/admin" className={style.link}>
               <li className={`${style.sidebarListItem} ${style.active}`}>
                 <LineStyle className={style.sidebarIcon} />
                 Home
               </li>
             </NavLink>
-            <li className={style.sidebarListItem}>
-              <Timeline className={style.sidebarIcon} />
-              Analytics
-            </li>
+            <NavLink to="/admin/analytics" className={style.sidebarListItem}>
+              <li>
+                <Timeline className={style.sidebarIcon} />
+                Analytics
+              </li>
+            </NavLink>
             <li className={style.sidebarListItem}>
               <TrendingUp className={style.sidebarIcon} />
               Sales
