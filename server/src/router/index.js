@@ -7,6 +7,7 @@ const TestRouter = require("./Test");
 const CartRouter = require("./Cart");
 const OrderRouter = require("./Order");
 const AddressRouter = require("./Address");
+const ChartRouter = require("./Chart");
 
 const Route = (app) => {
   app.use("/user", UserRouter);
@@ -18,6 +19,7 @@ const Route = (app) => {
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
   app.use("/address", AddressRouter);
+  app.use("/chart", ChartRouter);
 };
 
 module.exports = Route;
