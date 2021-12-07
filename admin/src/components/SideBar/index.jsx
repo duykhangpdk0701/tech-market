@@ -35,6 +35,7 @@ const SideBar = () => {
   const [openCategory, setOpenCategory] = useState(false);
   const [openBrand, setOpenBrand] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
+  const [openChart, setOpenChart] = useState(false);
 
   const handleClickOrder = () => {
     setOpenOrder(!openOrder);
@@ -53,6 +54,9 @@ const SideBar = () => {
 
   const handleClickAccount = () => {
     setOpenAccount(!openAccount);
+  };
+  const handleClickChart = () => {
+    setOpenChart(!openChart);
   };
 
   return (
@@ -147,6 +151,34 @@ const SideBar = () => {
           </List>
         </Collapse>
         <Divider />
+
+        {/* chart */}
+        <ListItemButton onClick={handleClickChart}>
+          <ListItemIcon>
+            <Storefront color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Biểu đồ</Typography>}
+          />
+          {openChart ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openChart} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/analytics">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Biểu đồ</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+
         {/* product */}
         <ListItemButton onClick={handleClickProduct}>
           <ListItemIcon>

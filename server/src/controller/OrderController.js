@@ -137,6 +137,25 @@ class OrderController {
         .json({ success: false, messages: "Interval server error" });
     }
   }
+
+  async setStatus(req, res) {
+    const { id, status } = req.body;
+    if (!id)
+      return res.status(401).json({ success: false, messages: "Missing id" });
+    try {
+      const order = await Order.findByIdAndUpdate(id, { status });
+
+      res.json({
+        success: true,
+        order,
+        messages: "update status successfully",
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, messages: "Interval server error" });
+    }
+  }
 }
 
 module.exports = new OrderController();
