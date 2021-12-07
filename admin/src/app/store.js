@@ -7,6 +7,7 @@ import snackBarSlice from "./snackBarSlice";
 import categoriesSlice from "./categorySlice";
 import brandsSlice from "./brandsSlice";
 import chartSlice from "./chartSlice";
+import ordersSlice from "./orderSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     categories: categoriesSlice,
     brands: brandsSlice,
     chart: chartSlice,
+    orders: ordersSlice,
   },
 });

@@ -1,125 +1,298 @@
-import React from "react";
-import style from "./SideBar.module.scss";
 import {
-  LineStyle,
-  Timeline,
-  TrendingUp,
-  PermIdentity,
+  ExpandLess,
+  ExpandMore,
   Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
-  FormatListBulleted,
-  GridView,
+  Add,
+  ViewList,
+  Category,
+  BrandingWatermark,
+  ManageAccounts,
+  Home,
+  Pending,
+  LocalShipping,
+  CheckCircle,
+  Cancel,
+  Inventory,
 } from "@mui/icons-material";
-
+import {
+  Collapse,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import style from "./SideBar.module.scss";
 
 const SideBar = () => {
   const match = useRouteMatch();
+  const [openOrder, setOpenOrder] = useState(false);
+  const [openProduct, setOpenProduct] = useState(false);
+  const [openCategory, setOpenCategory] = useState(false);
+  const [openBrand, setOpenBrand] = useState(false);
+  const [openAccount, setOpenAccount] = useState(false);
+
+  const handleClickOrder = () => {
+    setOpenOrder(!openOrder);
+  };
+  const handleClickProduct = () => {
+    setOpenProduct(!openProduct);
+  };
+
+  const handleClickCategory = () => {
+    setOpenCategory(!openCategory);
+  };
+
+  const handleClickBrand = () => {
+    setOpenBrand(!openBrand);
+  };
+
+  const handleClickAccount = () => {
+    setOpenAccount(!openAccount);
+  };
+
   return (
     <div className={style.sidebar}>
-      <div className={style.sidebarWrapper}>
-        <div className={style.sidebarMenu}>
-          <h3 className={style.sidebarTitle}>Dashboard</h3>
-          <ul className={style.sidebarList}>
-            <NavLink to="/admin" className={style.link}>
-              <li className={`${style.sidebarListItem} ${style.active}`}>
-                <LineStyle className={style.sidebarIcon} />
-                Home
-              </li>
-            </NavLink>
-            <NavLink to="/admin/analytics" className={style.sidebarListItem}>
-              <li>
-                <Timeline className={style.sidebarIcon} />
-                Analytics
-              </li>
-            </NavLink>
-            <li className={style.sidebarListItem}>
-              <TrendingUp className={style.sidebarIcon} />
-              Sales
-            </li>
-          </ul>
-        </div>
-        <div className={style.sidebarMenu}>
-          <h3 className={style.sidebarTitle}>Quick Menu</h3>
-          <ul className={style.sidebarList}>
-            <NavLink to={`${match.url}/user`} className={style.link}>
-              <li className={style.sidebarListItem}>
-                <PermIdentity className={style.sidebarIcon} />
-                Users
-              </li>
-            </NavLink>
-            <NavLink to={`${match.url}/product`} className={style.link}>
-              <li className={style.sidebarListItem}>
-                <Storefront className={style.sidebarIcon} />
-                Products
-              </li>
-            </NavLink>
+      <List
+        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        component="nav"
+        subheader={
+          <ListSubheader component="div">Thanh điều hướng</ListSubheader>
+        }>
+        {/* Home */}
+        <ListItemButton component={NavLink} to="/admin">
+          <ListItemIcon>
+            <Home color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Trang chủ</Typography>}
+          />
+        </ListItemButton>
+        <Divider />
+        {/* Order */}
+        <ListItemButton onClick={handleClickOrder}>
+          <ListItemIcon>
+            <Inventory color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Đơn hàng</Typography>}
+          />
+          {openOrder ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openOrder} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/order">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Danh sách</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/order/pending">
+              <ListItemIcon>
+                <Pending color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Chưa xác nhận</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/order/delivering">
+              <ListItemIcon>
+                <LocalShipping color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body2">Đang vận chuyển</Typography>
+                }
+              />
+            </ListItemButton>
 
-            <NavLink to={`${match.url}/category`} className={style.link}>
-              <li className={style.sidebarListItem}>
-                <FormatListBulleted className={style.sidebarIcon} />
-                Category
-              </li>
-            </NavLink>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/order/delivered">
+              <ListItemIcon>
+                <CheckCircle color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Đã giao</Typography>}
+              />
+            </ListItemButton>
 
-            <NavLink to={`${match.url}/brand`} className={style.link}>
-              <li className={style.sidebarListItem}>
-                <GridView className={style.sidebarIcon} />
-                Brand
-              </li>
-            </NavLink>
-
-            <li className={style.sidebarListItem}>
-              <AttachMoney className={style.sidebarIcon} />
-              Transactions
-            </li>
-            <li className={style.sidebarListItem}>
-              <BarChart className={style.sidebarIcon} />
-              Reports
-            </li>
-          </ul>
-        </div>
-        <div className={style.sidebarMenu}>
-          <h3 className={style.sidebarTitle}>Notifications</h3>
-          <ul className={style.sidebarList}>
-            <li className={style.sidebarListItem}>
-              <MailOutline className={style.sidebarIcon} />
-              Mail
-            </li>
-            <li className={style.sidebarListItem}>
-              <DynamicFeed className={style.sidebarIcon} />
-              Feedback
-            </li>
-            <li className={style.sidebarListItem}>
-              <ChatBubbleOutline className={style.sidebarIcon} />
-              Messages
-            </li>
-          </ul>
-        </div>
-        <div className={style.sidebarIcon}>
-          <h3 className={style.sidebarTitle}>Staff</h3>
-          <ul className={style.sidebarList}>
-            <li className={style.sidebarListItem}>
-              <WorkOutline className={style.sidebarIcon} />
-              Manage
-            </li>
-            <li className={style.sidebarListItem}>
-              <Timeline className={style.sidebarIcon} />
-              Analytics
-            </li>
-            <li className={style.sidebarListItem}>
-              <Report className={style.sidebarIcon} />
-              Reports
-            </li>
-          </ul>
-        </div>
-      </div>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/order/abort">
+              <ListItemIcon>
+                <Cancel color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Đã Huỷ</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+        {/* product */}
+        <ListItemButton onClick={handleClickProduct}>
+          <ListItemIcon>
+            <Storefront color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Sản phẩm</Typography>}
+          />
+          {openProduct ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openProduct} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/product">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Danh sách</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/product/add">
+              <ListItemIcon>
+                <Add color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Thêm</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+        {/* Brand */}
+        <ListItemButton onClick={handleClickBrand}>
+          <ListItemIcon>
+            <BrandingWatermark color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Thương hiệu</Typography>}
+          />
+          {openBrand ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openBrand} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/brand">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Danh sách</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/brand/add">
+              <ListItemIcon>
+                <Add color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Thêm danh mục</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+        {/* category */}
+        <ListItemButton onClick={handleClickCategory}>
+          <ListItemIcon>
+            <Category color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Danh mục</Typography>}
+          />
+          {openCategory ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openCategory} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/category">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Danh sách</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/category/add">
+              <ListItemIcon>
+                <Add color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Thêm danh mục</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+        {/* account */}
+        <ListItemButton onClick={handleClickAccount}>
+          <ListItemIcon>
+            <ManageAccounts color="primary" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="subtitle2">Tài Khoản </Typography>}
+          />
+          {openAccount ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openAccount} timeout="auto" unmountOnExit>
+          <List disablePadding>
+            <ListItemButton sx={{ pl: 4 }} component={NavLink} to="/admin/user">
+              <ListItemIcon>
+                <ViewList color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Danh sách</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ pl: 4 }}
+              component={NavLink}
+              to="/admin/user/add">
+              <ListItemIcon>
+                <Add color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body2">Thêm danh mục</Typography>}
+              />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <Divider />
+      </List>
     </div>
   );
 };

@@ -20,7 +20,7 @@ const Order = new Schema(
       required: true,
     },
     totalPrice: { type: Number, required: true },
-    status: { type: Number, default: 1 },
+    status: { type: Number, required: true, default: 1 },
   },
   {
     timestamps: true,

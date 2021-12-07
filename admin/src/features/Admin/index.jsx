@@ -17,6 +17,11 @@ import ListCategory from "../ListCategory";
 import ListBrand from "../ListBrand";
 import AddBrand from "../ListBrand/AddBrand";
 import Analytics from "../Analytics";
+import Order from "../Orders";
+import ListOrdersPending from "../Orders/ListOrdersPending";
+import ListOrdersDelivering from "../Orders/ListOrdersDelivering";
+import ListOrdersDelivered from "../Orders/ListOrdersDelivered";
+import ListOrdersAbort from "../Orders/ListOrdersAbort";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -29,22 +34,33 @@ const Admin = () => {
         <SideBar />
         <Switch>
           <Route path={`${match.url}`} component={Home} exact />
-          <Route
-            path={`${match.url}/product/addproduct`}
-            component={AddProduct}
-          />
+          <Route path={`${match.url}/product/add`} component={AddProduct} />
           <Route path={`${match.url}/product`} component={ListProduct} />
           <Route path={`${match.url}/user/:id`} component={User} />
           <Route path={`${match.url}/user`} component={Users} />
-          <Route
-            path={`${match.url}/category/add-category`}
-            component={AddCategory}
-          />
+          <Route path={`${match.url}/category/add`} component={AddCategory} />
           <Route path={`${match.url}/category`} component={ListCategory} />
-          <Route path={`${match.url}/brand/add-brand`} component={AddBrand} />
+          <Route path={`${match.url}/brand/add`} component={AddBrand} />
           <Route path={`${match.url}/brand`} component={ListBrand} />
-
           <Route path={`${match.url}/analytics`} component={Analytics} />
+          {/* order  */}
+          <Route
+            path={`${match.url}/order/pending`}
+            component={ListOrdersPending}
+          />
+          <Route
+            path={`${match.url}/order/delivering`}
+            component={ListOrdersDelivering}
+          />
+          <Route
+            path={`${match.url}/order/delivered`}
+            component={ListOrdersDelivered}
+          />
+          <Route
+            path={`${match.url}/order/abort`}
+            component={ListOrdersAbort}
+          />
+          <Route path={`${match.url}/order`} component={Order} />
         </Switch>
       </div>
     </>
