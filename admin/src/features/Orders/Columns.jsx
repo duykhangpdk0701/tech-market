@@ -1,5 +1,17 @@
-import { Chip, Typography } from "@mui/material";
+import {
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
+import { Form, Formik } from "formik";
+import React, { useState } from "react";
+import { store } from "../../app/store";
+import { setId, openDialog } from "../../app/selectStatus";
+import { LoadingButton } from "@mui/lab";
 
 const Columns = [
   { field: "_id", headerName: "ID", width: 250 },
@@ -70,6 +82,20 @@ const Columns = [
       };
 
       return <>{returnChip(params)}</>;
+    },
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    width: 200,
+    renderCell: (params) => {
+      let status = 0;
+
+      const handleChange = (e) => {
+        store.dispatch(setId(params._id));
+      };
+
+      return <LoadingButton>setStatus</LoadingButton>;
     },
   },
 ];
