@@ -8,6 +8,7 @@ import categoriesSlice from "./categorySlice";
 import brandsSlice from "./brandsSlice";
 import chartSlice from "./chartSlice";
 import ordersSlice from "./orderSlice";
+import selectStatusSlice from "./selectStatus";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     brands: brandsSlice,
     chart: chartSlice,
     orders: ordersSlice,
+    selectStatus: selectStatusSlice,
   },
 });

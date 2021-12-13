@@ -1,0 +1,50 @@
+.main {
+  width: 100%;
+}
+
+.breadcrumb_nav {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.breadcrumb {
+  display: flex;
+  list-style: none;
+}
+
+.breadcrumb_item:nth-child(n + 2) {
+  padding-left: 1rem;
+  display: flex;
+}
+
+.breadcrumb_icon {
+  opacity: 0.4;
+}
+
+.breadcrumb_text {
+  opacity: 0.7;
+}
+
+.breadcrumb_text_active {
+  opacity: 1;
+}
+
+.page_content {
+  width: 100%;
+}
+
+.container {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail_top {
+}
+
+.gallery_image {
+  object-fit: cover !important;
+}

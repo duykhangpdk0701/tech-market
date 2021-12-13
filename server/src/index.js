@@ -15,7 +15,11 @@ app.use(express.static(path.join(__dirname, "./public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // cors
-const whitelist = [process.env.CLIENT_URL, process.env.ADMIN_URL];
+const whitelist = [
+  process.env.CLIENT_URL,
+  process.env.ADMIN_URL,
+  "https://61b0be78c6f1601ea27c4e7a--affectionate-perlman-287a83.netlify.app",
+];
 
 const corsOptions = {
   origin: function (origin, callback) {

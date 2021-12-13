@@ -2,6 +2,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../app/productsSlice";
+import {Typography} from "@mui/material";
 
 const Products = () => {
   const dispatch = useDispatch();

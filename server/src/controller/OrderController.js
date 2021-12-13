@@ -142,19 +142,20 @@ class OrderController {
     const { id, status } = req.body;
     if (!id)
       return res.status(401).json({ success: false, messages: "Missing id" });
-    try {
-      const order = await Order.findByIdAndUpdate(id, { status });
-
-      res.json({
-        success: true,
-        order,
-        messages: "update status successfully",
-      });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ success: false, messages: "Interval server error" });
-    }
+    const order = await Order.findByIdAndUpdate(id, { status }).exec(
+      (error, resOrder) => {
+        if (error) {
+          res
+            .status(500)
+            .json({ success: false, messages: "Interval server error" });
+        }
+        res.json({
+          success: true,
+          order: { ...resOrder._doc, status: status },
+          messages: "update status successfully",
+        });
+      },
+    );
   }
 }
 

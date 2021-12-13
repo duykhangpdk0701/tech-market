@@ -23,7 +23,7 @@ const ListOrdersDelivered = () => {
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, []);
+  }, [distpatch]);
 
   return (
     <div className={style.orders}>

@@ -10,7 +10,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { store } from "../../app/store";
-import { setId, openDialog } from "../../app/selectStatus";
+import { setValue, openDialog } from "../../app/selectStatus";
 import { LoadingButton } from "@mui/lab";
 
 const Columns = [
@@ -89,13 +89,16 @@ const Columns = [
     headerName: "Action",
     width: 200,
     renderCell: (params) => {
-      let status = 0;
-
-      const handleChange = (e) => {
-        store.dispatch(setId(params._id));
+      const handleOpenDialog = (e) => {
+        store.dispatch(
+          setValue({ id: params.row._id, status: params.row.status || 1 }),
+        );
+        store.dispatch(openDialog());
       };
 
-      return <LoadingButton>setStatus</LoadingButton>;
+      return (
+        <LoadingButton onClick={handleOpenDialog}>setStatus</LoadingButton>
+      );
     },
   },
 ];

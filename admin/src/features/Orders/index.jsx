@@ -6,15 +6,13 @@ import { fetchOrdersAsync } from "../../app/orderSlice";
 import CustomToolBar from "../../components/CustomToolBar";
 import LoadingOverLay from "../../components/LoadingOverLay";
 import Columns from "./Columns";
+import DialogSetStatus from "./DialogSetStaus";
 import style from "./Orders.module.scss";
 
 const Orders = () => {
   const distpatch = useDispatch();
   const orders = useSelector((state) => state.orders.current) || [];
   const loading = useSelector((state) => state.orders.loading);
-  setTimeout(() => {
-    console.log(orders);
-  }, 3000);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +21,7 @@ const Orders = () => {
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, []);
+  }, [distpatch]);
 
   return (
     <div className={style.orders}>
@@ -38,6 +36,7 @@ const Orders = () => {
           LoadingOverlay: LoadingOverLay,
         }}
       />
+      <DialogSetStatus />
     </div>
   );
 };

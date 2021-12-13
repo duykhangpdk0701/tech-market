@@ -23,7 +23,7 @@ const ListOrdersPending = () => {
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, []);
+  }, [distpatch]);
 
   return (
     <div className={style.orders}>

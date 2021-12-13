@@ -4,6 +4,7 @@ const initialState = {
   openDialog: false,
   statusValue: 0,
   id: "",
+  status: 0,
 };
 
 export const selectStatus = createSlice({
@@ -14,8 +15,9 @@ export const selectStatus = createSlice({
       state.openDialog = true;
     },
 
-    setId: (state, action) => {
-      state.id = action.payload;
+    setValue: (state, action) => {
+      state.id = action.payload.id;
+      state.status = action.payload.status;
     },
 
     closeDialog: (state) => {
@@ -27,7 +29,7 @@ export const selectStatus = createSlice({
   },
 });
 
-export const { openDialog, setId, closeDialog, setStatus } =
+export const { openDialog, setValue, closeDialog, setStatus } =
   selectStatus.actions;
 
 export default selectStatus.reducer;

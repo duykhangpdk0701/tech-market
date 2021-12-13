@@ -15,6 +15,14 @@ export const fetchOrdersAsync = createAsyncThunk(
   },
 );
 
+export const setStatusAsync = createAsyncThunk(
+  "orders/setStatusAsync",
+  async (data) => {
+    const res = await ordersApi.setStatus(data);
+    return res;
+  },
+);
+
 export const ordersSlice = createSlice({
   name: "orders",
   initialState,
@@ -33,6 +41,23 @@ export const ordersSlice = createSlice({
         state.current = action.payload.orders;
         state.current.forEach((o, i) => {
           o.id = i + 1;
+        });
+      })
+
+      .addCase(setStatusAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setStatusAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(setStatusAsync.fulfilled, (state, action) => {
+        const order = action.payload.order;
+        state.loading = false;
+        state.current.forEach((item) => {
+          if (item._id === order._id) {
+            item.status = order.status;
+          }
         });
       });
   },

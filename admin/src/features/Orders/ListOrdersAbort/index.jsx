@@ -7,6 +7,7 @@ import CustomToolBar from "../../../components/CustomToolBar";
 import LoadingOverLay from "../../../components/LoadingOverLay";
 import Columns from ".././Columns";
 import style from ".././Orders.module.scss";
+import DialogSetStatus from "../DialogSetStaus";
 
 const ListOrdersAbort = () => {
   const distpatch = useDispatch();
@@ -23,7 +24,7 @@ const ListOrdersAbort = () => {
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, []);
+  }, [distpatch]);
 
   return (
     <div className={style.orders}>
@@ -38,6 +39,7 @@ const ListOrdersAbort = () => {
           LoadingOverlay: LoadingOverLay,
         }}
       />
+      <DialogSetStatus />
     </div>
   );
 };
