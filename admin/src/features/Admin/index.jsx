@@ -22,6 +22,8 @@ import ListOrdersPending from "../Orders/ListOrdersPending";
 import ListOrdersDelivering from "../Orders/ListOrdersDelivering";
 import ListOrdersDelivered from "../Orders/ListOrdersDelivered";
 import ListOrdersAbort from "../Orders/ListOrdersAbort";
+import OrderDetails from "../Orders/OrdersDetails";
+import ListAdmin from "../ListAdmin";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -60,7 +62,10 @@ const Admin = () => {
             path={`${match.url}/order/abort`}
             component={ListOrdersAbort}
           />
+          <Route path={`${match.url}/order/:id`} component={OrderDetails} />
           <Route path={`${match.url}/order`} component={Order} />
+          {/* admin */}
+          <Route path={`${match.url}/admin`} component={ListAdmin} />
         </Switch>
       </div>
     </>

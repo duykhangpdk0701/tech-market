@@ -34,14 +34,14 @@ class AdminController {
     if (!username || !password)
       return res
         .status(400)
-        .json({ success: false, messages: "Missing username or password" });
+        .json({ success: false, messages: "Missing Adminname or password" });
     try {
-      //checking if user exist
+      //checking if admin exist
       const user = await Admin.findOne({ username });
       if (user) {
         return res
           .status(400)
-          .json({ success: false, messages: "Username already taken" });
+          .json({ success: false, messages: "Adminname already taken" });
       }
       //checking if email exist
       const findEmail = await Admin.findOne({ email });
@@ -94,6 +94,34 @@ class AdminController {
         success: true,
         user: updateUser,
         messages: "toggle successfully",
+      });
+    } catch (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  }
+
+  async getAllAdmin(req, res) {
+    try {
+      const findAdmin = await Admin.find();
+      return res.json({ success: true, admins: findAdmin });
+    } catch (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  }
+
+  async changeRole(req, res) {
+    try {
+      const { id, role } = req.body;
+      const updateAdmin = await Admin.findByIdAndUpdate(id, {
+        role: role,
+      });
+
+      const findAdmin = await Admin.findById(id);
+
+      res.json({
+        success: true,
+        admin: findAdmin,
+        messages: "change role successfully",
       });
     } catch (error) {
       return res.status(400).json({ success: false, message: error.message });

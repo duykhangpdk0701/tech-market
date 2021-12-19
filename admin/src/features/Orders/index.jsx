@@ -10,18 +10,18 @@ import DialogSetStatus from "./DialogSetStaus";
 import style from "./Orders.module.scss";
 
 const Orders = () => {
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.current) || [];
   const loading = useSelector((state) => state.orders.loading);
 
   useEffect(() => {
     const fetchData = async () => {
       const action = await fetchOrdersAsync();
-      const actionResult = await distpatch(action);
+      const actionResult = await dispatch(action);
       await unwrapResult(actionResult);
     };
     fetchData();
-  }, [distpatch]);
+  }, [dispatch]);
 
   return (
     <div className={style.orders}>

@@ -1,12 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import style from "./NavBar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { fetchSearch } from "../../app/searchSlice";
-import { Autocomplete, TextField, Badge } from "@mui/material";
+import {
+  Autocomplete,
+  TextField,
+  Badge,
+  Menu,
+  Button,
+  MenuItem,
+  Paper,
+  MenuList,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonIcon from "@mui/icons-material/Person";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -56,7 +69,38 @@ const NavBar = () => {
             />
           </div>
           <div className={style.user_profile}>
-            <div className={style.user_profile}>Loli</div>
+            <div className={style.menu}>
+              <Typography>Button</Typography>
+              <Paper className={style.menu_list}>
+                <MenuList>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText>Profile</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText>Giỏ hàng</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText>Đơn mua</ListItemText>
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText>Log out</ListItemText>
+                  </MenuItem>
+                </MenuList>
+              </Paper>
+            </div>
+
             <div className={style.cart}>
               <Link className={style.link_cart} to="/store/cart"></Link>
               <Badge badgeContent={countCart} color="primary">

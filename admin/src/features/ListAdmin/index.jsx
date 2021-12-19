@@ -1,32 +1,34 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
+import style from "./ListAdmin.module.scss";
+import Column from "./Column";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategoriesAsync } from "../../app/categorySlice";
+import { getAllAdminAsync } from "../../app/adminSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 import CustomToolBar from "../../components/CustomToolBar";
 import LoadingOverLay from "../../components/LoadingOverLay";
-import Columns from "./Columns";
-import style from "./ListCategory.module.scss";
+import DialogSetRole from "./DialogSetRole";
 
-const ListCategory = () => {
+const ListAdmin = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.current) || [];
-  const loading = useSelector((state) => state.categories.loading);
+  const admin = useSelector((state) => state.admin.current) || [];
+  const loading = useSelector((state) => state.admin.loading);
 
   useEffect(() => {
     const fetchData = async () => {
-      const action = await fetchCategoriesAsync();
+      const action = await getAllAdminAsync();
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
     };
+
     fetchData();
   }, [dispatch]);
 
   return (
-    <div className={style.list_cagetory}>
+    <div className={style.list_admin}>
       <DataGrid
-        columns={Columns}
-        rows={categories}
+        columns={Column}
+        rows={admin}
         loading={loading}
         rowsPerPageOptions={[10]}
         pageSize={20}
@@ -35,8 +37,9 @@ const ListCategory = () => {
           LoadingOverlay: LoadingOverLay,
         }}
       />
+      <DialogSetRole />
     </div>
   );
 };
 
-export default ListCategory;
+export default ListAdmin;

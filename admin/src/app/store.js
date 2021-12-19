@@ -9,6 +9,8 @@ import brandsSlice from "./brandsSlice";
 import chartSlice from "./chartSlice";
 import ordersSlice from "./orderSlice";
 import selectStatusSlice from "./selectStatus";
+import adminSlice from "./adminSlice";
+import dialogSetRoleSlice from "./dialogSetRoleSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +24,7 @@ export const store = configureStore({
     chart: chartSlice,
     orders: ordersSlice,
     selectStatus: selectStatusSlice,
+    admin: adminSlice,
+    setRole: dialogSetRoleSlice,
   },
 });

@@ -24,6 +24,10 @@ const AdminSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    role: {
+      type: Number,
+      default: 3,
+    },
   },
   { timestamp: true },
 );

@@ -216,6 +216,7 @@ class LaptopController {
           },
         },
         { $unwind: "$brand" },
+        { $match: { isActive: true } },
         { $match: { "category._id": mongoose.Types.ObjectId(LAPTOP_ID) } },
       ]);
       res.json({ success: true, laptops: findLaptop });
@@ -247,6 +248,7 @@ class PhoneController {
           },
         },
         { $unwind: "$brand" },
+        { $match: { isActive: true } },
         { $match: { "category._id": mongoose.Types.ObjectId(PHONE_ID) } },
       ]);
       res.json({ success: true, laptops: findLaptop });

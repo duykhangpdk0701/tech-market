@@ -1,17 +1,10 @@
-import {
-  Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Chip, Button } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import { store } from "../../app/store";
 import { setValue, openDialog } from "../../app/selectStatus";
 import { LoadingButton } from "@mui/lab";
+import { Link } from "react-router-dom";
 
 const Columns = [
   { field: "_id", headerName: "ID", width: 250 },
@@ -97,7 +90,12 @@ const Columns = [
       };
 
       return (
-        <LoadingButton onClick={handleOpenDialog}>setStatus</LoadingButton>
+        <>
+          <LoadingButton onClick={handleOpenDialog}>setStatus</LoadingButton>
+          <Link to={`/admin/order/${params.row._id}`}>
+            <Button>Chi tiết</Button>
+          </Link>
+        </>
       );
     },
   },

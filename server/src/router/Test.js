@@ -1,19 +1,40 @@
 const express = require("express");
 const router = express.Router();
-const testController = require("../controller/TestController");
-const multer = require("multer");
+const nodemailer = require("nodemailer");
+const session = require('express-session');
 
-const fileStorageEngine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./src/public/assets"); //important this is a direct path fron our current file to storage location
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+router.post("/", (req, res) => {
+  console.log({
+    user: process.env.AUTH_EMAIL,
+    pass: process.env.AUTH_PASSWORD,
+  });
+  let transport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASSWORD,
+    },
+  });
+  transport.verify((error, success) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Ready for message");
+      console.log(success);
+    }
+  });
+
+  transport.sendMail({
+    from: "duykhangwork0701@gmail.com",
+    to: "duykhangpdk0701@gmail.com",
+    subject: "Testing nodemail",
+    text: "thư nè Khang",
+  });
+  res.send({ success: true });
 });
 
-const upload = multer({ storage: fileStorageEngine });
+router.post('/session', ()=>{
 
-router.post("/", upload.single("image"), testController.uploadFIle);
+})
 
 module.exports = router;

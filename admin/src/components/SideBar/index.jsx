@@ -13,6 +13,7 @@ import {
   CheckCircle,
   Cancel,
   Inventory,
+  AdminPanelSettings,
 } from "@mui/icons-material";
 import {
   Collapse,
@@ -36,6 +37,7 @@ const SideBar = () => {
   const [openBrand, setOpenBrand] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
   const [openChart, setOpenChart] = useState(false);
+  const [openAdmin, setOpenAdmin] = useState(false);
 
   const handleClickOrder = () => {
     setOpenOrder(!openOrder);
@@ -57,6 +59,9 @@ const SideBar = () => {
   };
   const handleClickChart = () => {
     setOpenChart(!openChart);
+  };
+  const handleClickAdmin = () => {
+    setOpenAdmin(!openAdmin);
   };
 
   return (
@@ -330,6 +335,48 @@ const SideBar = () => {
                 <ListItemText
                   primary={
                     <Typography variant="body2">Thêm danh mục</Typography>
+                  }
+                />
+              </ListItemButton>
+            </List>
+          </Collapse>
+          <Divider />
+
+          {/* admin list */}
+          <ListItemButton onClick={handleClickAdmin}>
+            <ListItemIcon>
+              <AdminPanelSettings color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography variant="subtitle2">Tài Khoản Admin</Typography>
+              }
+            />
+            {openAdmin ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openAdmin} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/admin">
+                <ListItemIcon>
+                  <ViewList color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body2">Danh sách</Typography>}
+                />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/user/add">
+                <ListItemIcon>
+                  <Add color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography variant="body2">Thêm tài khoản admi</Typography>
                   }
                 />
               </ListItemButton>
