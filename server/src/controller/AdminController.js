@@ -24,7 +24,6 @@ class AdminController {
       }
       res.json({ success: true, messages: "Login successfully", admin });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ success: false, message: error.message });
     }
   }

@@ -1,0 +1,34 @@
+.section {
+  min-height: 100vh;
+  background-color: #f6f7fc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container {
+  width: 30%;
+  background-color: #fff;
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+  min-height: 40rem;
+}
+
+.form_container {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  padding: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=Register.module.css.map */

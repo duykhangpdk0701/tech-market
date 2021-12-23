@@ -1,0 +1,32 @@
+.address_contnent {
+  -ms-flex-preferred-size: 55%;
+      flex-basis: 55%;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.cart_content {
+  -ms-flex-preferred-size: 45%;
+      flex-basis: 45%;
+}
+
+.content {
+  width: 100%;
+}
+
+.left_content {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.error {
+  color: red;
+}
+
+.right_content {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+/*# sourceMappingURL=AddressOrder.module.css.map */

@@ -1,0 +1,52 @@
+.container {
+  width: 75%;
+  margin: auto;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.main {
+  width: calc(100% - 335px);
+}
+
+.aside {
+  width: 335px;
+  top: 0px;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.sumary_contianer {
+  width: 100%;
+}
+
+.promotion_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.apply_btn {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.temp_sum_cotainer,
+.sum_contianer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/*# sourceMappingURL=Cart.module.css.map */

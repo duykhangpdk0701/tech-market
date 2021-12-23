@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,MAAM;CACtB",
+    "sources": [
+        "InputFields.module.scss"
+    ],
+    "names": [],
+    "file": "InputFields.module.css"
+}

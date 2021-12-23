@@ -1,0 +1,30 @@
+.form {
+  width: 100%;
+}
+
+.title_container {
+  margin-bottom: 3rem;
+}
+
+.title {
+  text-align: center;
+}
+
+.forgot_password_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.to_register {
+  margin-bottom: 0.5rem;
+}
+
+.submit_btn {
+  position: relative;
+  height: 48px;
+}
+/*# sourceMappingURL=FormRegister.module.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,KAAK,EAAE,IAAI;CACZ;;AAED,AAAA,gBAAgB,CAAC;EACf,aAAa,EAAE,IAAI;CACpB;;AAED,AAAA,MAAM,CAAC;EACL,UAAU,EAAE,MAAM;CACnB;;AAED,AAAA,0BAA0B,CAAC;EACzB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,QAAQ;CAC1B;;AAED,AAAA,YAAY,CAAC;EACX,aAAa,EAAE,MAAM;CACtB;;AAED,AAAA,WAAW,CAAC;EACV,QAAQ,EAAE,QAAQ;EAClB,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "FormRegister.module.scss"
+    ],
+    "names": [],
+    "file": "FormRegister.module.css"
+}

@@ -1,0 +1,72 @@
+.container {
+  width: 75%;
+  margin: auto;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.content {
+  -ms-flex-preferred-size: calc(100% - 245px);
+      flex-basis: calc(100% - 245px);
+  padding-right: 15px;
+}
+
+.item_wrapper {
+  width: calc(25% - 0.75rem);
+  background-color: #fff;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.item_wrapper:nth-child(4n + 1) {
+  background-color: #fff;
+  margin-left: 0;
+}
+
+.img_container {
+  height: 50%;
+}
+
+.item_link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.category_wrapper {
+  -ms-flex-preferred-size: 245px;
+      flex-basis: 245px;
+}
+
+.category {
+  width: 100%;
+}
+
+.card_btn {
+  z-index: 2;
+}
+
+.btn_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+/*# sourceMappingURL=Template.module.css.map */
