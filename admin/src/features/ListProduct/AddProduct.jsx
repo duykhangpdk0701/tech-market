@@ -116,7 +116,7 @@ const AddProduct = () => {
                       name="name"
                       component={InputField}
                       label="Name:"
-                      placholder="Name"
+                      placeholder="Name"
                     />
                   </Box>
                   <Box>
