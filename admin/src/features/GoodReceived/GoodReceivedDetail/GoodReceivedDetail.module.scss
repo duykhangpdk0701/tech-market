@@ -1,0 +1,19 @@
+.container {
+  flex-basis: calc(100% - 245px);
+  background-color: #e7ebf0;
+}
+
+.header {
+  margin: auto;
+  margin-top: 3rem;
+  display: flex;
+  width: 50rem;
+}
+
+.card {
+  flex-basis: 50%;
+}
+.body {
+  margin: auto;
+  width: 80rem;
+}

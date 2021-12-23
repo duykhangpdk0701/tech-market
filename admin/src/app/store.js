@@ -12,6 +12,8 @@ import selectStatusSlice from "./selectStatus";
 import adminSlice from "./adminSlice";
 import dialogSetRoleSlice from "./dialogSetRoleSlice";
 import goodReceivedSlice from "./goodReceivedSlice";
+import providerSlice from "./providersSlice";
+import goodReceivedDetailSlice from "./goodReceivedDetailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,5 +30,7 @@ export const store = configureStore({
     admin: adminSlice,
     setRole: dialogSetRoleSlice,
     goodsReceived: goodReceivedSlice,
+    goodsReceivedDetail: goodReceivedDetailSlice,
+    providers: providerSlice,
   },
 });

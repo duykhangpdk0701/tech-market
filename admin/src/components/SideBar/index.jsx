@@ -14,6 +14,7 @@ import {
   Cancel,
   Inventory,
   AdminPanelSettings,
+  DynamicForm,
 } from "@mui/icons-material";
 import {
   Collapse,
@@ -38,7 +39,8 @@ const SideBar = () => {
   const [openAccount, setOpenAccount] = useState(false);
   const [openChart, setOpenChart] = useState(false);
   const [openAdmin, setOpenAdmin] = useState(false);
-
+  const [openGoodReceived, setOpenGoodReceived] = useState(false);
+  const [openProvider, setOpenProvider] = useState(false);
   const handleClickOrder = () => {
     setOpenOrder(!openOrder);
   };
@@ -62,6 +64,14 @@ const SideBar = () => {
   };
   const handleClickAdmin = () => {
     setOpenAdmin(!openAdmin);
+  };
+
+  const handleClickReceived = () => {
+    setOpenGoodReceived(!openGoodReceived);
+  };
+
+  const handleClickProvider = () => {
+    setOpenProvider(!openProvider);
   };
 
   return (
@@ -187,6 +197,46 @@ const SideBar = () => {
           </Collapse>
           <Divider />
 
+          {/* đơn nhập */}
+          <ListItemButton onClick={handleClickReceived}>
+            <ListItemIcon>
+              <DynamicForm color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={<Typography variant="subtitle2">Đơn nhập</Typography>}
+            />
+            {openGoodReceived ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openGoodReceived} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/goodreceived">
+                <ListItemIcon>
+                  <ViewList color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body2">Danh sách</Typography>}
+                />
+              </ListItemButton>
+            </List>
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/goodreceived/add">
+                <ListItemIcon>
+                  <Add color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body2">Thêm</Typography>}
+                />
+              </ListItemButton>
+            </List>
+          </Collapse>
+          <Divider />
+
           {/* product */}
           <ListItemButton onClick={handleClickProduct}>
             <ListItemIcon>
@@ -257,6 +307,48 @@ const SideBar = () => {
                 <ListItemText
                   primary={
                     <Typography variant="body2">Thêm danh mục</Typography>
+                  }
+                />
+              </ListItemButton>
+            </List>
+          </Collapse>
+          <Divider />
+
+          {/* nhà cung cấp */}
+          <ListItemButton onClick={handleClickProvider}>
+            <ListItemIcon>
+              <BrandingWatermark color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography variant="subtitle2">Nhà cung cấp</Typography>
+              }
+            />
+            {openProvider ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openProvider} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/provider">
+                <ListItemIcon>
+                  <ViewList color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body2">Danh sách</Typography>}
+                />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/provider/add">
+                <ListItemIcon>
+                  <Add color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography variant="body2">Thêm Nhà cung cấp</Typography>
                   }
                 />
               </ListItemButton>

@@ -25,6 +25,9 @@ import ListOrdersAbort from "../Orders/ListOrdersAbort";
 import OrderDetails from "../Orders/OrdersDetails";
 import ListAdmin from "../ListAdmin";
 import GoodReceived from "../GoodReceived";
+import Provider from "../Provider";
+import GoodReceivedDetail from "../GoodReceived/GoodReceivedDetail";
+import AddProvider from "../Provider/AddProvider";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -68,7 +71,15 @@ const Admin = () => {
           {/* admin */}
           <Route path={`${match.url}/admin`} component={ListAdmin} />
           {/* good received */}
+
+          <Route
+            path={`${match.url}/goodreceived/:id`}
+            component={GoodReceivedDetail}
+          />
           <Route path={`${match.url}/goodreceived`} component={GoodReceived} />
+          {/* provider */}
+          <Route path={`${match.url}/provider/add`} component={AddProvider} />
+          <Route path={`${match.url}/provider`} component={Provider} />
         </Switch>
       </div>
     </>

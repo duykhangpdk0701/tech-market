@@ -15,6 +15,17 @@ class ProviderController {
       res.status(500).json({ success: false, message: error.message });
     }
   }
+  async getAll(req, res) {
+    try {
+      const findProvider = await Provider.find();
+      res.json({
+        success: true,
+        providers: findProvider,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
 }
 
 module.exports = new ProviderController();
