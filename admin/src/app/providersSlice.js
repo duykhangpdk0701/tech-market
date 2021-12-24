@@ -54,7 +54,6 @@ export const providerSlice = createSlice({
       })
       .addCase(addProviderAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.current.push(action.payload.provider);
       });
   },
 });

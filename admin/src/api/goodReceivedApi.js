@@ -12,6 +12,12 @@ const goodReceivedApi = {
     const res = await axiosAdmin.get(url + id);
     return res;
   },
+
+  add: async (data) => {
+    const url = "/goodsreceived";
+    const res = await axiosAdmin.post(url, { data });
+    return res;
+  },
 };
 
 export default goodReceivedApi;

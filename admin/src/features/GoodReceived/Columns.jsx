@@ -18,7 +18,6 @@ const Columns = [
     width: 200,
     renderCell: (params) => <Typography>{params.row.provider.name}</Typography>,
   },
-  { field: "totalAmount", headerName: "Tổng tiền", width: 250 },
   { field: "createdAt", headerName: "Ngày nhập", width: 250 },
   {
     field: "action",

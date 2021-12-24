@@ -15,6 +15,14 @@ export const fetchGoodReceivedAsync = createAsyncThunk(
   },
 );
 
+export const addGoodReceivedAsync = createAsyncThunk(
+  "goodReceived/addGoodReceivedAsync",
+  async (data) => {
+    const res = await goodReceived.add(data);
+    return res;
+  },
+);
+
 export const goodReceivedSlice = createSlice({
   name: "categories",
   initialState,
@@ -35,6 +43,17 @@ export const goodReceivedSlice = createSlice({
         state.current.forEach((o, i) => {
           o.id = i + 1;
         });
+      })
+
+      .addCase(addGoodReceivedAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addGoodReceivedAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(addGoodReceivedAsync.fulfilled, (state, action) => {
+        state.loading = false;
       });
   },
 });

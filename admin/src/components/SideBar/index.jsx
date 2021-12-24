@@ -170,13 +170,13 @@ const SideBar = () => {
           </Collapse>
           <Divider />
 
-          {/* chart */}
+          {/* Thống kê */}
           <ListItemButton onClick={handleClickChart}>
             <ListItemIcon>
               <Storefront color="primary" />
             </ListItemIcon>
             <ListItemText
-              primary={<Typography variant="subtitle2">Biểu đồ</Typography>}
+              primary={<Typography variant="subtitle2">Thống kê</Typography>}
             />
             {openChart ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
@@ -190,7 +190,22 @@ const SideBar = () => {
                   <ViewList color="primary" />
                 </ListItemIcon>
                 <ListItemText
-                  primary={<Typography variant="body2">Biểu đồ</Typography>}
+                  primary={<Typography variant="body2">Thống kê</Typography>}
+                />
+              </ListItemButton>
+            </List>
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/analytics/byday">
+                <ListItemIcon>
+                  <ViewList color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography variant="body2">Thống kê theo ngày</Typography>
+                  }
                 />
               </ListItemButton>
             </List>

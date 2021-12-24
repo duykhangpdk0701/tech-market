@@ -28,6 +28,8 @@ import GoodReceived from "../GoodReceived";
 import Provider from "../Provider";
 import GoodReceivedDetail from "../GoodReceived/GoodReceivedDetail";
 import AddProvider from "../Provider/AddProvider";
+import AddGoodReceived from "../GoodReceived/AddGoodReceived";
+import ByDay from "../Analytics/ByDay";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -48,6 +50,8 @@ const Admin = () => {
           <Route path={`${match.url}/category`} component={ListCategory} />
           <Route path={`${match.url}/brand/add`} component={AddBrand} />
           <Route path={`${match.url}/brand`} component={ListBrand} />
+          {/* analytics */}
+          <Route path={`${match.url}/analytics/byday`} component={ByDay} />
           <Route path={`${match.url}/analytics`} component={Analytics} />
           {/* order  */}
           <Route
@@ -72,6 +76,10 @@ const Admin = () => {
           <Route path={`${match.url}/admin`} component={ListAdmin} />
           {/* good received */}
 
+          <Route
+            path={`${match.url}/goodreceived/add`}
+            component={AddGoodReceived}
+          />
           <Route
             path={`${match.url}/goodreceived/:id`}
             component={GoodReceivedDetail}
