@@ -7,10 +7,6 @@ const GoodsReceived = new Schema(
       type: Schema.Types.ObjectId,
       ref: "admins",
     },
-    totalAmount: {
-      type: Number,
-      required: true,
-    },
     provider: {
       type: Schema.Types.ObjectId,
       ref: "provider",

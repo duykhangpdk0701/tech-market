@@ -11,7 +11,7 @@ const GoodsReceivedDetail = new Schema(
       type: Schema.Types.ObjectId,
       ref: "product",
     },
-    amount: {
+    quantity: {
       type: Number,
       required: true,
     },

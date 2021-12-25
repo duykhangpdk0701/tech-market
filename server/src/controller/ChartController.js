@@ -1,4 +1,6 @@
 const OrderDetail = require("../model/OrderDetail");
+const { endOfDay, startOfDay } = require("date-fns");
+const Order = require("../model/Order");
 
 class Chart {
   year = async (req, res) => {
@@ -76,6 +78,37 @@ class Chart {
               name: "$product.category.name",
             },
             count: { $sum: "$quantity" },
+          },
+        },
+      ]);
+
+      res.json({
+        success: true,
+        chart: chart,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, messages: error });
+    }
+  };
+
+  byAmountOfDate = async (req, res) => {
+    try {
+      const { startDate, endDate } = req.body;
+
+      const chart = await OrderDetail.aggregate([
+        {
+          $project: {
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        {
+          $match: {
+            formattedDate: {
+              $gte: startOfDay(new Date(startDate)),
+              $lte: endOfDay(new Date(endDate)),
+            },
           },
         },
       ]);

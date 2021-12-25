@@ -157,6 +157,54 @@ class OrderController {
       },
     );
   }
+
+  byDate = async (req, res) => {
+    try {
+      const { date } = req.body;
+
+      const orders = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        { $match: { formattedDate: date } },
+        { $match: { status: 3 } },
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        { $unwind: "$user" },
+      ]);
+
+      res.json({
+        success: true,
+        orders: orders,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, messages: error });
+    }
+  };
 }
 
 module.exports = new OrderController();

@@ -8,4 +8,5 @@ router.post("/store", orderController.store);
 // router.put("/:id", orderController.update);
 router.delete("/:id", orderController.delete);
 router.put("/status", orderController.setStatus);
+router.post("/bydate", orderController.byDate);
 module.exports = router;

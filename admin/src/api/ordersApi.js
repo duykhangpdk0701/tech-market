@@ -12,6 +12,12 @@ const ordersApi = {
     const res = await axiosAdmin.put(url, data);
     return res;
   },
+
+  getByDate: async (date) => {
+    const url = "/order/bydate";
+    const res = await axiosAdmin.post(url, { date });
+    return res;
+  },
 };
 
 export default ordersApi;

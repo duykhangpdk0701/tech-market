@@ -4,6 +4,7 @@ import ordersApi from "../api/ordersApi";
 const initialState = {
   loading: false,
   current: [],
+  currentSta: [],
   error: "",
 };
 
@@ -19,6 +20,15 @@ export const setStatusAsync = createAsyncThunk(
   "orders/setStatusAsync",
   async (data) => {
     const res = await ordersApi.setStatus(data);
+    return res;
+  },
+);
+
+export const getByDateOrderAsync = createAsyncThunk(
+  "orders/getByDateOrderAsync",
+  async (data) => {
+    const { date } = data;
+    const res = await ordersApi.getByDate(date);
     return res;
   },
 );
@@ -59,6 +69,18 @@ export const ordersSlice = createSlice({
             item.status = order.status;
           }
         });
+      })
+
+      .addCase(getByDateOrderAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getByDateOrderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(getByDateOrderAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentSta = action.payload.orders;
       });
   },
 });

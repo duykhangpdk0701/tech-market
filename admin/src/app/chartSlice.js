@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   currentLine: [],
   currentPie: [],
+  currentDate: [],
   error: "",
 };
 
@@ -20,6 +21,15 @@ export const fetchChartCategoryAsync = createAsyncThunk(
   "chart/fetchChartCategoryAsync",
   async () => {
     const res = await chartApi.getCategory();
+    return res;
+  },
+);
+
+export const getChartByDateAsync = createAsyncThunk(
+  "chart/getChartByDateAsync",
+  async (data) => {
+    const { date } = data;
+    const res = await chartApi.getDay(date);
     return res;
   },
 );
@@ -65,6 +75,18 @@ export const chartSlice = createSlice({
         state.currentPie = state.currentPie.map((item) => {
           return { name: item._id.name, quantity: item.count };
         });
+      })
+
+      .addCase(getChartByDateAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getChartByDateAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(getChartByDateAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentDate = action.payload.chart;
       });
   },
 });
