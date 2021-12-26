@@ -1,5 +1,5 @@
-const Order = require("../model/Order");
 const OrderDetail = require("../model/OrderDetail");
+const Order = require("../model/Order");
 const mongoose = require("mongoose");
 
 class OrderController {
@@ -34,6 +34,7 @@ class OrderController {
         //   },
         // },
       ]);
+
       res.json({ success: true, orders });
     } catch (error) {
       res
@@ -158,6 +159,77 @@ class OrderController {
     );
   }
 
+  showAllDate = async (req, res) => {
+    try {
+      const orders = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        { $match: { status: 3 } },
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        { $unwind: "$user" },
+      ]);
+
+      const sum = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        { $match: { status: 3 } },
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: "$totalPrice",
+            },
+          },
+        },
+      ]);
+
+      res.json({
+        success: true,
+        orders: orders,
+        sum: sum[0].total,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, messages: error });
+    }
+  };
+
   byDate = async (req, res) => {
     try {
       const { date } = req.body;
@@ -197,9 +269,125 @@ class OrderController {
         { $unwind: "$user" },
       ]);
 
+      const sum = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        { $match: { formattedDate: date } },
+        { $match: { status: 3 } },
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: "$totalPrice",
+            },
+          },
+        },
+      ]);
+
       res.json({
         success: true,
         orders: orders,
+        sum: sum[0].total,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, messages: error });
+    }
+  };
+
+  byAmountOfDate = async (req, res) => {
+    try {
+      const { startDate, endDate } = req.body;
+
+      const chart = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        {
+          $match: {
+            formattedDate: {
+              $gte: startDate,
+              $lte: endDate,
+            },
+          },
+        },
+        { $match: { status: 3 } },
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        { $unwind: "$user" },
+      ]);
+
+      const sum = await Order.aggregate([
+        {
+          $project: {
+            user: 1,
+            status: 1,
+            orderDetail: 1,
+            address: 1,
+            paymentMethod: 1,
+            totalPrice: 1,
+            formattedDate: {
+              $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+            },
+          },
+        },
+        {
+          $match: {
+            formattedDate: {
+              $gte: startDate,
+              $lte: endDate,
+            },
+          },
+        },
+        { $match: { status: 3 } },
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: "$totalPrice",
+            },
+          },
+        },
+      ]);
+
+      res.json({
+        success: true,
+        orders: chart,
+        sum: sum[0].total,
       });
     } catch (error) {
       res.status(500).json({ success: false, messages: error });

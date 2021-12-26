@@ -7,10 +7,19 @@ const initialState = {
   error: "",
 };
 
-export const fetchLaptops = createAsyncThunk("laptops/fetch", async () => {
-  const res = await laptopApi.fetchLaptop();
-  return res;
-});
+export const fetchLaptops = createAsyncThunk(
+  "laptops/fetch",
+  async (data = null) => {
+    const { brand } = data;
+    if (data) {
+      const { arrangePrice } = data;
+      const res = await laptopApi.fetchLaptop(brand, arrangePrice);
+      return res;
+    }
+    const res = await laptopApi.fetchLaptop(brand);
+    return res;
+  },
+);
 
 export const laptopsSlice = createSlice({
   name: "laptops",

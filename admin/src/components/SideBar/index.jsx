@@ -209,6 +209,24 @@ const SideBar = () => {
                 />
               </ListItemButton>
             </List>
+
+            <List disablePadding>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={NavLink}
+                to="/admin/analytics/byamountofday">
+                <ListItemIcon>
+                  <ViewList color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography variant="body2">
+                      Thống kê theo khoảng ngày
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+            </List>
           </Collapse>
           <Divider />
 

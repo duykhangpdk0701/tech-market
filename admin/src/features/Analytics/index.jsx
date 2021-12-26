@@ -1,5 +1,16 @@
 import React, { useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import style from "./Analytics.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,6 +32,9 @@ import {
   fetchChartYearAsync,
 } from "../../app/chartSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { Link } from "react-router-dom";
+import { getAllDateOrderAsync } from "../../app/orderSlice";
+import toPrice from "../../helper/toPrice";
 
 ChartJS.register(
   ArcElement,
@@ -38,6 +52,9 @@ const Analytics = () => {
   const chartLine = useSelector((state) => state.chart.currentLine);
   const chartPie = useSelector((state) => state.chart.currentPie);
 
+  const listOrder = useSelector((state) => state.orders.currentSta) || [];
+  const sum = useSelector((state) => state.orders.sum);
+
   useEffect(() => {
     const fetchChart = async () => {
       const action = await fetchChartYearAsync();
@@ -51,6 +68,13 @@ const Analytics = () => {
       unwrapResult(actionResult);
     };
 
+    const fetchByDate = async () => {
+      const action = await getAllDateOrderAsync();
+      const actionResult = await dispatch(action);
+      await unwrapResult(actionResult);
+    };
+
+    fetchByDate();
     fetchChart();
     fetchChartPie();
   }, [dispatch]);
@@ -131,6 +155,53 @@ const Analytics = () => {
       </Box>
       <Box>
         <Doughnut width={50} height={50} data={covertToDatasetPie(chartPie)} />
+      </Box>
+      <Box>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Người Mua</TableCell>
+                <TableCell>Email người Mua</TableCell>
+                <TableCell>Hình thức thanh toán</TableCell>
+                <TableCell>Ngày mua</TableCell>
+                <TableCell>Tổng tiền</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {listOrder.map((item) => {
+                return (
+                  <>
+                    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                      <TableCell>{item.user.username}</TableCell>
+                      <TableCell>{item.user.email}</TableCell>
+                      <TableCell>{item.paymentMethod}</TableCell>
+                      <TableCell>{item.formattedDate}</TableCell>
+                      <TableCell>{toPrice(item.totalPrice)}</TableCell>
+                      <TableCell>
+                        <Link to="/">
+                          <Button>Chi tiết</Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  </>
+                );
+              })}
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <Typography variant="h6">Tổng:</Typography>
+                </TableCell>
+                <TableCell />
+                <TableCell />
+                <TableCell>
+                  <Typography variant="h6">{toPrice(sum)}</Typography>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Box>
   );

@@ -196,29 +196,46 @@ class ProductController {
 
 class LaptopController {
   async showAll(req, res) {
+    const preAggregate = [
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      { $unwind: "$category" },
+      {
+        $lookup: {
+          from: "brands",
+          localField: "brand",
+          foreignField: "_id",
+          as: "brand",
+        },
+      },
+      { $unwind: "$brand" },
+      { $match: { isActive: true } },
+      { $match: { "category._id": mongoose.Types.ObjectId(LAPTOP_ID) } },
+    ];
+
+    if (req.query.max) {
+      preAggregate.push({
+        $match: {
+          price: { $gt: parseInt(req.query.min), $lt: parseInt(req.query.max) },
+        },
+      });
+    }
+    if (req.query.brand) {
+      preAggregate.push({
+        $match: {
+          "brand.name": { $in: req.query.brand },
+        },
+      });
+    }
+
     try {
-      const findLaptop = await Product.aggregate([
-        {
-          $lookup: {
-            from: "categories",
-            localField: "category",
-            foreignField: "_id",
-            as: "category",
-          },
-        },
-        { $unwind: "$category" },
-        {
-          $lookup: {
-            from: "brands",
-            localField: "brand",
-            foreignField: "_id",
-            as: "brand",
-          },
-        },
-        { $unwind: "$brand" },
-        { $match: { isActive: true } },
-        { $match: { "category._id": mongoose.Types.ObjectId(LAPTOP_ID) } },
-      ]);
+      const findLaptop = await Product.aggregate(preAggregate);
       res.json({ success: true, laptops: findLaptop });
     } catch (error) {
       res.status(500).json({ success: false, message: error });
@@ -229,7 +246,7 @@ class LaptopController {
 class PhoneController {
   async showAll(req, res) {
     try {
-      const findLaptop = await Product.aggregate([
+      const preAggregate = [
         {
           $lookup: {
             from: "categories",
@@ -250,7 +267,29 @@ class PhoneController {
         { $unwind: "$brand" },
         { $match: { isActive: true } },
         { $match: { "category._id": mongoose.Types.ObjectId(PHONE_ID) } },
-      ]);
+      ];
+
+      if (req.query.max) {
+        preAggregate.push({
+          $match: {
+            price: {
+              $gt: parseInt(req.query.min),
+              $lt: parseInt(req.query.max),
+            },
+          },
+        });
+      }
+
+      if (req.query.brand) {
+        preAggregate.push({
+          $match: {
+            "brand.name": { $in: req.query.brand },
+          },
+        });
+      }
+
+      const findLaptop = await Product.aggregate(preAggregate);
+
       res.json({ success: true, laptops: findLaptop });
     } catch (error) {
       res.status(500).json({ success: false, message: error });

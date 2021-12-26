@@ -19,6 +19,7 @@ import { setSnackbar } from "../../app/snackbarSlice";
 import style from "./ItemCart.module.scss";
 
 import PropsType from "prop-types";
+import toPrice from "../../helper/toPrice";
 
 const ItemCart = (props) => {
   const { cart } = props;
@@ -164,10 +165,7 @@ const ItemCart = (props) => {
       </Box>
       <Box className={style.price_container}>
         <Typography variant="h6">
-          {new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format((cart.product && cart.product.price) * cart.quantity)}
+          {toPrice((cart.product && cart.product.price) * cart.quantity)}
         </Typography>
       </Box>
       <Box className={style.amount_container}>

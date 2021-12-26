@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
   Typography,
   Accordion,
@@ -7,13 +7,21 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Slider,
+  Box,
+  Button,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import style from "./Template.module.scss";
 import prototype from "prop-types";
 import ItemProduct from "./ItemProduct";
+import toPrice from "../../../helper/toPrice";
 
 const Template = (props) => {
+  const handleChange = (event, values) => {
+    props.setArrangePrice(values);
+  };
+
   return (
     <section className={style.section}>
       <div className={style.container}>
@@ -46,7 +54,12 @@ const Template = (props) => {
                   {props.brands.map((item) => (
                     <FormGroup>
                       <FormControlLabel
-                        control={<Checkbox />}
+                        control={
+                          <Checkbox
+                            value={item.name}
+                            onChange={props.handleChangeCheckBox}
+                          />
+                        }
                         label={item.name}
                       />
                     </FormGroup>
@@ -62,26 +75,18 @@ const Template = (props) => {
                   <Typography>GIá</Typography>
                 </AccordionSummary>
                 <AccordionDetails accordionId="1">
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label={"Dưới 10 triệu"}
+                  <Box>
+                    <Slider
+                      min={1000000}
+                      max={50000000}
+                      valueLabelFormat={(values) => toPrice(values)}
+                      valueLabelDisplay="auto"
+                      step={1000000}
+                      value={props.arrangePrice}
+                      onChange={handleChange}
                     />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label={"10 - 20 triệu"}
-                    />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label={"trên 20 Triệu"}
-                    />
-                  </FormGroup>
+                  </Box>
+                  <Button onClick={props.handleSubmit}>Xác nhận</Button>
                 </AccordionDetails>
               </Accordion>
             </div>

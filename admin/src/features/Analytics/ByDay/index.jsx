@@ -1,7 +1,5 @@
 import {
   Button,
-  Collapse,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -19,14 +17,15 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getByDateOrderAsync } from "../../../app/orderSlice";
 import style from "./ByDay.module.scss";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Link } from "react-router-dom";
+import toPrice from "../../../helper/toPrice";
 
 const ByDay = () => {
   const [date, setDate] = useState("2021-12-04");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const listOrder = useSelector((state) => state.orders.currentSta) || [];
+  const sum = useSelector((state) => state.orders.sum);
 
   useEffect(() => {
     const fetchByDate = async () => {
@@ -37,33 +36,32 @@ const ByDay = () => {
     fetchByDate();
   }, [dispatch, date]);
 
-  const handleClick = () => {
-    console.log(date);
-  };
-
   return (
     <div className={style.container}>
-      <Typography>Thống kê theo ngày</Typography>
-      <TextField
-        id="date"
-        label="Birthday"
-        type="date"
-        defaultValue="2021-12-04"
-        onChange={(e) => setDate(e.target.value)}
-        sx={{ width: 220 }}
-      />
-
-      <Button onClick={handleClick}>Click me</Button>
-
       <Box>
+        <Typography variant="h3">Thống kê theo ngày</Typography>
+        <Box marginRight={1}>
+          <Typography margin={1}>Ngày</Typography>
+          <TextField
+            id="date"
+            label="Ngày"
+            type="date"
+            defaultValue="2021-12-04"
+            onChange={(e) => setDate(e.target.value)}
+            sx={{ width: 220 }}
+          />
+        </Box>
+      </Box>
+
+      <Box className={style.table}>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell />
                 <TableCell>Người Mua</TableCell>
                 <TableCell>Email người Mua</TableCell>
                 <TableCell>Hình thức thanh toán</TableCell>
+                <TableCell>Ngày mua</TableCell>
                 <TableCell>Tổng tiền</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
@@ -73,66 +71,31 @@ const ByDay = () => {
                 return (
                   <>
                     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                      <TableCell>
-                        <IconButton
-                          aria-label="expand row"
-                          size="small"
-                          onClick={() => setOpen(!open)}>
-                          {open ? (
-                            <KeyboardArrowUpIcon />
-                          ) : (
-                            <KeyboardArrowDownIcon />
-                          )}
-                        </IconButton>
-                      </TableCell>
                       <TableCell>{item.user.username}</TableCell>
                       <TableCell>{item.user.email}</TableCell>
                       <TableCell>{item.paymentMethod}</TableCell>
-                      <TableCell>{item.totalPrice}</TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                      <TableCell
-                        style={{ paddingBottom: 0, paddingTop: 0 }}
-                        colSpan={6}>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                          <Box sx={{ margin: 1 }}>
-                            <Typography
-                              variant="h6"
-                              gutterBottom
-                              component="div">
-                              Chi Tiết
-                            </Typography>
-                            <Table size="small">
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell>Product</TableCell>
-                                  <TableCell>Quantity</TableCell>
-                                  <TableCell>price</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {item.orderDetail &&
-                                  item.orderDetail.map((orderDetail) => (
-                                    <TableRow key={orderDetail._id}>
-                                      <TableCell component="th" scope="row">
-                                        {orderDetail.product}
-                                      </TableCell>
-                                      <TableCell>
-                                        {orderDetail.quantity}
-                                      </TableCell>
-                                      <TableCell>{orderDetail.price}</TableCell>
-                                    </TableRow>
-                                  ))}
-                              </TableBody>
-                            </Table>
-                          </Box>
-                        </Collapse>
+                      <TableCell>{item.formattedDate}</TableCell>
+                      <TableCell>{toPrice(item.totalPrice)}</TableCell>
+                      <TableCell>
+                        <Link to="/">
+                          <Button>Chi tiết</Button>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   </>
                 );
               })}
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  <Typography variant="h6">Tổng:</Typography>
+                </TableCell>
+                <TableCell />
+                <TableCell />
+                <TableCell>
+                  <Typography variant="h6">{toPrice(sum)}</Typography>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>

@@ -30,6 +30,7 @@ import GoodReceivedDetail from "../GoodReceived/GoodReceivedDetail";
 import AddProvider from "../Provider/AddProvider";
 import AddGoodReceived from "../GoodReceived/AddGoodReceived";
 import ByDay from "../Analytics/ByDay";
+import ByAmountOfDate from "../Analytics/ByAmountOfDate";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -51,6 +52,10 @@ const Admin = () => {
           <Route path={`${match.url}/brand/add`} component={AddBrand} />
           <Route path={`${match.url}/brand`} component={ListBrand} />
           {/* analytics */}
+          <Route
+            path={`${match.url}/analytics/byamountofday`}
+            component={ByAmountOfDate}
+          />
           <Route path={`${match.url}/analytics/byday`} component={ByDay} />
           <Route path={`${match.url}/analytics`} component={Analytics} />
           {/* order  */}

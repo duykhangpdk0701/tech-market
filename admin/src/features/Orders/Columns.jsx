@@ -91,7 +91,11 @@ const Columns = [
 
       return (
         <>
-          <LoadingButton onClick={handleOpenDialog}>setStatus</LoadingButton>
+          <LoadingButton
+            disabled={params.row.status === 0 || params.row.status === 3}
+            onClick={handleOpenDialog}>
+            setStatus
+          </LoadingButton>
           <Link to={`/admin/order/${params.row._id}`}>
             <Button>Chi tiết</Button>
           </Link>

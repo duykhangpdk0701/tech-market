@@ -15,6 +15,7 @@ import style from "./Template.module.scss";
 import { useDispatch } from "react-redux";
 import { setSnackbar } from "../../../app/snackbarSlice";
 import { addToCart } from "../../../app/cartsSlice";
+import toPrice from "../../../helper/toPrice";
 
 const ItemProduct = (props) => {
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ const ItemProduct = (props) => {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             {item.category.name}
           </Typography>
-          <Typography variant="body2">{item.description}</Typography>
+          <Typography variant="h6" color="primary">
+            {toPrice(item.price)}
+          </Typography>
         </CardContent>
         <CardActions>
           <div className={style.btn_container}>

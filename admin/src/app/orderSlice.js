@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   current: [],
   currentSta: [],
+  sum: 0,
   error: "",
 };
 
@@ -29,6 +30,23 @@ export const getByDateOrderAsync = createAsyncThunk(
   async (data) => {
     const { date } = data;
     const res = await ordersApi.getByDate(date);
+    return res;
+  },
+);
+
+export const getByAmountOfDateOrderAsync = createAsyncThunk(
+  "orders/getByAmountOfDateOrderAsync",
+  async (data) => {
+    const { startDate, endDate } = data;
+    const res = await ordersApi.getByAmountOfDate(startDate, endDate);
+    return res;
+  },
+);
+
+export const getAllDateOrderAsync = createAsyncThunk(
+  "orders/getAllDateOrderAsync",
+  async () => {
+    const res = await ordersApi.getAllDate();
     return res;
   },
 );
@@ -77,10 +95,43 @@ export const ordersSlice = createSlice({
       .addCase(getByDateOrderAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error;
+        state.currentSta = [];
+        state.sum = 0;
       })
       .addCase(getByDateOrderAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.currentSta = action.payload.orders;
+        state.sum = action.payload.sum;
+      })
+
+      .addCase(getByAmountOfDateOrderAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getByAmountOfDateOrderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+        state.currentSta = [];
+        state.sum = 0;
+      })
+      .addCase(getByAmountOfDateOrderAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentSta = action.payload.orders;
+        state.sum = action.payload.sum;
+      })
+
+      .addCase(getAllDateOrderAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllDateOrderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+        state.currentSta = [];
+        state.sum = 0;
+      })
+      .addCase(getAllDateOrderAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentSta = action.payload.orders;
+        state.sum = action.payload.sum;
       });
   },
 });

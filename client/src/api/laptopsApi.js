@@ -1,8 +1,20 @@
 import axiosClient from "./axiosClient";
+import queryString from "query-string";
 
 const laptopApi = {
-  fetchLaptop: async () => {
-    const url = "/product/products/laptop";
+  fetchLaptop: async (brand = null, arrangePrice = null) => {
+    let url = "/product/products/laptop?";
+    if (brand) {
+      url += queryString.stringify(
+        { brand: brand },
+        { arrayFormat: "bracket" },
+      );
+    }
+
+    if (arrangePrice) {
+      url += `&max=${arrangePrice[1]}&min=${arrangePrice[0]}`;
+    }
+
     const res = axiosClient.get(url);
     return res;
   },

@@ -21,7 +21,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path={`/`} exact>
-            <Redirect to={`/auth`} />
+            <Redirect to={`/store`} />
           </Route>
           <Route path="/auth" component={Auth} />
           <Route path="/store" component={Store} />

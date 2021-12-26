@@ -1,5 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchBrands } from "../../../app/brandsSlice";
 import { fetchLaptops } from "../../../app/laptopsSlice";
 import { LAPTOP } from "../../../constants/category";
@@ -12,10 +12,12 @@ const Laptop = () => {
   const brands = useSelector((state) => state.brands.current);
   const loadingLaptop = useSelector((state) => state.laptops.loading);
   const userId = localStorage.getItem("userId");
+  const [arrangePrice, setArrangePrice] = useState([1000000, 10000000]);
+  const [array, setArray] = useState([]);
 
   useEffect(() => {
     const fetchDataLaptop = async () => {
-      const action = await fetchLaptops();
+      const action = await fetchLaptops({ brand: array });
       const actionResult = await dispatch(action);
       unwrapResult(actionResult);
     };
@@ -28,7 +30,21 @@ const Laptop = () => {
 
     fetchDataLaptop();
     fetchDataCategories();
-  }, [dispatch]);
+  }, [dispatch, array]);
+
+  const handleSubmit = async (e) => {
+    const action = await fetchLaptops({ arrangePrice, brand: array });
+    const actionResult = await dispatch(action);
+    unwrapResult(actionResult);
+  };
+
+  const handleChangeCheckBox = (e, value) => {
+    if (e.target.checked) {
+      setArray([...array, e.target.value]);
+    } else {
+      setArray(array.filter((item) => item !== e.target.value));
+    }
+  };
 
   return (
     <Template
@@ -37,6 +53,11 @@ const Laptop = () => {
       componentName="Laptop"
       isLoading={loadingLaptop}
       userId={userId}
+      arrangePrice={arrangePrice}
+      setArrangePrice={setArrangePrice}
+      handleSubmit={handleSubmit}
+      setArray={setArray}
+      handleChangeCheckBox={handleChangeCheckBox}
     />
   );
 };

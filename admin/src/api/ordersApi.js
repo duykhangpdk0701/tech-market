@@ -18,6 +18,17 @@ const ordersApi = {
     const res = await axiosAdmin.post(url, { date });
     return res;
   },
+  getByAmountOfDate: async (startDate, endDate) => {
+    const url = "/order/byamountofdate";
+    const res = await axiosAdmin.post(url, { startDate, endDate });
+    return res;
+  },
+
+  getAllDate: async () => {
+    const url = "/order/byalldate";
+    const res = await axiosAdmin.get(url);
+    return res;
+  },
 };
 
 export default ordersApi;

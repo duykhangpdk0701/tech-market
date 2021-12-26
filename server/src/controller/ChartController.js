@@ -1,5 +1,4 @@
 const OrderDetail = require("../model/OrderDetail");
-const { endOfDay, startOfDay } = require("date-fns");
 const Order = require("../model/Order");
 
 class Chart {
@@ -95,9 +94,11 @@ class Chart {
     try {
       const { startDate, endDate } = req.body;
 
-      const chart = await OrderDetail.aggregate([
+      const chart = await Order.aggregate([
         {
           $project: {
+            orderDetail: 1,
+            count: { $size: "$orderDetail" },
             formattedDate: {
               $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
             },
@@ -106,8 +107,8 @@ class Chart {
         {
           $match: {
             formattedDate: {
-              $gte: startOfDay(new Date(startDate)),
-              $lte: endOfDay(new Date(endDate)),
+              $gte: startDate,
+              $lte: endDate,
             },
           },
         },

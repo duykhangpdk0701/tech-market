@@ -7,10 +7,19 @@ const initialState = {
   error: "",
 };
 
-export const fetchPhones = createAsyncThunk("phones/fetch", async () => {
-  const res = await phoneApi.fetchPhone();
-  return res;
-});
+export const fetchPhones = createAsyncThunk(
+  "phones/fetch",
+  async (data = null) => {
+    const { brand } = data;
+    if (data) {
+      const { arrangePrice } = data;
+      const res = await phoneApi.fetchPhone(brand, arrangePrice);
+      return res;
+    }
+    const res = await phoneApi.fetchPhone(brand);
+    return res;
+  },
+);
 
 export const phonesSlice = createSlice({
   name: "phones",
