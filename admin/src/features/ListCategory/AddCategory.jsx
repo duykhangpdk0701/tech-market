@@ -1,9 +1,9 @@
 import { FastField, Form, Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
-import style from "./AddCategory.module.scss";
+import styles from "./AddCategory.module.scss";
 import * as Yup from "yup";
-import { Paper, Box, Button } from "@mui/material";
+import { Paper, Box, Button, Typography } from "@mui/material";
 import InputField from "../../components/CustomField/InputField";
 import { store } from "../../app/store";
 import { setSnackbar } from "../../app/snackBarSlice";
@@ -48,7 +48,7 @@ const AddCategory = () => {
   };
 
   return (
-    <section className={style.section}>
+    <section className={styles.section}>
       <Formik
         initialValues={initialValue}
         validationSchema={validationSchema}
@@ -57,12 +57,13 @@ const AddCategory = () => {
           return (
             <Form>
               <Box>
-                <Paper>
+                <Paper className={styles.paper}>
+                <Typography variant="h5">Nhập thông tin danh mục:</Typography>
                   <Box>
                     <FastField
                       name="name"
                       component={InputField}
-                      label="Name:"
+                      label="Name :"
                       placholder="Name"
                     />
                   </Box>
@@ -70,19 +71,14 @@ const AddCategory = () => {
                     <FastField
                       name="description"
                       component={InputField}
-                      label="description"
+                      label="Description :"
                       multiline
                       placholder="description"
                     />
                   </Box>
-                </Paper>
-
-                <Paper elevation={0} className={style.paper}>
-                  <Box>
-                    <Button type="submit" variant="contained">
+                    <Button className={styles.button} type="submit" variant="contained">
                       Xác nhận
                     </Button>
-                  </Box>
                 </Paper>
               </Box>
             </Form>
