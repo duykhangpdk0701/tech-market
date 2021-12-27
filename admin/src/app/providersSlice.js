@@ -23,6 +23,14 @@ export const addProviderAsync = createAsyncThunk(
   },
 );
 
+export const updateProviderAsync = createAsyncThunk(
+  "provider/updateProviderAsync",
+  async (data) => {
+    const res = await providerApi.update(data);
+    return res;
+  },
+);
+
 export const providerSlice = createSlice({
   name: "providers",
   initialState,
@@ -53,6 +61,17 @@ export const providerSlice = createSlice({
         state.error = action.error;
       })
       .addCase(addProviderAsync.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+
+      .addCase(updateProviderAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateProviderAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error;
+      })
+      .addCase(updateProviderAsync.fulfilled, (state, action) => {
         state.loading = false;
       });
   },

@@ -31,6 +31,8 @@ import AddProvider from "../Provider/AddProvider";
 import AddGoodReceived from "../GoodReceived/AddGoodReceived";
 import ByDay from "../Analytics/ByDay";
 import ByAmountOfDate from "../Analytics/ByAmountOfDate";
+import UpdateBrand from "../ListBrand/UpdateBrand";
+import UpdateProvider from "../Provider/UpdateProvider";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -49,6 +51,10 @@ const Admin = () => {
           <Route path={`${match.url}/user`} component={Users} />
           <Route path={`${match.url}/category/add`} component={AddCategory} />
           <Route path={`${match.url}/category`} component={ListCategory} />
+          <Route
+            path={`${match.url}/brand/update/:id`}
+            component={UpdateBrand}
+          />
           <Route path={`${match.url}/brand/add`} component={AddBrand} />
           <Route path={`${match.url}/brand`} component={ListBrand} />
           {/* analytics */}
@@ -91,6 +97,10 @@ const Admin = () => {
           />
           <Route path={`${match.url}/goodreceived`} component={GoodReceived} />
           {/* provider */}
+          <Route
+            path={`${match.url}/provider/update/:id`}
+            component={UpdateProvider}
+          />
           <Route path={`${match.url}/provider/add`} component={AddProvider} />
           <Route path={`${match.url}/provider`} component={Provider} />
         </Switch>

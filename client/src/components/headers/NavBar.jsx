@@ -127,12 +127,14 @@ const NavBar = () => {
                             <ListItemText> Đơn mua</ListItemText>
                           </MenuItem>
                         </Link>
-                        <MenuItem>
-                          <ListItemIcon>
-                            <ShoppingCartIcon fontSize="small" />
-                          </ListItemIcon>
-                          <ListItemText>Giỏ hàng</ListItemText>
-                        </MenuItem>
+                        <Link to="/store/cart">
+                          <MenuItem>
+                            <ListItemIcon>
+                              <ShoppingCartIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText>Giỏ hàng</ListItemText>
+                          </MenuItem>
+                        </Link>
                         <MenuItem>
                           <ListItemIcon>
                             <Settings fontSize="small" />

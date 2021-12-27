@@ -1,4 +1,5 @@
-import { Button, Typography } from "@mui/material";
+import { Button, ButtonGroup, Typography } from "@mui/material";
+import toDate from "../../helper/toDate";
 
 const Columns = [
   { field: "_id", headerName: "ID", width: 250 },
@@ -18,12 +19,23 @@ const Columns = [
     width: 200,
     renderCell: (params) => <Typography>{params.row.provider.name}</Typography>,
   },
-  { field: "createdAt", headerName: "Ngày nhập", width: 250 },
+  {
+    field: "createdAt",
+    headerName: "Ngày nhập",
+    width: 250,
+    renderCell: (params) => (
+      <Typography>{toDate(params.row.createdAt)}</Typography>
+    ),
+  },
   {
     field: "action",
     headerName: "Hành động",
     width: 250,
-    renderCell: (params) => <Button variant="contained">Chi tiết</Button>,
+    renderCell: (params) => (
+      <ButtonGroup>
+        <Button>Chi tiết</Button>
+      </ButtonGroup>
+    ),
   },
 ];
 

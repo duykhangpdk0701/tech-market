@@ -74,11 +74,6 @@ export const brandsSlice = createSlice({
       })
       .addCase(upDateBrandAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.current.forEach((item) => {
-          if (item._id === action.payload.brand._id) {
-            item = action.payload.brand;
-          }
-        });
       });
   },
 });

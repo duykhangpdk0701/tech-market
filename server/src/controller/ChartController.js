@@ -4,22 +4,42 @@ const Order = require("../model/Order");
 class Chart {
   year = async (req, res) => {
     try {
-      const chart = await OrderDetail.aggregate([
+      const chart = await Order.aggregate([
+        { $match: { status: 3 } },
         {
-          $lookup: {
-            from: "products",
-            localField: "product",
-            foreignField: "_id",
-            as: "product",
-          },
+          $unwind: "$orderDetail",
         },
         {
           $group: {
+            _id: null,
+            orderDetail: { $push: "$orderDetail" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+          },
+        },
+
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $unwind: "$orderDetail",
+        },
+
+        {
+          $group: {
             _id: {
-              year: { $year: "$createdAt" },
-              month: { $month: "$createdAt" },
+              year: { $year: "$orderDetail.createdAt" },
+              month: { $month: "$orderDetail.createdAt" },
             },
-            count: { $sum: "$quantity" },
+            count: { $sum: "$orderDetail.quantity" },
           },
         },
         {
@@ -44,39 +64,143 @@ class Chart {
     }
   };
 
-  category = async (req, res) => {
+  year2 = async (req, res) => {
     try {
-      const chart = await OrderDetail.aggregate([
+      const chart = await Order.aggregate([
+        { $match: { status: 3 } },
+        {
+          $unwind: "$orderDetail",
+        },
+        {
+          $group: {
+            _id: null,
+            orderDetail: { $push: "$orderDetail" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+          },
+        },
+
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $unwind: "$orderDetail",
+        },
+
         {
           $lookup: {
             from: "products",
-            localField: "product",
+            localField: "orderDetail.product",
             foreignField: "_id",
-            as: "product",
+            as: "orderDetail.product",
           },
         },
         {
-          $unwind: "$product",
+          $unwind: "$orderDetail.product",
         },
+
         {
           $lookup: {
             from: "categories",
-            localField: "product.category",
+            localField: "orderDetail.product.category",
             foreignField: "_id",
-            as: "product.category",
+            as: "orderDetail.product.category",
           },
         },
         {
-          $unwind: "$product.category",
+          $unwind: "$orderDetail.product.category",
         },
 
         {
           $group: {
             _id: {
-              category: "$product.category._id",
-              name: "$product.category.name",
+              category: "$orderDetail.product.category._id",
+              name: "$orderDetail.product.category.name",
             },
-            count: { $sum: "$quantity" },
+            count: { $sum: "$orderDetail.quantity" },
+          },
+        },
+      ]);
+
+      res.json({
+        success: true,
+        chart: chart,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, messages: error });
+    }
+  };
+
+  category = async (req, res) => {
+    try {
+      const chart = await Order.aggregate([
+        { $match: { status: 3 } },
+        {
+          $unwind: "$orderDetail",
+        },
+        {
+          $group: {
+            _id: null,
+            orderDetail: { $push: "$orderDetail" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+          },
+        },
+
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        {
+          $unwind: "$orderDetail",
+        },
+
+        {
+          $lookup: {
+            from: "products",
+            localField: "orderDetail.product",
+            foreignField: "_id",
+            as: "orderDetail.product",
+          },
+        },
+        {
+          $unwind: "$orderDetail.product",
+        },
+
+        {
+          $lookup: {
+            from: "categories",
+            localField: "orderDetail.product.category",
+            foreignField: "_id",
+            as: "orderDetail.product.category",
+          },
+        },
+        {
+          $unwind: "$orderDetail.product.category",
+        },
+
+        {
+          $group: {
+            _id: {
+              category: "$orderDetail.product.category._id",
+              name: "$orderDetail.product.category.name",
+            },
+            count: { $sum: "$orderDetail.quantity" },
           },
         },
       ]);

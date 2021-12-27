@@ -55,7 +55,7 @@ class BrandController {
         },
         { $unwind: "$category" },
       ]);
-      res.json({ success: true, brand });
+      res.json({ success: true, brand: brand[0] });
     } catch (error) {
       res
         .status(500)
@@ -86,7 +86,7 @@ class BrandController {
   }
 
   async update(req, res) {
-    const { id } = req.params;
+    const { id } = req.body;
     if (!id)
       return res.status(401).json({ success: false, messages: "Missing id" });
     try {

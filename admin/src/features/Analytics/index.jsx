@@ -115,46 +115,50 @@ const Analytics = () => {
 
   return (
     <Box className={style.analytics}>
-      <Typography>This is analytics page</Typography>
-      <Box className={style.chart}>
-        <Line
-          data={{
-            labels: [
-              "Tháng 1",
-              "Tháng 2",
-              "Tháng 3",
-              "Tháng 4",
-              "Tháng 5",
-              "Tháng 6",
-              "Tháng 7",
-              "Tháng 8",
-              "Tháng 9",
-              "Tháng 10",
-              "Tháng 11",
-              "Tháng 12",
-            ],
-            datasets: covertToDataset(chartLine),
-          }}
-          options={{
-            interaction: {
-              intersect: false,
-              mode: "index",
-            },
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
+      <Typography variant="h3">Thống kê toàn thời gian</Typography>
+      <Box className={style.chart_container}>
+        <Box className={style.doughnut}>
+          <Typography>Biểu đồ tròn </Typography>
+          <Doughnut data={covertToDatasetPie(chartPie)} />
+        </Box>
+
+        <Box className={style.chart}>
+          <Line
+            data={{
+              labels: [
+                "Tháng 1",
+                "Tháng 2",
+                "Tháng 3",
+                "Tháng 4",
+                "Tháng 5",
+                "Tháng 6",
+                "Tháng 7",
+                "Tháng 8",
+                "Tháng 9",
+                "Tháng 10",
+                "Tháng 11",
+                "Tháng 12",
+              ],
+              datasets: covertToDataset(chartLine),
+            }}
+            options={{
+              interaction: {
+                intersect: false,
+                mode: "index",
               },
-              title: {
-                display: true,
-                text: "Thống kê so sánh từng năm",
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top",
+                },
+                title: {
+                  display: true,
+                  text: "Thống kê so sánh từng năm",
+                },
               },
-            },
-          }}
-        />
-      </Box>
-      <Box>
-        <Doughnut width={50} height={50} data={covertToDatasetPie(chartPie)} />
+            }}
+          />
+        </Box>
       </Box>
       <Box>
         <TableContainer component={Paper}>

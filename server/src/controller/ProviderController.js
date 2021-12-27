@@ -26,6 +26,38 @@ class ProviderController {
       res.status(500).json({ success: false, message: error.message });
     }
   }
+
+  async update(req, res) {
+    try {
+      const { name, email, address, phone, id } = req.body;
+      console.log({ name, email, address, phone, id });
+      const updateProvider = await Provider.findByIdAndUpdate(id, {
+        name,
+        email,
+        address,
+        phone,
+      });
+      res.json({
+        success: true,
+        providers: updateProvider,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const findProvider = await Provider.findById(id);
+      res.json({
+        success: true,
+        providers: findProvider,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
 }
 
 module.exports = new ProviderController();

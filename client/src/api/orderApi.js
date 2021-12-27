@@ -18,6 +18,13 @@ const orderApi = {
     const res = await axiosClient.post(url, { id });
     return res;
   },
+
+  setStatus: async (id, status) => {
+    const url = "/order/status";
+    const data = { id, status };
+    const res = await axiosClient.put(url, data);
+    return res;
+  },
 };
 
 export default orderApi;
