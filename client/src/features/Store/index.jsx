@@ -12,6 +12,8 @@ import { load } from "../../app/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Orders from "../Orders";
 import PrivateRoute from "../../private/PrivateRoute";
+import Ordered from "../Ordered";
+import OrderDetail from "../OrderDetail";
 
 const Store = () => {
   const match = useRouteMatch();
@@ -19,7 +21,7 @@ const Store = () => {
   useEffect(() => {
     const autoAuth = async () => {
       const action = await load();
-      const actionResult = dispatch(action);
+      const actionResult = await dispatch(action);
       unwrapResult(actionResult);
     };
     autoAuth();
@@ -35,6 +37,8 @@ const Store = () => {
         <Route path={`${match.url}/phone`} component={Phone} />
         <Route path={`${match.url}/cart`} component={Cart} />
         <Route path={`${match.url}/product/:id`} component={Product} exact />
+        <Route path={`${match.url}/ordered`} component={Ordered} />
+        <Route path={`${match.url}/orderdetail/:id`} component={OrderDetail} />
         <PrivateRoute path={`${match.url}/order`} component={Orders} />
       </Switch>
     </>

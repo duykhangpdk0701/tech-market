@@ -11,6 +11,7 @@ import cartsReducer from "./cartsSlice";
 import snackbarReducer from "./snackbarSlice";
 import orderReducer from "./ordersSlice";
 import addressReducer from "./addressSlice";
+import orderedSlice from "./orderedSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export const store = configureStore({
     snackbar: snackbarReducer,
     order: orderReducer,
     address: addressReducer,
+    ordered: orderedSlice,
   },
 });

@@ -393,6 +393,62 @@ class OrderController {
       res.status(500).json({ success: false, messages: error });
     }
   };
+
+  getOrderByUserId = async (req, res) => {
+    try {
+      const { userId } = req.body;
+      const orders = await Order.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        { $unwind: "$user" },
+
+        {
+          $lookup: {
+            from: "orderdetails",
+            localField: "orderDetail",
+            foreignField: "_id",
+            as: "orderDetail",
+          },
+        },
+        { $match: { "user._id": mongoose.Types.ObjectId(userId) } },
+      ]);
+
+      res.json({ success: true, orders });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, messages: "Interval server error" });
+    }
+  };
+
+  getOrderDetailById = async (req, res) => {
+    try {
+      const { id } = req.body;
+      const orderDetail = await OrderDetail.aggregate([
+        { $match: { _id: mongoose.Types.ObjectId(id) } },
+        {
+          $lookup: {
+            from: "products",
+            localField: "product",
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+        { $unwind: "$product" },
+      ]);
+      res.json({ success: true, orderDetail });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, messages: "Interval server error" });
+    }
+  };
 }
 
 module.exports = new OrderController();

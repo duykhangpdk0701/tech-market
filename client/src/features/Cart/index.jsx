@@ -42,7 +42,9 @@ const Cart = () => {
   return (
     <section className={style.section}>
       <div className={style.container}>
-        <Typography variant="h5">Giỏ hàng</Typography>
+        <Typography sx={{ m: 1 }} variant="h5">
+          Giỏ hàng
+        </Typography>
         <div className={style.content}>
           <Box
             sx={{

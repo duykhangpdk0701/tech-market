@@ -15,14 +15,37 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  Avatar,
+  Box,
+  Popover,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonIcon from "@mui/icons-material/Person";
+import {
+  ContentCopy,
+  Logout,
+  Settings,
+  ShoppingBag,
+} from "@mui/icons-material";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const searchResult = useSelector((state) => state.search.current) || [];
   const countCart = useSelector((state) => state.carts.current).length || 0;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logout = async () => {
+    localStorage.clear();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,11 +60,15 @@ const NavBar = () => {
   const handleInputOnchangeInputSearch = (e) => {};
 
   return (
-    <nav className={style.nav}>
+    <Box sx={{ boxShadow: 1 }} className={style.nav}>
       <div className={style.nav_wrapper}>
         <div className={style.feature_container}>
           <div className={style.logo_container}>
-            <Link to="/store">Tào Đạo store</Link>
+            <Link to="/store">
+              <Typography variant="h5" className={style.logo}>
+                Tào Đạo
+              </Typography>
+            </Link>
           </div>
           <div className={style.search_container}>
             <Autocomplete
@@ -59,6 +86,7 @@ const NavBar = () => {
               getOptionLabel={(option) => option.name || ""}
               renderInput={(params) => (
                 <TextField
+                  className={style.autocomplete}
                   onChange={handleInputOnchangeInputSearch}
                   {...params}
                   label="Tìm kiếm"
@@ -68,35 +96,68 @@ const NavBar = () => {
           </div>
           <div className={style.user_profile}>
             <div className={style.menu}>
-              <Typography>Button</Typography>
-              <Paper className={style.menu_list}>
-                <MenuList>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText>Profile</ListItemText>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText>Giỏ hàng</ListItemText>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText>Đơn mua</ListItemText>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText>Log out</ListItemText>
-                  </MenuItem>
-                </MenuList>
-              </Paper>
+              {localStorage.getItem("token") ? (
+                <>
+                  <Avatar
+                    aria-describedby={id}
+                    variant="contained"
+                    onClick={handleClick}>
+                    {localStorage.getItem("username")[0]}
+                  </Avatar>
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}>
+                    <Paper sx={{ width: 200, maxWidth: "100%" }}>
+                      <MenuList>
+                        <Link to="/store/ordered">
+                          <MenuItem>
+                            <ListItemIcon>
+                              <ShoppingBag fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText> Đơn mua</ListItemText>
+                          </MenuItem>
+                        </Link>
+                        <MenuItem>
+                          <ListItemIcon>
+                            <ShoppingCartIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText>Giỏ hàng</ListItemText>
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText>Cài đặt</ListItemText>
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText onClick={logout}>
+                            Đăng xuất
+                          </ListItemText>
+                        </MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Popover>
+                </>
+              ) : (
+                <>
+                  <Typography>
+                    <Link to="/auth">Đăng nhập</Link>
+                  </Typography>
+                </>
+              )}
             </div>
 
             <div className={style.cart}>
@@ -138,7 +199,7 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-    </nav>
+    </Box>
   );
 };
 

@@ -11,5 +11,7 @@ router.delete("/:id", orderController.delete);
 router.put("/status", orderController.setStatus);
 router.post("/bydate", orderController.byDate);
 router.post("/byamountofdate", orderController.byAmountOfDate);
+router.post("/byuserid", orderController.getOrderByUserId);
+router.post("/orderdetail", orderController.getOrderDetailById);
 
 module.exports = router;
