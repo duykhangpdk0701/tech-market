@@ -30,7 +30,6 @@ class ProviderController {
   async update(req, res) {
     try {
       const { name, email, address, phone, id } = req.body;
-      console.log({ name, email, address, phone, id });
       const updateProvider = await Provider.findByIdAndUpdate(id, {
         name,
         email,
