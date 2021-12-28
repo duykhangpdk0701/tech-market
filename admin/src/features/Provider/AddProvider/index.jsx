@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Card, Typography, Box, Button } from "@mui/material";
+import { Card, Typography, Box, Button, Paper } from "@mui/material";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { FastField, Form, Formik } from "formik";
 import React from "react";
@@ -9,6 +9,7 @@ import { addProviderAsync } from "../../../app/providersSlice";
 import { setSnackbar } from "../../../app/snackBarSlice";
 import { store } from "../../../app/store";
 import InputField from "../../../components/CustomField/InputField";
+import styles from "./Add.module.scss";
 
 const AddProvider = () => {
   const dispatch = useDispatch();
@@ -50,8 +51,7 @@ const AddProvider = () => {
   };
 
   return (
-    <div>
-      <Card>
+    <div className={styles.section}>
         <Formik
           initialValues={initialValue}
           validationSchema={validationSchema}
@@ -59,51 +59,50 @@ const AddProvider = () => {
           {(formikProps) => {
             return (
               <Form>
-                <Typography>Thêm Nhà cung cấp</Typography>
-                <Box>
-                  <FastField
-                    name="name"
-                    component={InputField}
-                    label="Tên nhà cung cấp"
-                    placeholder="Tên nhà cung cấp"
-                  />
-                </Box>
-                <Box>
-                  <FastField
-                    name="email"
-                    component={InputField}
-                    label="Địa chỉ email"
-                    placeholder="vidu@gmail.com"
-                  />
-                </Box>
+                <Paper className={styles.paper}>
+                  <Typography variant='h5'>Nhập thông tin nhà cung cấp :</Typography>
+                  <Box>
+                    <FastField
+                      name="name"
+                      component={InputField}
+                      label="Tên nhà cung cấp :"
+                      placeholder="Tên nhà cung cấp"
+                    />
+                  </Box>
+                  <Box>
+                    <FastField
+                      name="email"
+                      component={InputField}
+                      label="Địa chỉ email :"
+                      placeholder="vidu@gmail.com"
+                    />
+                  </Box>
 
-                <Box>
-                  <FastField
-                    name="address"
-                    component={InputField}
-                    label="Địa chỉ"
-                    placeholder="12 đường..."
-                  />
-                </Box>
+                  <Box>
+                    <FastField
+                      name="address"
+                      component={InputField}
+                      label="Địa chỉ :"
+                      placeholder="12 đường..."
+                    />
+                  </Box>
 
-                <Box>
-                  <FastField
-                    name="phone"
-                    component={InputField}
-                    label="điện thoại"
-                    placeholder="0123456789"
-                  />
-                </Box>
-                <Box>
-                  <LoadingButton type="submit" variant="contained">
-                    Xác Nhận
-                  </LoadingButton>
-                </Box>
+                  <Box>
+                    <FastField
+                      name="phone"
+                      component={InputField}
+                      label="Điện thoại :"
+                      placeholder="0123456789"
+                    />
+                  </Box>
+                    <LoadingButton className={styles.button} type="submit" variant="contained">
+                      Xác Nhận
+                    </LoadingButton>
+                </Paper>
               </Form>
             );
           }}
         </Formik>
-      </Card>
     </div>
   );
 };

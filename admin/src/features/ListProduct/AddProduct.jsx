@@ -12,7 +12,7 @@ import { store } from "../../app/store";
 import AutoField from "../../components/CustomField/AutoField";
 import InputField from "../../components/CustomField/InputField";
 import DropZone from "../../components/DropZone";
-import style from "./AddProduct.module.scss";
+import styles from "./AddProduct.module.scss";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -93,85 +93,66 @@ const AddProduct = () => {
   };
 
   return (
-    <section className={style.section}>
+    <section className={styles.section}>
       <Formik
         initialValues={initialValue}
         validationSchema={validationSchema}
         onSubmit={handleOnSubmit}>
         {(formikProps) => {
           return (
-            <Form enctype="multipart/form-data">
-              <Box className={style.outter_box}>
-                <Paper elevation={0} className={style.paper}>
+            <Form enctype="multipart/form-data" className={styles.form}>
+              <Box>
+                <Paper elevation={0} className={styles.paper}>
                   <Typography> Image</Typography>
                   <DropZone
                     values={formikProps.values}
                     setFieldValue={formikProps.setFieldValue}
                   />
                 </Paper>
-                <Paper elevation={0} className={style.paper}>
-                  <Box>
-                    <Typography variant="h5">Thông tin:</Typography>
+                <Paper elevation={0} className={styles.paper}>
+                    <Typography variant="h5">Nhập thông tin sản phẩm :</Typography>
                     <FastField
                       name="name"
                       component={InputField}
-                      label="Name:"
+                      label="Name :"
                       placeholder="Name"
                     />
-                  </Box>
-                  <Box>
                     <FastField
                       name="category"
                       component={AutoField}
-                      label="Category:"
+                      label="Category :"
                       placeholder="What's your photo category?"
                       options={categories}
                     />
-
                     <FastField
                       name="brand"
                       component={AutoField}
-                      label="Brand:"
+                      label="Brand :"
                       placeholder="What's your photo category?"
                       options={brands}
                     />
-                  </Box>
-
-                  <Box>
                     <FastField
                       name="quantity"
                       component={InputField}
-                      label="Quantity:"
+                      label="Quantity :"
                       placholder="Quantity"
                     />
-
                     <FastField
                       name="price"
                       component={InputField}
-                      label="Price:"
+                      label="Price :"
                       placholder="Price"
                     />
-                  </Box>
-                </Paper>
-
-                <Paper elevation={0} className={style.paper}>
-                  <Box>
-                    <Typography>Description</Typography>
                     <FastField
                       name="description"
                       component={InputField}
-                      label="description"
+                      label="Description :"
                       multiline
                       placholder="description"
                     />
-                  </Box>
-                </Paper>
-                <Paper elevation={0} className={style.paper}>
-                  <Box>
-                    <Button type="submit" variant="contained">
+                    <Button className={styles.button} type="submit" variant="contained">
                       Xác nhận
                     </Button>
-                  </Box>
                 </Paper>
               </Box>
             </Form>

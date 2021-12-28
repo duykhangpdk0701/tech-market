@@ -1,6 +1,7 @@
 import React from "react";
 import { MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import prototype from "prop-types";
+import styles from "./AutoField.module.scss";
 
 const AutoField = (props) => {
   const { field, form, label, options, placeholder } = props;
@@ -20,7 +21,7 @@ const AutoField = (props) => {
 
   return (
     <>
-      <InputLabel id={name}>{label}</InputLabel>
+      <InputLabel id={name} className={styles.label}>{label}</InputLabel>
       <Select
         labelId={name}
         id={name}
@@ -28,7 +29,8 @@ const AutoField = (props) => {
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        label={label}>
+        label={label}
+        className={styles.select}>
         {options.map((element) => (
           <MenuItem key={element._id} value={element._id}>
             {element.name}

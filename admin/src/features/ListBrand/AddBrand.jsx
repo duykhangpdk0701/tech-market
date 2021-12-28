@@ -1,9 +1,9 @@
 import { FastField, Form, Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import style from "./AddBrand.module.scss";
+import styles from "./AddBrand.module.scss";
 import * as Yup from "yup";
-import { Paper, Box, Button } from "@mui/material";
+import { Paper, Box, Button, Typography } from "@mui/material";
 import InputField from "../../components/CustomField/InputField";
 import { store } from "../../app/store";
 import { setSnackbar } from "../../app/snackBarSlice";
@@ -60,7 +60,7 @@ const AddBrand = () => {
   };
 
   return (
-    <section className={style.section}>
+    <section className={styles.section}>
       <Formik
         initialValues={initialValue}
         validationSchema={validationSchema}
@@ -69,12 +69,13 @@ const AddBrand = () => {
           return (
             <Form>
               <Box>
-                <Paper>
+                <Paper className={styles.paper}>
+                  <Typography variant="h5">Nhập thông tin thương hiệu :</Typography>
                   <Box>
                     <FastField
                       name="name"
                       component={InputField}
-                      label="Name:"
+                      label="Name :"
                       placholder="Name"
                     />
                   </Box>
@@ -82,19 +83,14 @@ const AddBrand = () => {
                     <FastField
                       name="category"
                       component={AutoField}
-                      label="Category:"
+                      label="Category :"
                       placholder="Category"
                       options={categories}
                     />
                   </Box>
-                </Paper>
-
-                <Paper elevation={0} className={style.paper}>
-                  <Box>
-                    <Button type="submit" variant="contained">
+                    <Button className={styles.button} type="submit" variant="contained">
                       Xác nhận
                     </Button>
-                  </Box>
                 </Paper>
               </Box>
             </Form>

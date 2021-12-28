@@ -1,0 +1,25 @@
+.section{
+    flex: 1;
+    padding: 50px;
+    background-color: #eaeef3;
+    display: flex;
+    .box{
+        flex: 1;
+        & + .box{
+            margin-left: 24px;
+        }
+        .card{
+            padding: 24px;
+            h5{
+                margin-bottom: 20px;
+            }
+            .input{
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .button{
+                width: 100%;
+            }
+        }
+    }
+}

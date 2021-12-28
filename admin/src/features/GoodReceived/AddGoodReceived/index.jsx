@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  Menu,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,6 +16,7 @@ import { fetchProductsAsync } from "../../../app/productsSlice";
 import { store } from "../../../app/store";
 import { setSnackbar } from "../../../app/snackBarSlice";
 import { addGoodReceivedAsync } from "../../../app/goodReceivedSlice";
+import styles from "./Add.module.scss";
 
 const AddGoodReceived = () => {
   const dispatch = useDispatch();
@@ -24,8 +26,10 @@ const AddGoodReceived = () => {
   const [productValue, setProductValue] = useState({});
   const [productQuantity, setProductQuantity] = useState(0);
   const [arrProductValue, setArrProductValue] = useState([]);
+  console.log(styles)
 
   useEffect(() => {
+    
     const fetchProvider = async () => {
       const action = getAllProviderAsync();
       const actionResult = dispatch(action);
@@ -86,10 +90,10 @@ const AddGoodReceived = () => {
   };
 
   return (
-    <div>
-      <Box>
-        <Card>
-          <Typography>Nhà cung cấp</Typography>
+    <div className={styles.section}>
+      <Box className={styles.box}>
+        <Card className={styles.card}>
+          <Typography variant="h5">Nhà cung cấp :</Typography>
           <Autocomplete
             freeSolo
             options={providers}
@@ -103,10 +107,9 @@ const AddGoodReceived = () => {
             )}
             getOptionLabel={(option) => option.name || ""}
             renderInput={(params) => <TextField {...params} label="Tìm kiếm" />}
+            className={styles.input}
           />
-        </Card>
-        <Card>
-          <Typography>Sản phẩm</Typography>
+          <Typography variant="h5">Sản phẩm :</Typography>
           <Autocomplete
             freeSolo
             options={products}
@@ -120,24 +123,26 @@ const AddGoodReceived = () => {
             )}
             getOptionLabel={(option) => option.name || ""}
             renderInput={(params) => <TextField {...params} label="Tìm kiếm" />}
+            className={styles.input}
           />
           <TextField
             onChange={(e) => setProductQuantity(e.target.value)}
             label="Số lượng"
             type="number"
+            className={styles.input}
           />
-          <Button onClick={handleAdd}>Thêm</Button>
+          <Button variant="contained" className={styles.button} onClick={handleAdd}>Thêm</Button>
         </Card>
       </Box>
-      <Box>
-        <Card>
-          <Typography>Danh sách sản phẩm nhập hàng</Typography>
+      <Box className={styles.box}>
+        <Card className={styles.card}>
+          <Typography variant="h5">Danh sách sản phẩm nhập hàng</Typography>
           {arrProductValue &&
             arrProductValue.map((item) => {
               return <div key={item._id}>{item._id}</div>;
             })}
+          <Button variant="contained" className={styles.button} onClick={handleSubmit}>Submit</Button>
         </Card>
-        <Button onClick={handleSubmit}>Submit</Button>
       </Box>
     </div>
   );
