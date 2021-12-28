@@ -49,23 +49,25 @@ class OrderController {
       const order = await Order.aggregate([
         {
           $lookup: {
-            from: "users",
-            localField: "user",
-            foreignField: "_id",
-            as: "user",
-          },
-        },
-        { $unwind: "$user" },
-        {
-          $lookup: {
             from: "orderdetails",
             localField: "orderDetail",
             foreignField: "_id",
             as: "orderDetail",
           },
         },
+        { $match: { _id: mongoose.Types.ObjectId(id) } },
+        {
+          $lookup: {
+            from: "products",
+            localField: "orderDetail.product",
+            foreignField: "_id",
+            as: "newProduct",
+          },
+        },
+
+        // { $unwind: "$orderDetail.product" },
       ]);
-      res.json({ success: true, order });
+      res.json({ success: true, order: order[0] });
     } catch (error) {
       res
         .status(500)

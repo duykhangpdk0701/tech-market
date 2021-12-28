@@ -37,8 +37,8 @@ const Store = () => {
         <Route path={`${match.url}/phone`} component={Phone} />
         <Route path={`${match.url}/cart`} component={Cart} />
         <Route path={`${match.url}/product/:id`} component={Product} exact />
+        <Route path={`${match.url}/ordered/:id`} component={OrderDetail} />
         <Route path={`${match.url}/ordered`} component={Ordered} />
-        <Route path={`${match.url}/orderdetail/:id`} component={OrderDetail} />
         <PrivateRoute path={`${match.url}/order`} component={Orders} />
       </Switch>
     </>

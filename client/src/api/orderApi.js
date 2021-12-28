@@ -25,6 +25,12 @@ const orderApi = {
     const res = await axiosClient.put(url, data);
     return res;
   },
+
+  getOrderById: async (id) => {
+    const url = "/order/" + id;
+    const res = await axiosClient.get(url);
+    return res;
+  },
 };
 
 export default orderApi;

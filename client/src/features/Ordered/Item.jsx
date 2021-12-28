@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { setSnackbar } from "../../app/snackbarSlice";
 import { setStatusAsync } from "../../app/orderedSlice";
+import { Link } from "react-router-dom";
 
 const Item = (props) => {
   const { ordered } = props;
@@ -87,7 +88,9 @@ const Item = (props) => {
       <TableCell>{toPrice(ordered.totalPrice)}</TableCell>
       <TableCell>
         <ButtonGroup>
-          <Button>Chi tiết</Button>
+          <Link to={`/store/ordered/${ordered._id}`}>
+            <Button>Chi tiết</Button>
+          </Link>
 
           <Button
             onClick={handleClickOpen}

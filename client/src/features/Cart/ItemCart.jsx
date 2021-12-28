@@ -150,7 +150,6 @@ const ItemCart = (props) => {
     }
   };
 
-  console.log(cart.product);
   return (
     <Box mx={{ p: 3 }} className={style.container}>
       <Box className={style.img_contianer}>

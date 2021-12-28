@@ -26,6 +26,7 @@ import {
   Settings,
   ShoppingBag,
 } from "@mui/icons-material";
+import { clearCart } from "../../app/cartsSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const NavBar = () => {
 
   const logout = async () => {
     localStorage.clear();
+    dispatch(clearCart());
   };
 
   useEffect(() => {

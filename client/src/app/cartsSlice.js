@@ -111,6 +111,7 @@ export const CartsSlice = createSlice({
     },
 
     clearCart: (state) => {
+      localStorage.clear();
       state.current = [];
     },
   },

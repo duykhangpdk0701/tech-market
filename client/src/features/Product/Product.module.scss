@@ -3,7 +3,7 @@
 }
 
 .breadcrumb_nav {
-  width: 1200px;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
   padding-top: 1rem;
@@ -37,13 +37,25 @@
 }
 
 .container {
-  width: 1200px;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
+  padding: 3rem;
 }
 
-.product_detail{
-
+.product_detail {
 }
 
+.param {
+  background-color: #cacaca;
+  padding: 1rem;
+  color: #7a8288;
+}
 
+.flex_line {
+  display: flex;
+  margin: 1rem;
+  svg {
+    margin-right: 0.5rem;
+  }
+}
