@@ -17,6 +17,13 @@ class AdminController {
           .json({ success: false, messages: "Incorrect username or password" });
       }
       const passowrdvalid = await argon2.verify(admin.password, password);
+
+      if (!admin.isActive) {
+        return res
+          .status(500)
+          .json({ success: false, messages: "Tài khoản của bạn đã bị khoá." });
+      }
+
       if (!passowrdvalid) {
         return res
           .status(500)

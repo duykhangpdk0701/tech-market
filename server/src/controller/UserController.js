@@ -39,6 +39,13 @@ class UserController {
           .status(500)
           .json({ success: false, messages: "Invalid password" });
       }
+
+      if (!user.isActive) {
+        return res
+          .status(500)
+          .json({ success: false, messages: "Tài khoản của bạn đã bị khoá." });
+      }
+
       const accessToken = jwt.sign(
         { Id: user._id },
         process.env.ACCESS_TOKEN_SECRET || "Khangvippro",

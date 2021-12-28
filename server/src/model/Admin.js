@@ -28,6 +28,10 @@ const AdminSchema = mongoose.Schema(
       type: Number,
       default: 3,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamp: true },
 );

@@ -450,19 +450,6 @@ const SideBar = () => {
                   primary={<Typography variant="body2">Danh sách</Typography>}
                 />
               </ListItemButton>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                component={NavLink}
-                to="/admin/user/add">
-                <ListItemIcon>
-                  <Add color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body2">Thêm danh mục</Typography>
-                  }
-                />
-              </ListItemButton>
             </List>
           </Collapse>
           <Divider />
@@ -495,13 +482,15 @@ const SideBar = () => {
               <ListItemButton
                 sx={{ pl: 4 }}
                 component={NavLink}
-                to="/admin/user/add">
+                to="/admin/admin/add">
                 <ListItemIcon>
                   <Add color="primary" />
                 </ListItemIcon>
                 <ListItemText
                   primary={
-                    <Typography variant="body2">Thêm tài khoản admi</Typography>
+                    <Typography variant="body2">
+                      Thêm tài khoản admin
+                    </Typography>
                   }
                 />
               </ListItemButton>

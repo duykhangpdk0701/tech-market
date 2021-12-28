@@ -26,10 +26,8 @@ const AddGoodReceived = () => {
   const [productValue, setProductValue] = useState({});
   const [productQuantity, setProductQuantity] = useState(0);
   const [arrProductValue, setArrProductValue] = useState([]);
-  console.log(styles)
 
   useEffect(() => {
-    
     const fetchProvider = async () => {
       const action = getAllProviderAsync();
       const actionResult = dispatch(action);
@@ -131,7 +129,12 @@ const AddGoodReceived = () => {
             type="number"
             className={styles.input}
           />
-          <Button variant="contained" className={styles.button} onClick={handleAdd}>Thêm</Button>
+          <Button
+            variant="contained"
+            className={styles.button}
+            onClick={handleAdd}>
+            Thêm
+          </Button>
         </Card>
       </Box>
       <Box className={styles.box}>
@@ -141,7 +144,12 @@ const AddGoodReceived = () => {
             arrProductValue.map((item) => {
               return <div key={item._id}>{item._id}</div>;
             })}
-          <Button variant="contained" className={styles.button} onClick={handleSubmit}>Submit</Button>
+          <Button
+            variant="contained"
+            className={styles.button}
+            onClick={handleSubmit}>
+            Submit
+          </Button>
         </Card>
       </Box>
     </div>

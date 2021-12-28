@@ -34,6 +34,7 @@ import ByAmountOfDate from "../Analytics/ByAmountOfDate";
 import UpdateBrand from "../ListBrand/UpdateBrand";
 import UpdateProvider from "../Provider/UpdateProvider";
 import UpdateProduct from "../ListProduct/UpdateProduct";
+import AddAdmin from "../ListAdmin/AddAdmin";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -89,6 +90,7 @@ const Admin = () => {
           <Route path={`${match.url}/order/:id`} component={OrderDetails} />
           <Route path={`${match.url}/order`} component={Order} />
           {/* admin */}
+          <Route path={`${match.url}/admin/add`} component={AddAdmin} />
           <Route path={`${match.url}/admin`} component={ListAdmin} />
           {/* good received */}
 
