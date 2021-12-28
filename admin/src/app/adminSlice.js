@@ -24,6 +24,14 @@ export const changeRoleAsync = createAsyncThunk(
   },
 );
 
+export const addAdminAsync = createAsyncThunk(
+  "/admin/addAdminAsync",
+  async (data) => {
+    const res = await adminApi.add(data);
+    return res;
+  },
+);
+
 export const adminSlice = createSlice({
   name: "admin",
   initialState,

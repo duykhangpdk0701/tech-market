@@ -35,16 +35,39 @@ import UpdateBrand from "../ListBrand/UpdateBrand";
 import UpdateProvider from "../Provider/UpdateProvider";
 import UpdateProduct from "../ListProduct/UpdateProduct";
 import AddAdmin from "../ListAdmin/AddAdmin";
+import { MANAGER, ACCOUNTANT, STAFF } from "../../constant/role";
+import SideBar1 from "../../components/SideBar/SiderBar1";
+import SideBar2 from "../../components/SideBar/SiderBar2";
+import { useHistory } from "react-router-dom";
 
 const Admin = () => {
   const match = useRouteMatch();
+  const history = useHistory();
+  const role = parseInt(localStorage.getItem("role"));
+
+  if (!localStorage.getItem("adminId")) {
+    history.push("/auth");
+  }
+
+  const fillByRole = (role) => {
+    switch (role) {
+      case MANAGER.value:
+        return <SideBar />;
+      case ACCOUNTANT.value:
+        return <SideBar1 />;
+      case STAFF.value:
+        return <SideBar2 />;
+      default:
+        return <SideBar />;
+    }
+  };
 
   return (
     <>
       <TopBar />
       <ActionSnackBar />
       <div className={style.container}>
-        <SideBar />
+        {fillByRole(role)}
         <Switch>
           <Route path={`${match.url}`} component={Home} exact />
           <Route

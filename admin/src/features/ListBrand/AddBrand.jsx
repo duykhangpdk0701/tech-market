@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddBrand.module.scss";
 import * as Yup from "yup";
 import { Paper, Box, Button, Typography } from "@mui/material";
-import InputField from "../../components/CustomField/InputField";
 import { store } from "../../app/store";
 import { setSnackbar } from "../../app/snackBarSlice";
 import { fetchCategoriesAsync } from "../../app/categorySlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { addBrandAsync } from "../../app/brandsSlice";
 import AutoField from "../../components/CustomField/AutoField";
+import InputField from "../../components/CustomField/InputField";
 
 const AddBrand = () => {
   const dispatch = useDispatch();
@@ -70,7 +70,9 @@ const AddBrand = () => {
             <Form>
               <Box>
                 <Paper className={styles.paper}>
-                  <Typography variant="h5">Nhập thông tin thương hiệu :</Typography>
+                  <Typography variant="h5">
+                    Nhập thông tin thương hiệu :
+                  </Typography>
                   <Box>
                     <FastField
                       name="name"
@@ -88,9 +90,12 @@ const AddBrand = () => {
                       options={categories}
                     />
                   </Box>
-                    <Button className={styles.button} type="submit" variant="contained">
-                      Xác nhận
-                    </Button>
+                  <Button
+                    className={styles.button}
+                    type="submit"
+                    variant="contained">
+                    Xác nhận
+                  </Button>
                 </Paper>
               </Box>
             </Form>

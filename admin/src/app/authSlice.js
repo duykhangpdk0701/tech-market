@@ -31,6 +31,7 @@ export const authSlice = createSlice({
         state.current = action.payload.admin;
         localStorage.setItem("adminId", action.payload.admin._id);
         localStorage.setItem("adminName", action.payload.admin.username);
+        localStorage.setItem("role", action.payload.admin.role);
       });
   },
 });

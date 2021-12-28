@@ -1,0 +1,19 @@
+.section {
+  flex: 1;
+  padding: 50px;
+  background-color: #eaeef3;
+  .paper {
+    margin-bottom: 20px;
+    padding: 24px;
+    h5 {
+      margin-bottom: 20px;
+    }
+    .button {
+      margin: 20px 0 10px;
+      width: 100%;
+    }
+    & > div {
+      margin-bottom: 10px;
+    }
+  }
+}
