@@ -57,15 +57,21 @@ const FormLogin = (props) => {
                     />
                     <Grid container direction="row" justifyContent="flex-end">
                       <Grid item>
-                        <Link to="/auth/forgot-password">Forgot password</Link>
+                        <Link
+                          className={style.a_link}
+                          to="/auth/forgot-password">
+                          Forgot password
+                        </Link>
                       </Grid>
                     </Grid>
 
                     <Grid container>
                       <Grid item>
                         <span className={style.to_register}>
-                          Don't have an account
-                          <Link to="/auth/register">Register</Link>
+                          Don't have an account{" "}
+                          <Link className={style.a_link} to="/auth/register">
+                            Register
+                          </Link>
                         </span>
                       </Grid>
                     </Grid>

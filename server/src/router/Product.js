@@ -8,6 +8,7 @@ const {
 const upload = require("../Middleware/UploadImg");
 
 router.get("/", ProductController.showAll);
+router.put("/", upload.array("files", 10), ProductController.update);
 router.get("/:id", ProductController.show);
 
 //laptop
@@ -18,6 +19,5 @@ router.get("/products/phone", PhoneController.showAll);
 //admin
 router.post("/store", upload.array("files", 10), ProductController.store);
 router.put("/permit", ProductController.disactive);
-router.put("/:id", ProductController.update);
 router.delete("/:id", ProductController.delete);
 module.exports = router;

@@ -1,4 +1,5 @@
 const multer = require("multer");
+const { nanoid } = require("nanoid");
 var path = require("path");
 
 const storage = multer.diskStorage({
@@ -9,7 +10,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, callback) {
     callback(
       null,
-      req.body.name + "-" + Date.now() + path.extname(file.originalname),
+      nanoid() + "-" + Date.now() + path.extname(file.originalname),
     );
   },
 });

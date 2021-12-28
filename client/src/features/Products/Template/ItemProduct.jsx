@@ -40,11 +40,19 @@ const ItemProduct = (props) => {
   return (
     <Card className={style.item_wrapper}>
       <CardActionArea>
-        <CardMedia
-          className={style.img_container}
-          component="img"
-          image="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
-        />
+        {item.images ? (
+          <CardMedia
+            className={style.img_container}
+            component="img"
+            image={`${process.env.REACT_APP_SERVER_URL}${item.images[0]}`}
+          />
+        ) : (
+          <CardMedia
+            className={style.img_container}
+            component="img"
+            image="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
+          />
+        )}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {item.name}

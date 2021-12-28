@@ -33,6 +33,7 @@ import ByDay from "../Analytics/ByDay";
 import ByAmountOfDate from "../Analytics/ByAmountOfDate";
 import UpdateBrand from "../ListBrand/UpdateBrand";
 import UpdateProvider from "../Provider/UpdateProvider";
+import UpdateProduct from "../ListProduct/UpdateProduct";
 
 const Admin = () => {
   const match = useRouteMatch();
@@ -45,6 +46,10 @@ const Admin = () => {
         <SideBar />
         <Switch>
           <Route path={`${match.url}`} component={Home} exact />
+          <Route
+            path={`${match.url}/product/update/:id`}
+            component={UpdateProduct}
+          />
           <Route path={`${match.url}/product/add`} component={AddProduct} />
           <Route path={`${match.url}/product`} component={ListProduct} />
           <Route path={`${match.url}/user/:id`} component={User} />

@@ -7,7 +7,7 @@ const productsApi = {
   },
 
   fetchProduct: async (id) => {
-    const res = await axiosAdmin.get(`/product${id}`);
+    const res = await axiosAdmin.get(`/product/${id}`);
     return res;
   },
 
@@ -18,6 +18,15 @@ const productsApi = {
 
   addProdutc: async (formData) => {
     const res = await axiosAdmin.post("/product/store", formData, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    return res;
+  },
+
+  updateProduct: async (formData) => {
+    const res = await axiosAdmin.put("/product", formData, {
       headers: {
         "content-type": "multipart/form-data",
       },

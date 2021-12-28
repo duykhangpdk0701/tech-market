@@ -33,6 +33,15 @@ export const addProductAsync = createAsyncThunk(
   },
 );
 
+export const updateProductAsync = createAsyncThunk(
+  "product/updateProductAsync",
+  async (data) => {
+    const { formData } = data;
+    const res = await productsApi.updateProduct(formData);
+    return res;
+  },
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -81,7 +90,6 @@ export const productsSlice = createSlice({
       })
       .addCase(addProductAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.current = [...state.current, action.payload.product];
       });
   },
 });

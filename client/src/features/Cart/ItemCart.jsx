@@ -150,9 +150,24 @@ const ItemCart = (props) => {
     }
   };
 
+  console.log(cart.product);
   return (
     <Box mx={{ p: 3 }} className={style.container}>
-      <Box className={style.img_contianer}></Box>
+      <Box className={style.img_contianer}>
+        {cart.product &&
+        cart.product.images &&
+        cart.product.images.length !== 0 ? (
+          <img
+            className={style.img}
+            src={`${process.env.REACT_APP_SERVER_URL}${cart.product.images[0]}`}
+          />
+        ) : (
+          <img
+            className={style.img}
+            src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
+          />
+        )}
+      </Box>
       <Box className={style.name_container}>
         <Typography>{cart.product && cart.product.name}</Typography>
         <LoadingButton

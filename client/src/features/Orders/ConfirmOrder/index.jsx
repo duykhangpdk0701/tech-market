@@ -76,7 +76,19 @@ const ConfirmOrder = (props) => {
           <Typography variant="h5">Giỏ hàng</Typography>
           {order.carts.map((item) => (
             <Paper variant="outlined" className={style.cart}>
-              <Box className={style.cart_img}></Box>
+              <Box className={style.cart_img}>
+                {item.product.images && item.product.images.length !== 0 ? (
+                  <img
+                    className={style.img}
+                    src={`${process.env.REACT_APP_SERVER_URL}${item.product.images[0]}`}
+                  />
+                ) : (
+                  <img
+                    className={style.img}
+                    src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
+                  />
+                )}
+              </Box>
               <Box className={style.cart_container}>
                 <Typography variant="subtitle2">{item.product.name}</Typography>
                 <Typography variant="body2">

@@ -78,7 +78,7 @@ const AddProduct = () => {
         setSnackbar({
           snackbarOpen: true,
           snackbarType: "success",
-          snackbarMessage: "",
+          snackbarMessage: "Thêm sản phẩm thành công",
         }),
       );
     } catch (error) {
@@ -86,7 +86,7 @@ const AddProduct = () => {
         setSnackbar({
           snackbarOpen: true,
           snackbarType: "error",
-          snackbarMessage: "Không thành công",
+          snackbarMessage: error.message,
         }),
       );
     }
@@ -110,49 +110,54 @@ const AddProduct = () => {
                   />
                 </Paper>
                 <Paper elevation={0} className={styles.paper}>
-                    <Typography variant="h5">Nhập thông tin sản phẩm :</Typography>
-                    <FastField
-                      name="name"
-                      component={InputField}
-                      label="Name :"
-                      placeholder="Name"
-                    />
-                    <FastField
-                      name="category"
-                      component={AutoField}
-                      label="Category :"
-                      placeholder="What's your photo category?"
-                      options={categories}
-                    />
-                    <FastField
-                      name="brand"
-                      component={AutoField}
-                      label="Brand :"
-                      placeholder="What's your photo category?"
-                      options={brands}
-                    />
-                    <FastField
-                      name="quantity"
-                      component={InputField}
-                      label="Quantity :"
-                      placholder="Quantity"
-                    />
-                    <FastField
-                      name="price"
-                      component={InputField}
-                      label="Price :"
-                      placholder="Price"
-                    />
-                    <FastField
-                      name="description"
-                      component={InputField}
-                      label="Description :"
-                      multiline
-                      placholder="description"
-                    />
-                    <Button className={styles.button} type="submit" variant="contained">
-                      Xác nhận
-                    </Button>
+                  <Typography variant="h5">
+                    Nhập thông tin sản phẩm :
+                  </Typography>
+                  <FastField
+                    name="name"
+                    component={InputField}
+                    label="Name :"
+                    placeholder="Name"
+                  />
+                  <FastField
+                    name="category"
+                    component={AutoField}
+                    label="Category :"
+                    placeholder="What's your photo category?"
+                    options={categories}
+                  />
+                  <FastField
+                    name="brand"
+                    component={AutoField}
+                    label="Brand :"
+                    placeholder="What's your photo category?"
+                    options={brands}
+                  />
+                  <FastField
+                    name="quantity"
+                    component={InputField}
+                    label="Quantity :"
+                    placholder="Quantity"
+                  />
+                  <FastField
+                    name="price"
+                    component={InputField}
+                    label="Price :"
+                    placholder="Price"
+                  />
+                  <FastField
+                    name="description"
+                    component={InputField}
+                    label="Description :"
+                    multiline
+                    placholder="description"
+                  />
+                  <Button
+                    className={styles.button}
+                    type="submit"
+                    variant="contained">
+                    Xác nhận
+                  </Button>
                 </Paper>
               </Box>
             </Form>

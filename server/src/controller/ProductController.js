@@ -95,6 +95,7 @@ class ProductController {
 
   async store(req, res) {
     try {
+      console.log(req.body);
       const product = await Product.findOne({ name: req.body.name });
       if (product) {
         return res
@@ -119,13 +120,23 @@ class ProductController {
   }
 
   async update(req, res) {
-    const { id } = req.params;
+    console.log(req);
+    const { id } = req.body;
     if (!id)
       return res.status(401).json({ success: false, messages: "Missing id" });
     try {
-      const product = await Product.updateOne({ _id: id }, req.body, {
-        new: true,
-      });
+      const product = await Product.updateOne(
+        { _id: mongoose.Types.ObjectId(id) },
+        {
+          ...req.body,
+          images: req.files
+            ? req.files.map((file) => "/assets/" + file.filename)
+            : "defaultImg ??",
+        },
+        {
+          new: true,
+        },
+      );
       if (!product)
         return res.json({ success: false, messages: "Cant update Product" });
       res.json({ success: true, messages: "Update successfully" });

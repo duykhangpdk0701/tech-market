@@ -29,7 +29,12 @@
   flex-basis: 4rem;
 }
 
+.img {
+  width: 100%;
+}
+
 .cart_container {
+  margin-left: 1rem;
   flex-basis: calc(100% - 10rem);
 }
 

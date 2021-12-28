@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Chip } from "@mui/material";
+import { Button, Chip, ButtonGroup } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { toggleActive } from "../../app/productsSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -59,7 +59,7 @@ const Columns = [
   {
     field: "action",
     headerName: "Action",
-    width: 200,
+    width: 250,
     renderCell: (params) => {
       let loading = false;
       const handleToggleAcitveProduct = async (e) => {
@@ -95,6 +95,9 @@ const Columns = [
         <>
           <Link to={`/product/${params.row._id}`}>
             <Button variant="outlined">View</Button>
+          </Link>
+          <Link to={`/admin/product/update/${params.row._id}`}>
+            <Button variant="outlined">Cập nhật</Button>
           </Link>
           <LoadingButton
             onClick={handleToggleAcitveProduct}

@@ -9,12 +9,17 @@
   align-items: center;
 }
 
+.img {
+  width: 100%;
+}
+
 .name_container {
   width: calc(100% - 410px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin-left: 1rem;
 }
 
 .price_container {
