@@ -6,9 +6,7 @@ const formiable = require("formidable");
 class ProductController {
   async showAll(req, res) {
     try {
-      const filter = req.query || null;
-      let aggregate = [];
-      const deFault = [
+      const preAggregate = [
         {
           $lookup: {
             from: "categories",
@@ -27,36 +25,29 @@ class ProductController {
           },
         },
         { $unwind: "$brand" },
+        { $match: { isActive: true } },
       ];
 
-      if (filter) {
-        if (filter.category) {
-          aggregate.push({
-            $match: {
-              category: mongoose.Types.ObjectId(filter.category),
+      if (req.query.max) {
+        preAggregate.push({
+          $match: {
+            price: {
+              $gt: parseInt(req.query.min),
+              $lt: parseInt(req.query.max),
             },
-          });
-        }
-        if (filter.brand) {
-          aggregate.push({
-            $match: {
-              brand: mongoose.Types.ObjectId(filter.brand),
-            },
-          });
-        }
-        if (filter.price) {
-          aggregate.push({
-            $match: {
-              $and: [
-                { price: { $gte: JSON.parse(filter.price)[0] } },
-                { price: { $lte: JSON.parse(filter.price)[1] } },
-              ],
-            },
-          });
-        }
+          },
+        });
       }
-      aggregate = aggregate.concat(deFault);
-      const products = await Product.aggregate(aggregate);
+
+      if (req.query.brand) {
+        preAggregate.push({
+          $match: {
+            "brand.name": { $in: req.query.brand },
+          },
+        });
+      }
+
+      const products = await Product.aggregate(preAggregate);
       res.json({ success: true, products });
     } catch (error) {
       res.status(500).json({

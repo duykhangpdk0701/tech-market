@@ -187,7 +187,7 @@ const NavBar = () => {
             to="/store/phone">
             Điện thoại
           </NavLink>
-          <NavLink
+          {/* <NavLink
             className={`link-light ${style.type}`}
             activeClassName={style.type_active}
             to="/store/headphone">
@@ -198,7 +198,7 @@ const NavBar = () => {
             activeClassName={style.type_active}
             to="/store/keyboard">
             Bàn phím
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
     </Box>

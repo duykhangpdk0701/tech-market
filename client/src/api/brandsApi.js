@@ -3,7 +3,6 @@ import queryString from "query-string";
 
 const brandsApi = {
   fetchBrands: async (query) => {
-    console.log(query);
     const url = "/brand";
     const res = axiosClient.get(
       queryString.stringifyUrl({
@@ -13,6 +12,12 @@ const brandsApi = {
         },
       }),
     );
+    return res;
+  },
+
+  fetchAllBrands: async () => {
+    const url = "/brand";
+    const res = axiosClient.get(url);
     return res;
   },
 };

@@ -60,7 +60,7 @@ const Cart = () => {
             })}
           </Box>
           <aside className={style.aside}>
-            <Box
+            {/* <Box
               sx={{ boxShadow: 1, bgcolor: "background.paper", mb: 3, p: 2 }}
               className={style.promotion_container}>
               <Typography sx={{ mb: 1 }} variant="h6">
@@ -77,7 +77,7 @@ const Cart = () => {
               <Button className={style.apply_btn} variant="outlined">
                 Áp dụng
               </Button>
-            </Box>
+            </Box> */}
             <Box
               sx={{ boxShadow: 1, bgcolor: "background.paper", mb: 3, p: 2 }}
               className={style.sumary_contianer}>

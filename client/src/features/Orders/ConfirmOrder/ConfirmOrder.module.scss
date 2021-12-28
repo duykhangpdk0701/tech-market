@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  display: flex;
+}
+
+.right_content {
+  margin-top: 1rem;
+  padding-right: 5rem;
+  flex-basis: 60%;
+}
+
+.left_content {
+  margin-top: 1rem;
+  flex-basis: 35%;
+}
+
+.total_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart {
+  display: flex;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.cart_img {
+  flex-basis: 4rem;
+}
+
+.cart_container {
+  flex-basis: calc(100% - 10rem);
+}
+
+.cart_price {
+  flex-basis: 6rem;
+}

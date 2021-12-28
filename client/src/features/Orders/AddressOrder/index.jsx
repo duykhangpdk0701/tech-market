@@ -71,41 +71,25 @@ const OrderAddress = (props) => {
                 }}
                 className={style.content}>
                 {/* left content */}
-                <Box className={style.left_content}>
-                  <Box>
-                    <Typography variant="h5" className={style.title}>
-                      TaoDao.LOLI
-                    </Typography>
-                    <Typography>Chọn địa chỉ giao hàng</Typography>
-                    <List>
-                      <ListItem button onClick={handleOpenDialog}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <AddIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText>Thêm địa chỉ</ListItemText>
-                      </ListItem>
-                      <RadioFields name="address" options={addressState} />
-                      {formikProps.errors.address &&
-                      formikProps.touched.address ? (
-                        <Alert severity="error">
-                          {formikProps.errors.address}
-                        </Alert>
-                      ) : null}
-                    </List>
-                  </Box>
-                  <Box
-                    sx={{
-                      p: 2,
-                    }}
-                    className={style.cart_content}></Box>
-                </Box>
-                {/* right content */}
-                <Box className={style.right_content}>
-                  <Typography variant="h5" className={style.title}>
-                    right content
-                  </Typography>
+                <Box className={style.inner_content}>
+                  <Typography variant="h5">Chọn địa chỉ giao hàng</Typography>
+                  <List>
+                    <ListItem button onClick={handleOpenDialog}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <AddIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText>Thêm địa chỉ</ListItemText>
+                    </ListItem>
+                    <RadioFields name="address" options={addressState} />
+                    {formikProps.errors.address &&
+                    formikProps.touched.address ? (
+                      <Alert severity="error">
+                        {formikProps.errors.address}
+                      </Alert>
+                    ) : null}
+                  </List>
                 </Box>
               </Box>
 

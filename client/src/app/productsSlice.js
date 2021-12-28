@@ -7,10 +7,19 @@ const initialState = {
   error: "",
 };
 
-export const fetchProducts = createAsyncThunk("products/fetch", async () => {
-  const res = await productsApi.fetchProducts();
-  return res;
-});
+export const fetchProducts = createAsyncThunk(
+  "products/fetch",
+  async (data = null) => {
+    const { brand } = data;
+    if (data) {
+      const { arrangePrice } = data;
+      const res = await productsApi.fetchProducts(brand, arrangePrice);
+      return res;
+    }
+    const res = await productsApi.fetchProducts(brand);
+    return res;
+  },
+);
 
 export const productSlice = createSlice({
   name: "products",

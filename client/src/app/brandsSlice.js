@@ -12,6 +12,11 @@ export const fetchBrands = createAsyncThunk("brands/fetch", async (data) => {
   return res;
 });
 
+export const fetchAllBrands = createAsyncThunk("brands/fetch", async () => {
+  const res = await brandsApi.fetchAllBrands();
+  return res;
+});
+
 export const BrandsSlice = createSlice({
   name: "brands",
   initialState,
