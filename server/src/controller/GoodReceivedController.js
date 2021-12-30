@@ -25,11 +25,14 @@ class GoodsReceivedController {
         });
         await addGoodsReceivedDetail.save();
         // add amount to product
-        await Product.updateOne(item.product, {
-          $inc: {
-            quantity: item.quantity,
+        await Product.findOneAndUpdate(
+          { _id: mongoose.Types.ObjectId(item.product) },
+          {
+            $inc: {
+              quantity: item.quantity,
+            },
           },
-        });
+        );
       });
 
       const findGoodsReceived = await GoodsReceived.aggregate([
@@ -126,12 +129,19 @@ class GoodsReceivedController {
             as: "provider",
           },
         },
+        {
+          $lookup: {
+            from: "products",
+            localField: "goodsReceivedDetail.product",
+            foreignField: "_id",
+            as: "newProduct",
+          },
+        },
         { $unwind: "$provider" },
       ]).then((item) => item[0]);
       res.json({
         success: true,
-        messages: "add successfully",
-        goodsReceivedDetail: findGoodsReceived,
+        goodsReceived: findGoodsReceived,
       });
     } catch (error) {
       res.status(500).json({ success: false, message: error.message });

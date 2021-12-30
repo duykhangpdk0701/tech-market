@@ -8,6 +8,7 @@ const {
 const upload = require("../Middleware/UploadImg");
 
 router.get("/", ProductController.showAll);
+router.get("/admin", ProductController.showAllAdminDSide);
 router.put("/", upload.array("files", 10), ProductController.update);
 router.get("/:id", ProductController.show);
 

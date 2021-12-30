@@ -90,7 +90,7 @@ const ByAmountOfDate = () => {
                     <TableCell>{item.formattedDate}</TableCell>
                     <TableCell>{toPrice(item.totalPrice)}</TableCell>
                     <TableCell>
-                      <Link to="/">
+                      <Link to={`/admin/order/${item._id}`}>
                         <Button>Chi tiết</Button>
                       </Link>
                     </TableCell>

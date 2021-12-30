@@ -5,6 +5,7 @@ import { store } from "../../app/store";
 import { setValue, openDialog } from "../../app/selectStatus";
 import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
+import toDate from "../../helper/toDate";
 
 const Columns = [
   { field: "_id", headerName: "ID", width: 250 },
@@ -75,6 +76,15 @@ const Columns = [
       };
 
       return <>{returnChip(params)}</>;
+    },
+  },
+
+  {
+    field: "createdAt",
+    headerName: "Thời gian đặt hàng",
+    width: 200,
+    renderCell: (params) => {
+      return toDate(params.row.createdAt);
     },
   },
   {

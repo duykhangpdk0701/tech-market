@@ -29,6 +29,12 @@ const ordersApi = {
     const res = await axiosAdmin.get(url);
     return res;
   },
+
+  getOrderById: async (id) => {
+    const url = "/order/" + id;
+    const res = await axiosAdmin.get(url);
+    return res;
+  },
 };
 
 export default ordersApi;

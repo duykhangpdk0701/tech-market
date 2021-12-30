@@ -7,6 +7,7 @@ import {
   CardContent,
   Typography,
   Tooltip,
+  Box,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -39,20 +40,22 @@ const ItemProduct = (props) => {
   const { item } = props;
   return (
     <Card className={style.item_wrapper}>
-      <CardActionArea>
-        {item.images ? (
-          <CardMedia
-            className={style.img_container}
-            component="img"
-            image={`${process.env.REACT_APP_SERVER_URL}${item.images[0]}`}
-          />
-        ) : (
-          <CardMedia
-            className={style.img_container}
-            component="img"
-            image="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
-          />
-        )}
+      <CardActionArea className={style.item_inner_wrapper}>
+        <Box className={style.img_container}>
+          {item.images ? (
+            <CardMedia
+              className={style.img}
+              component="img"
+              image={`${process.env.REACT_APP_SERVER_URL}${item.images[0]}`}
+            />
+          ) : (
+            <CardMedia
+              className={style.img}
+              component="img"
+              image="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
+            />
+          )}
+        </Box>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {item.name}

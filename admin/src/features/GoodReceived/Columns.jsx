@@ -1,4 +1,5 @@
 import { Button, ButtonGroup, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import toDate from "../../helper/toDate";
 
 const Columns = [
@@ -33,7 +34,9 @@ const Columns = [
     width: 250,
     renderCell: (params) => (
       <ButtonGroup>
-        <Button>Chi tiết</Button>
+        <Link to={`/admin/goodreceived/${params.row._id}`}>
+          <Button>Chi tiết</Button>
+        </Link>
       </ButtonGroup>
     ),
   },

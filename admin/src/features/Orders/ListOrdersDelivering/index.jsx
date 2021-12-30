@@ -7,6 +7,7 @@ import CustomToolBar from "../../../components/CustomToolBar";
 import LoadingOverLay from "../../../components/LoadingOverLay";
 import Columns from ".././Columns";
 import style from ".././Orders.module.scss";
+import DialogSetStatus from "../DialogSetStaus";
 
 const ListOrdersDelivering = () => {
   const distpatch = useDispatch();
@@ -38,6 +39,7 @@ const ListOrdersDelivering = () => {
           LoadingOverlay: LoadingOverLay,
         }}
       />
+      <DialogSetStatus />
     </div>
   );
 };

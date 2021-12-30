@@ -1,8 +1,3 @@
-.order_details {
-  flex-basis: calc(100% - 245px);
-  background-color: #eaeef3;
-}
-
 .container {
   width: 75%;
   margin: auto;
@@ -26,7 +21,7 @@
 }
 
 .name_container {
-  width: calc(100% - 410px);
+  width: calc(100% - 280px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +35,6 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding-right: 1rem;
 }
 
 .amount_container {

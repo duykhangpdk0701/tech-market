@@ -1,7 +1,6 @@
 const Product = require("../model/Product");
 const mongoose = require("mongoose");
 const { LAPTOP_ID, PHONE_ID } = require("../constant/categoryName");
-const formiable = require("formidable");
 
 class ProductController {
   async showAll(req, res) {
@@ -26,6 +25,7 @@ class ProductController {
         },
         { $unwind: "$brand" },
         { $match: { isActive: true } },
+        // { $match: { quantity: { $gte: 0 } } },
       ];
 
       if (req.query.max) {
@@ -49,6 +49,38 @@ class ProductController {
 
       const products = await Product.aggregate(preAggregate);
       res.json({ success: true, products });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        messages: "Interval server error" + error.message,
+      });
+    }
+  }
+
+  async showAllAdminDSide(req, res) {
+    try {
+      const findProduct = await Product.aggregate([
+        {
+          $lookup: {
+            from: "categories",
+            localField: "category",
+            foreignField: "_id",
+            as: "category",
+          },
+        },
+        { $unwind: "$category" },
+        {
+          $lookup: {
+            from: "brands",
+            localField: "brand",
+            foreignField: "_id",
+            as: "brand",
+          },
+        },
+        { $unwind: "$brand" },
+      ]);
+
+      res.json({ success: true, products: findProduct });
     } catch (error) {
       res.status(500).json({
         success: false,

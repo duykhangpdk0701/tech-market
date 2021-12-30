@@ -6,10 +6,12 @@ const GoodsReceivedDetail = new Schema(
     goodsreceived: {
       type: Schema.Types.ObjectId,
       ref: "goodsreceiveds",
+      required: true,
     },
     product: {
       type: Schema.Types.ObjectId,
       ref: "product",
+      required: true,
     },
     quantity: {
       type: Number,

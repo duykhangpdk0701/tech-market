@@ -17,6 +17,7 @@ import { store } from "../../../app/store";
 import { setSnackbar } from "../../../app/snackBarSlice";
 import { addGoodReceivedAsync } from "../../../app/goodReceivedSlice";
 import styles from "./Add.module.scss";
+import ItemAddGoodReceived from "./ItemAddGoodReceived";
 
 const AddGoodReceived = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const AddGoodReceived = () => {
     setArrProductValue((previousState) => [
       ...previousState,
       {
-        _id: productValue._id,
+        product: productValue._id,
         name: productValue.name,
         quantity: productQuantity,
       },
@@ -142,7 +143,13 @@ const AddGoodReceived = () => {
           <Typography variant="h5">Danh sách sản phẩm nhập hàng</Typography>
           {arrProductValue &&
             arrProductValue.map((item) => {
-              return <div key={item._id}>{item._id}</div>;
+              return (
+                <ItemAddGoodReceived
+                  key={item._id}
+                  id={item.product}
+                  quantity={item.quantity}
+                />
+              );
             })}
           <Button
             variant="contained"

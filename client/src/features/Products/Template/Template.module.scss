@@ -32,8 +32,19 @@
   margin-left: 0;
 }
 
+.item_inner_wrapper {
+  height: 100%;
+}
+
 .img_container {
   height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  object-fit: contain;
 }
 
 .item_link {

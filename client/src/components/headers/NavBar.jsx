@@ -18,6 +18,7 @@ import {
   Avatar,
   Box,
   Popover,
+  Button,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
@@ -158,7 +159,9 @@ const NavBar = () => {
               ) : (
                 <>
                   <Typography>
-                    <Link to="/auth">Đăng nhập</Link>
+                    <Link style={{ color: "#fff" }} to="/auth">
+                      <Button color="inherit">Đăng nhập</Button>
+                    </Link>
                   </Typography>
                 </>
               )}

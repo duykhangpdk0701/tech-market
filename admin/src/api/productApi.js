@@ -2,7 +2,7 @@ import axiosAdmin from "./axiosAdmin";
 
 const productsApi = {
   fetchProducts: async () => {
-    const res = await axiosAdmin.get("/product");
+    const res = await axiosAdmin.get("/product/admin");
     return res;
   },
 
