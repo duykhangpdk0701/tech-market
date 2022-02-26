@@ -79,11 +79,13 @@ const ConfirmOrder = (props) => {
               <Box className={style.cart_img}>
                 {item.product.images && item.product.images.length !== 0 ? (
                   <img
+                    alt="product-img"
                     className={style.img}
                     src={`${process.env.REACT_APP_SERVER_URL}${item.product.images[0]}`}
                   />
                 ) : (
                   <img
+                    alt="product-default-img"
                     className={style.img}
                     src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/23/637232326768418337_lenovo-ideapad-L340-den-2.png"
                   />

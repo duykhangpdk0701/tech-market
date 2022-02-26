@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import thank from "../../../assets/thank.svg";
 import style from "./CompleteOrder.module.scss";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 

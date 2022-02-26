@@ -1,5 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -17,7 +17,6 @@ const Product = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.current) || {};
   const { id } = useParams();
-  const loading = useSelector((state) => state.product.loading);
 
   const image = product.images
     ? product.images.map((item) => ({

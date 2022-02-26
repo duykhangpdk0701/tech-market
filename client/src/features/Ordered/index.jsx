@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -27,7 +26,7 @@ const Ordered = () => {
       unwrapResult(actionResult);
     };
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   return (
     <section className={style.section}>

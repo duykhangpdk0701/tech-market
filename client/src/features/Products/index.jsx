@@ -2,13 +2,11 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../app/productsSlice";
-import { Typography } from "@mui/material";
 import Template from "./Template";
-import { fetchAllBrands, fetchBrands } from "../../app/brandsSlice";
+import { fetchAllBrands } from "../../app/brandsSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.products.loading);
   const products = useSelector((state) => state.products.current) || [];
   const brands = useSelector((state) => state.brands.current) || [];
   const [arrangePrice, setArrangePrice] = useState([1000000, 10000000]);

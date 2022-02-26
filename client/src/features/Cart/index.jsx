@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCartsAsync } from "../../app/cartsSlice";
 import { addOder } from "../../app/ordersSlice";
+import toVND from "../../utils/convertMoney";
 
 import style from "./Cart.module.scss";
 import ItemCart from "./ItemCart";
@@ -83,20 +84,12 @@ const Cart = () => {
               className={style.sumary_contianer}>
               <div className={style.temp_sum_cotainer}>
                 <Typography variant="subtitle2">Tạm tính</Typography>
-                <Typography>
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(sum)}
-                </Typography>
+                <Typography>{toVND(sum)}</Typography>
               </div>
               <div className={style.sum_contianer}>
                 <Typography variant="h6">Tổng</Typography>
                 <Typography color="primary" variant="h5">
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(sum)}
+                  {toVND(sum)}
                 </Typography>
               </div>
             </Box>

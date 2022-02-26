@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchBrands } from "../../../app/brandsSlice";
-import { fetchLaptops } from "../../../app/laptopsSlice";
 import { fetchPhones } from "../../../app/phonesSlice";
 import { PHONE } from "../../../constants/category";
 import Template from "../Template";
@@ -12,7 +11,6 @@ const Phone = () => {
   const dispatch = useDispatch();
   const phones = useSelector((state) => state.phones.current);
   const brands = useSelector((state) => state.brands.current);
-  const userId = localStorage.getItem("userId");
   const [arrangePrice, setArrangePrice] = useState([1000000, 10000000]);
   const [array, setArray] = useState([]);
 
